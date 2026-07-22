@@ -1,14 +1,14 @@
 package se.simmarken
 
 import android.app.Application
+import se.simmarken.di.AppContainer
 
 class SimmarkenApplication : Application() {
-    lateinit var container: Unit
+    lateinit var container: AppContainer
         private set
 
     override fun onCreate() {
         super.onCreate()
-        // AppContainer lands in Plan 01-03
-        container = Unit
+        container = AppContainer(this)
     }
 }
