@@ -60,13 +60,16 @@ Plans:
 
 Plans:
 
-**Wave 1** *(parallel — no file overlap)*
+**Wave 1** *(parallel — 02-01 and 02-02)*
 
 - [ ] 02-01-PLAN.md — Extract Svensk Simidrott catalog from official PDFs into simidrott.json
 - [ ] 02-02-PLAN.md — Extract curated SLS catalog from official sources into sls.json
+
+**Wave 2** *(02-04 after 02-02 — needs SLS-SOURCE-NOTES.md; does not edit seed JSON)*
+
 - [ ] 02-04-PLAN.md — Bundle WebP badge images, tier fallbacks, and SOURCES.md licensing
 
-**Wave 2** *(blocked on Wave 1 completion)*
+**Wave 3** *(blocked on Waves 1–2 completion)*
 
 - [ ] 02-03-PLAN.md — Seed DTOs, version-gated merge loader, DAO upserts, startup wiring
 

@@ -310,7 +310,7 @@ Use ASCII slugs (å→a) for codes; display names stay in `nameSv`/`nameEn`.
 | Vattenvana | Baddaren Grön/Blå/Gul; Sköldpaddan; Bläckfisken |
 | Nybörjare | Pingvinen Silver/Guld; Simsättsmärke 1–2; Silverfisken; Guldfisken |
 | Hajen tier | Hajen Brons/Silver/Guld; Simsättsmärke 3–4 |
-| Järn/Brons/Silver/Guld | Järnmärket, Bronsmärket, Silvermärket, Guldmärket/Kandidaten (verify on current affisch) |
+| Järn/Brons/Silver/Guld | Järnmärket (`jarnmarket`), Bronsmärket (`bronsmarket`), Silvermärket (`silvermarket`), Guldmärket (`guldmarket`), Kandidaten (`kandidaten`) — **RESOLVED:** Guld is the category tier; terminal badge is Kandidaten |
 
 **Exclude (D-05):** Magistermärken, Vattenpolo, Simborgarmärken (annual), Simhalls special badges.
 
@@ -477,23 +477,24 @@ fun baddarenGronRequirementsMatchOfficial() {
 | A2 | `catalogVersion` as `YYYY.MM.DD` string is sufficient for ordering | Merge strategy | String sort breaks if format changes — document format lock |
 | A3 | SLS shop product text can substitute where no protocol PDF exists | SLS sources | D-09 verbatim rule violated — reduce SLS badge count |
 | A4 | Pruning requirements absent from new seed is acceptable | Merge | Orphan progress removed via CASCADE — aligns with D-15 code-based matching |
-| A5 | Guldmärket/Kandidaten naming on current affisch | Simidrott coverage | Wrong badge set — verify against 2026 affisch during extraction |
+| A5 | Guldmärket/Kandidaten naming on current affisch | Simidrott coverage | **RESOLVED** — see Open Questions #2; verify row names during 02-01 extraction |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **SLS authoritative requirement documents**
-   - What we know: Shop lists badge names; GP article lists skills (secondary).
-   - What's unclear: Whether sls.se hosts protocol PDFs equivalent to Simidrott.
-   - Recommendation: 02-02 plan starts with sls.se + contact Märkespool; ship thinner verified subset per D-06.
+1. **SLS authoritative requirement documents** — **RESOLVED**
+   - What we know: Shop lists badge names and product descriptions; GP article lists skills (secondary, not D-09 authoritative).
+   - **Resolution:** sls.se does not publish per-badge protocol PDFs equivalent to Simidrott's simmärkesmaterial page. SLS requirement text comes from shop product descriptions and any downloadable brochures found via `scripts/extract-sls.sh` (MEDIUM confidence). Badges without MEDIUM+ source are excluded per D-06. Document confidence per badge in `SLS-SOURCE-NOTES.md`; do not use GP article as primary source.
+   - Plan impact: 02-02 ships 8–20 curated badges with verified text; thinner than Simidrott by design.
 
-2. **Exact Guldmärket / Kandidaten placement**
-   - What we know: Affisch mentions Järn/Brons/Silver and Kandidaten [CITED: affisch PDF snippet].
-   - What's unclear: Whether "Guld" is separate badge name on 2026 affisch.
-   - Recommendation: Extract from latest affisch during 02-01; don't guess codes.
+2. **Exact Guldmärket / Kandidaten placement** — **RESOLVED**
+   - What we know: 2026 affisch (simmärkesmaterial last updated 2026-03-02) places Järn/Brons/Silver/Guld as **category tiers** (D-07), not badge names. Progression badges within those tiers are Järnmärket, Bronsmärket, Silvermärket, Guldmärket, and Kandidaten as the terminal badge.
+   - **Resolution:** Use category `code` `guld` with `nameSv` `"Guld"` for the tier. Badge codes: `jarnmarket`, `bronsmarket`, `silvermarket`, `guldmarket`, `kandidaten`. "Guld" is not a badge name — Guldmärket is the gold-tier pin; Kandidaten is the final progression badge after Guldmärket. Confirm exact `nameSv` spellings from downloaded 2026 affisch during 02-01 extraction (D-12).
+   - Plan impact: 02-01 checklist must include `guldmarket` and `kandidaten` rows; `kandidaten` may use `imageAssetPath: null` if WebP not in 02-04 priority set.
 
-3. **SLS category tier names**
-   - What we know: D-07 requires affisch-exact names for Simidrott; SLS structure less defined.
-   - Recommendation: Use SLS-appropriate tier names in `nameSv`; keep `code` stable once chosen.
+3. **SLS category tier names** — **RESOLVED**
+   - What we know: D-07 affisch-exact naming applies to Simidrott only; SLS has no single affisch authority.
+   - **Resolution:** Adopt shop-progression category groups with stable ASCII `code` slugs: `grund` (Droppen, Skräddaren), `doppingen`, `livbojen`, `krabban`, `uttern`, `krokodilen`, `grodan`, `sal`. `nameSv`/`nameEn` reflect shop grouping labels (e.g. `nameSv` = `"Livbojen"`). Codes are immutable once seeded — future additions use new badges within existing categories.
+   - Plan impact: 02-02 Task 1 validates names against shop pages; 02-04 `BadgePlaceholderColors` must include all eight SLS category codes.
 
 ## Environment Availability
 
