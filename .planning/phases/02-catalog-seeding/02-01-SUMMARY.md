@@ -73,7 +73,7 @@ completed: 2026-07-22
 2. **Task 2: Produce simidrott.json seed from affisch and protocol PDFs** - `7850ec1` (feat)
 3. **Task 3: Golden requirement accuracy tests and unit-test fixture** - `4cf35aa` (test)
 
-**Plan metadata:** pending (docs commit after state update)
+**Plan metadata:** `f05c20a` (docs: complete plan)
 
 ## Files Created/Modified
 
