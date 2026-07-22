@@ -6,7 +6,7 @@ Build a local-first Android app that lets parents track Swedish swimming badge p
 
 ## Phases
 
-- [ ] **Phase 1: Android Foundation & Database** — Project skeleton, Room schema, offline persistence
+- [x] **Phase 1: Android Foundation & Database** — Project skeleton, Room schema, offline persistence (completed 2026-07-22)
 - [ ] **Phase 2: Catalog Seeding** — Svensk Simidrott + SLS badge data loaded from official sources
 - [ ] **Phase 3: Child Profiles & Home** — Kid-first navigation with add/edit children
 - [ ] **Phase 4: Catalog View & Visual States** — Category-grouped badge grid with 4-tier visuals
@@ -32,15 +32,15 @@ Build a local-first Android app that lets parents track Swedish swimming badge p
 Plans:
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — Gradle scaffold, Compose NavHost shell, Wave 0 test stubs
+- [x] 01-01-PLAN.md — Gradle scaffold, Compose NavHost shell, Wave 0 test stubs
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 01-02-PLAN.md — Room entities (D-01–D-05), DAOs, schema export, DaoInstrumentedTest
+- [x] 01-02-PLAN.md — Room entities (D-01–D-05), DAOs, schema export, DaoInstrumentedTest
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 01-03-PLAN.md — AppContainer + repositories, Home kid-insert slice, persistence test
+- [x] 01-03-PLAN.md — AppContainer + repositories, Home kid-insert slice, persistence test
 
 ### Phase 2: Catalog Seeding
 
@@ -60,10 +60,15 @@ Plans:
 
 Plans:
 
-- [ ] 02-01: Research and extract Svensk Simidrott catalog data from official PDFs
-- [ ] 02-02: Research and extract SLS catalog data from official sources
-- [ ] 02-03: JSON seed format, asset bundling, and seed loader
-- [ ] 02-04: Badge image strategy (assets, placeholders, licensing documentation)
+**Wave 1** *(parallel — no file overlap)*
+
+- [ ] 02-01-PLAN.md — Extract Svensk Simidrott catalog from official PDFs into simidrott.json
+- [ ] 02-02-PLAN.md — Extract curated SLS catalog from official sources into sls.json
+- [ ] 02-04-PLAN.md — Bundle WebP badge images, tier fallbacks, and SOURCES.md licensing
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 02-03-PLAN.md — Seed DTOs, version-gated merge loader, DAO upserts, startup wiring
 
 ### Phase 3: Child Profiles & Home
 
@@ -163,7 +168,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Android Foundation & Database | 0/3 | Not started | - |
+| 1. Android Foundation & Database | 3/3 | Complete   | 2026-07-22 |
 | 2. Catalog Seeding | 0/4 | Not started | - |
 | 3. Child Profiles & Home | 0/3 | Not started | - |
 | 4. Catalog View & Visual States | 0/3 | Not started | - |
