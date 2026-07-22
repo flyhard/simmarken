@@ -660,17 +660,11 @@ dependencies {
 | A5 | Room 2.8.4 over Room 3.0 | Standard Stack | Miss newest APIs; avoids Jul 2026 breaking migration |
 | A6 | `lifecycle-viewmodel-compose:2.8.7` and `coroutines:1.9.0` | Standard Stack | Patch version drift — verify at scaffold time |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Room 2.8.4 vs 3.0 for greenfield**
-   - What we know: Room 3.0 stable Jul 2026 with new `androidx.room3` package [CITED: developer.android.com/jetpack/androidx/releases/room3]
-   - What's unclear: Team appetite for bleeding-edge vs proven 2.8 line
-   - Recommendation: Stay on 2.8.4 for Phase 1; revisit before Phase 2 if 3.x ecosystem matures
+1. **Room 2.8.4 vs 3.0 for greenfield** — **RESOLVED:** Use Room **2.8.4** (`androidx.room` line) for Phase 1. Room 3.0 (`androidx.room3`) introduces breaking API changes and higher integration risk; 2.8.4 is confirmed stable and matches KSP/Kotlin 2.1.21 toolchain pins in `libs.versions.toml`.
 
-2. **Catalog i18n column naming**
-   - What we know: I18N requirements need SV + EN text; seed source is Swedish-primary
-   - What's unclear: Whether Phase 2 JSON uses nested `i18n` objects vs flat columns
-   - Recommendation: Flat `_sv`/`_en` columns match simplest Room + seed loader; adjust seed format in Phase 2 planning
+2. **Catalog i18n column naming** — **RESOLVED:** Use flat bilingual columns (`nameSv`/`nameEn` on catalog entities, `textSv`/`textEn` on requirements). No normalized translation table in v1; Phase 2 seed loader will map JSON fields to these columns.
 
 ## Environment Availability
 
