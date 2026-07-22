@@ -12,7 +12,7 @@ human_verification:
     expected: "Promotional-use basis for Simidrott affisch images and SLS shop images is acceptable for app distribution"
     why_human: "VALIDATION.md defers image licensing to human legal review"
   - test: "Run instrumented seed tests on emulator/device"
-    expected: "./gradlew :app:connectedDebugAndroidTest --tests \"se.simmarken.data.seed.*\" exits 0"
+    expected: "./gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.package=se.simmarken.data.seed exits 0"
     why_human: "No emulator connected during verification; androidTest APK compiles but runtime not executed"
   - test: "Install debug APK, launch on fresh install, confirm catalogs seeded"
     expected: "After first launch, Room contains simidrott and sls catalogs (inspect via Database Inspector or temporary debug query)"
@@ -141,9 +141,11 @@ No `TBD`/`FIXME`/`XXX` debt markers in phase-delivered source files.
 
 ### 3. Instrumented seed test execution
 
-**Test:** `./gradlew :app:connectedDebugAndroidTest --tests "se.simmarken.data.seed.*"` with emulator running  
+**Test:** `./gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.package=se.simmarken.data.seed` with emulator running  
 **Expected:** `CatalogSeedLoaderTest`, `CatalogSeedMergeTest`, `CatalogSeedLoaderSmokeTest` all pass  
 **Why human:** No emulator connected; tests compile but runtime not executed in verifier environment
+
+> Note: JVM `--tests` applies to `testDebugUnitTest` only. Instrumented tests use `-Pandroid.testInstrumentationRunnerArguments.package=…`.
 
 ### 4. First-run seed on device
 

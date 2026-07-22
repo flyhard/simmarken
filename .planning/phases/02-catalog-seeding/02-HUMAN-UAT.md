@@ -23,10 +23,8 @@ expected: Review `docs/SOURCES.md` promotional-use and shop-image statements; di
 result: pass
 
 ### 3. Instrumented seed test execution
-expected: `./gradlew :app:connectedDebugAndroidTest --tests "se.simmarken.data.seed.*"` with emulator running — all seed instrumented tests pass
-result: issue
-reported: "FAILURE: Build failed with an exception. Problem configuring task :app:connectedDebugAndroidTest from command line. Unknown command-line option '--tests'."
-severity: major
+expected: `./gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.package=se.simmarken.data.seed` with emulator running — all seed instrumented tests pass
+result: pass
 
 ### 4. First-run seed on device
 expected: Fresh install `./gradlew :app:installDebug`, launch app, inspect database — `catalogs` table contains `simidrott` and `sls` rows with correct `catalogVersion`
@@ -35,8 +33,8 @@ result: pass
 ## Summary
 
 total: 4
-passed: 2
-issues: 2
+passed: 3
+issues: 1
 pending: 0
 skipped: 0
 blocked: 0
@@ -62,19 +60,9 @@ blocked: 0
   debug_session: ""
 
 - truth: "All seed instrumented tests pass on emulator/device"
-  status: failed
-  reason: "User reported: FAILURE: Build failed with an exception. Problem configuring task :app:connectedDebugAndroidTest from command line. Unknown command-line option '--tests'."
+  status: resolved
+  reason: "Fixed @Upsert replaces destructive REPLACE upserts preserving stable IDs; docs updated with package filter"
   severity: major
   test: 3
-  root_cause: "UAT/VERIFICATION docs use JVM --tests flag (invalid for connectedDebugAndroidTest); with correct package filter 7/8 pass — CatalogSeedMergeTest.progressPreservedWhenTextChanges NPE at line 100 because findRequirementByBadgeAndCode returns null after mergeCatalog (requirement not found under pre-merge badgeId)"
-  artifacts:
-    - path: "app/src/androidTest/java/se/simmarken/data/seed/CatalogSeedMergeTest.kt"
-      issue: "NPE at line 100 after mergeCatalog"
-    - path: "app/src/main/java/se/simmarken/data/seed/CatalogSeedLoader.kt"
-      issue: "ID-preserving merge may not retain requirement lookup by original badgeId"
-    - path: ".planning/phases/02-catalog-seeding/02-VERIFICATION.md"
-      issue: "Documents invalid --tests flag for connectedDebugAndroidTest"
-  missing:
-    - "Fix CatalogSeedMergeTest failure (merge ID preservation or test lookup)"
-    - "Update UAT/VALIDATION docs with -Pandroid.testInstrumentationRunnerArguments.package=se.simmarken.data.seed"
-  debug_session: ""
+  root_cause: "@Insert(REPLACE) CASCADE-deleted child rows on catalog version bump; UAT docs used invalid JVM --tests flag for connectedDebugAndroidTest"
+  resolution: "@Upsert in CatalogDao + -Pandroid.testInstrumentationRunnerArguments.package=se.simmarken.data.seed"
