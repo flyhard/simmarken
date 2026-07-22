@@ -67,7 +67,7 @@ Plans:
 
 **Wave 2** *(02-04 after 02-02 — needs SLS-SOURCE-NOTES.md; does not edit seed JSON)*
 
-- [ ] 02-04-PLAN.md — Bundle WebP badge images, tier fallbacks, and SOURCES.md licensing
+- [x] 02-04-PLAN.md — Bundle WebP badge images, tier fallbacks, and SOURCES.md licensing
 
 **Wave 3** *(blocked on Waves 1–2 completion)*
 
@@ -172,7 +172,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Android Foundation & Database | 3/3 | Complete   | 2026-07-22 |
-| 2. Catalog Seeding | 2/4 | In Progress|  |
+| 2. Catalog Seeding | 3/4 | In Progress|  |
 | 3. Child Profiles & Home | 0/3 | Not started | - |
 | 4. Catalog View & Visual States | 0/3 | Not started | - |
 | 5. Progress Tracking & Badge Detail | 0/3 | Not started | - |

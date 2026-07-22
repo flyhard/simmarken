@@ -18,7 +18,7 @@
 - [x] **CATA-02**: App ships with SLS badge catalog pre-loaded (categories, badges, requirements)
 - [x] **CATA-03**: Badges are displayed grouped by category within each catalog
 - [x] **CATA-04**: Each badge shows its official skill requirements as a checklist
-- [ ] **CATA-05**: Each badge displays an image or visual identifier
+- [x] **CATA-05**: Each badge displays an image or visual identifier
 
 ### Progress Tracking
 
@@ -76,7 +76,7 @@
 | CATA-02 | Phase 2 | Complete |
 | CATA-03 | Phase 2 | Complete |
 | CATA-04 | Phase 2 | Complete |
-| CATA-05 | Phase 2 | Pending |
+| CATA-05 | Phase 2 | Complete |
 | KIDS-01 | Phase 3 | Pending |
 | KIDS-02 | Phase 3 | Pending |
 | KIDS-03 | Phase 3 | Pending |
