@@ -56,7 +56,7 @@ Plans:
   3. Each badge has a visual identifier (image or color-coded placeholder)
   4. Catalog version metadata is stored for future updates
 
-**Plans**: 4 plans
+**Plans**: 5 plans
 
 Plans:
 
@@ -71,7 +71,11 @@ Plans:
 
 **Wave 3** *(blocked on Waves 1–2 completion)*
 
-- [ ] 02-03-PLAN.md — Seed DTOs, version-gated merge loader, DAO upserts, startup wiring
+- [x] 02-03-PLAN.md — Seed DTOs, version-gated merge loader, DAO upserts, startup wiring
+
+**Wave 4** *(gap closure — UAT instrumented test failure)*
+
+- [ ] 02-05-PLAN.md — Fix CASCADE-breaking REPLACE upserts; correct instrumented test docs
 
 ### Phase 3: Child Profiles & Home
 
