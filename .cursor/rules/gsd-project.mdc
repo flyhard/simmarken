@@ -1,0 +1,119 @@
+<!-- GSD:project-start source:PROJECT.md -->
+## Project
+
+**Simmärken Tracker**
+
+A local-first Android app for parents to track their children's progress through official Swedish swimming badge systems (Svensk Simidrott and SLS). At the swim hall, parents can instantly see which skills are done, which badges are earned but not yet purchased, and which physical pins still need buying — without relying on memory, paper lists, or the other parent.
+
+**Core Value:** At the swim hall, a parent can open the app and immediately answer: "Did they pass this badge, and did we buy the physical pin?"
+
+### Constraints
+
+- **Platform**: Native Android only — Kotlin + Jetpack Compose
+- **Architecture**: MVVM with Room Database (SQLite)
+- **Network**: None — 100% offline, no backend
+- **Storage**: Local device only; manual JSON export/import for phone migration
+- **i18n**: Swedish and English UI strings from v1
+- **Data model**: Relational schema supporting multiple catalogs (Catalog → Category → Badge → Requirement; Kid + Progress join tables)
+<!-- GSD:project-end -->
+
+<!-- GSD:stack-start source:research/STACK.md -->
+## Technology Stack
+
+## Recommended Stack
+### Core Technologies
+| Technology | Version | Purpose | Why Recommended |
+|------------|---------|---------|-----------------|
+| Kotlin | 2.0+ | Language | Official Android language; coroutines/Flow native support |
+| Jetpack Compose | BOM 2024.12+ | UI | State-driven UI ideal for reactive progress tracking |
+| Room | 2.6.1+ | Local database | Google-recommended SQLite wrapper; Flow integration for reactive UI |
+| KSP | 2.0.x | Annotation processing | Required for Room 2.6+; faster than deprecated kapt |
+| MVVM + Repository | — | Architecture | Standard Android pattern; separates UI from data layer |
+| Navigation Compose | 2.8.x | Navigation | Type-safe routing between Home → Child → Badge Detail |
+| Material 3 | Compose BOM | Design system | Clean minimal UI with system theming support |
+### Supporting Libraries
+| Library | Version | Purpose | When to Use |
+|---------|---------|---------|-------------|
+| kotlinx-serialization-json | 1.7+ | JSON export/import | Backup/migration file format |
+| Coil | 2.7+ | Image loading | Badge images from assets/drawables |
+| DataStore Preferences | 1.1+ | Settings | Language preference, theme |
+| Hilt (optional) | 2.52+ | DI | If project grows beyond manual DI; defer until needed |
+### Development Tools
+| Tool | Purpose | Notes |
+|------|---------|-------|
+| Android Studio Ladybug+ | IDE | Compose preview, Room schema export |
+| Gradle Kotlin DSL | Build | Standard for new Android projects |
+| Room schema export | Migrations | Export JSON schemas from day 1 for safe migrations |
+## Installation
+## Alternatives Considered
+| Recommended | Alternative | When to Use Alternative |
+|-------------|-------------|-------------------------|
+| Room | SQLDelight | Kotlin Multiplatform needed (not in scope) |
+| Compose | XML Views | Legacy codebase integration (greenfield — use Compose) |
+| Manual DI | Hilt | Team grows or DI complexity increases |
+| JSON export | Android Backup API | If user wants zero-config cloud backup (out of scope) |
+## What NOT to Use
+| Avoid | Why | Use Instead |
+|-------|-----|-------------|
+| kapt | Deprecated for Room; slower builds | KSP |
+| LiveData for new code | Compose prefers Flow/StateFlow | Kotlin Flow + collectAsStateWithLifecycle |
+| Network stack (Retrofit, WorkManager sync) | 100% offline app — no backend | Room as sole source of truth |
+| SharedPreferences for structured data | No relational queries | Room |
+| Hardcoded strings | Need SV + EN | strings.xml + values-sv/values-en |
+## Stack Patterns by Variant
+- Room is the single source of truth — no sync layer needed
+- UI observes `Flow` from DAOs directly via ViewModel `StateFlow`
+- All writes on `Dispatchers.IO`
+- kotlinx-serialization for portable JSON schema
+- Version field in export format for forward compatibility
+## Version Compatibility
+| Package A | Compatible With | Notes |
+|-----------|-----------------|-------|
+| Room 2.6.1 | KSP 2.0.x | Requires KSP, not kapt |
+| Compose BOM 2024.12 | AGP 8.7+ | Match compileSdk 35 |
+| Navigation 2.8.x | Compose 1.7+ | Use type-safe routes |
+## Sources
+- [Android Room docs](https://developer.android.com/training/data-storage/room) — Flow, KSP setup (HIGH)
+- [Jetpack Compose docs](https://developer.android.com/jetpack/compose) — state management (HIGH)
+- Svensk Simidrott simmärkesaffisch 2024 — badge data source (HIGH)
+<!-- GSD:stack-end -->
+
+<!-- GSD:conventions-start source:CONVENTIONS.md -->
+## Conventions
+
+Conventions not yet established. Will populate as patterns emerge during development.
+<!-- GSD:conventions-end -->
+
+<!-- GSD:architecture-start source:ARCHITECTURE.md -->
+## Architecture
+
+Architecture not yet mapped. Follow existing patterns found in the codebase.
+<!-- GSD:architecture-end -->
+
+<!-- GSD:skills-start source:skills/ -->
+## Project Skills
+
+No project skills found. Add skills to any of: `.claude/skills/`, `.agents/skills/`, `.cursor/skills/`, `.github/skills/`, or `.codex/skills/` with a `SKILL.md` index file.
+<!-- GSD:skills-end -->
+
+<!-- GSD:workflow-start source:GSD defaults -->
+## GSD Workflow Enforcement
+
+Before using Edit, Write, or other file-changing tools, start work through a GSD command so planning artifacts and execution context stay in sync.
+
+Use these entry points:
+- `/gsd-quick` for small fixes, doc updates, and ad-hoc tasks
+- `/gsd-debug` for investigation and bug fixing
+- `/gsd-execute-phase` for planned phase work
+
+Do not make direct repo edits outside a GSD workflow unless the user explicitly asks to bypass it.
+<!-- GSD:workflow-end -->
+
+
+
+<!-- GSD:profile-start -->
+## Developer Profile
+
+> Profile not yet configured. Run `/gsd-profile-user` to generate your developer profile.
+> This section is managed by `generate-claude-profile` -- do not edit manually.
+<!-- GSD:profile-end -->
