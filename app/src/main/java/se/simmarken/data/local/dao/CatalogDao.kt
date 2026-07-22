@@ -1,9 +1,8 @@
 package se.simmarken.data.local.dao
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 import se.simmarken.data.local.entity.BadgeEntity
 import se.simmarken.data.local.entity.CatalogEntity
@@ -48,15 +47,15 @@ interface CatalogDao {
     @Query("SELECT COUNT(*) FROM categories")
     suspend fun countCategories(): Int
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Upsert
     suspend fun upsertCatalog(catalog: CatalogEntity): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Upsert
     suspend fun upsertCategory(category: CategoryEntity): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Upsert
     suspend fun upsertBadge(badge: BadgeEntity): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Upsert
     suspend fun upsertRequirement(requirement: RequirementEntity): Long
 }
