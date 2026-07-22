@@ -78,7 +78,7 @@ completed: 2026-07-22
 2. **Task 2: Extract and convert badge images to WebP** - `e2dbb26` (feat)
 3. **Task 3: Define tier-color fallback palette for missing images** - `943cc1e` (feat)
 
-**Plan metadata:** pending (docs: complete plan)
+**Plan metadata:** `3a21434` (docs: complete plan)
 
 ## Files Created/Modified
 
