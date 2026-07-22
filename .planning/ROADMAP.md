@@ -7,7 +7,7 @@ Build a local-first Android app that lets parents track Swedish swimming badge p
 ## Phases
 
 - [x] **Phase 1: Android Foundation & Database** — Project skeleton, Room schema, offline persistence (completed 2026-07-22)
-- [ ] **Phase 2: Catalog Seeding** — Svensk Simidrott + SLS badge data loaded from official sources
+- [x] **Phase 2: Catalog Seeding** — Svensk Simidrott + SLS badge data loaded from official sources (completed 2026-07-22)
 - [ ] **Phase 3: Child Profiles & Home** — Kid-first navigation with add/edit children
 - [ ] **Phase 4: Catalog View & Visual States** — Category-grouped badge grid with 4-tier visuals
 - [ ] **Phase 5: Progress Tracking & Badge Detail** — Skill checklist, auto-achieve, purchase toggle
@@ -75,7 +75,7 @@ Plans:
 
 **Wave 4** *(gap closure — UAT instrumented test failure)*
 
-- [ ] 02-05-PLAN.md — Fix CASCADE-breaking REPLACE upserts; correct instrumented test docs
+- [x] 02-05-PLAN.md — Fix CASCADE-breaking REPLACE upserts; correct instrumented test docs
 
 ### Phase 3: Child Profiles & Home
 
@@ -176,7 +176,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Android Foundation & Database | 3/3 | Complete   | 2026-07-22 |
-| 2. Catalog Seeding | 3/4 | In Progress|  |
+| 2. Catalog Seeding | 5/5 | Complete    | 2026-07-22 |
 | 3. Child Profiles & Home | 0/3 | Not started | - |
 | 4. Catalog View & Visual States | 0/3 | Not started | - |
 | 5. Progress Tracking & Badge Detail | 0/3 | Not started | - |
