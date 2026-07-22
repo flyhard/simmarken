@@ -15,7 +15,7 @@
 ### Catalog
 
 - [x] **CATA-01**: App ships with Svensk Simidrott badge catalog pre-loaded (categories, badges, requirements)
-- [ ] **CATA-02**: App ships with SLS badge catalog pre-loaded (categories, badges, requirements)
+- [x] **CATA-02**: App ships with SLS badge catalog pre-loaded (categories, badges, requirements)
 - [x] **CATA-03**: Badges are displayed grouped by category within each catalog
 - [x] **CATA-04**: Each badge shows its official skill requirements as a checklist
 - [ ] **CATA-05**: Each badge displays an image or visual identifier
@@ -73,7 +73,7 @@
 |-------------|-------|--------|
 | DATA-01 | Phase 1 | Pending |
 | CATA-01 | Phase 2 | Complete |
-| CATA-02 | Phase 2 | Pending |
+| CATA-02 | Phase 2 | Complete |
 | CATA-03 | Phase 2 | Complete |
 | CATA-04 | Phase 2 | Complete |
 | CATA-05 | Phase 2 | Pending |
