@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -97,15 +98,33 @@ class CatalogSeedMergeTest {
 
         loader.mergeCatalog(bumpedSeed)
 
+        val postMergeBadge = catalogDao.findBadgeByCategoryAndCode(
+            categoryId = vattenvana.id,
+            code = "baddaren-gron",
+        )
+        assertNotNull(
+            "baddaren-gron badge should exist after merge (categoryId=${vattenvana.id})",
+            postMergeBadge,
+        )
+        assertEquals(
+            "badge id should be stable across merge",
+            baddarenGron.id,
+            postMergeBadge!!.id,
+        )
+
         val updatedRequirement = catalogDao.findRequirementByBadgeAndCode(
             badgeId = baddarenGron.id,
             code = "baddaren-gron-01",
-        )!!
+        )
+        assertNotNull(
+            "requirement baddaren-gron-01 should exist under badgeId=${baddarenGron.id} after merge",
+            updatedRequirement,
+        )
         val progressRows = db.requirementProgressDao().observeForKid(kidId).first()
 
         assertEquals(1, progressRows.size)
         assertTrue(progressRows.first().isAchieved)
-        assertEquals(requirementId, updatedRequirement.id)
+        assertEquals(requirementId, updatedRequirement!!.id)
         assertEquals("Uppdaterad kravtext för merge-test.", updatedRequirement.textSv)
 
         db.close()

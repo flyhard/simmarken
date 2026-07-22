@@ -26,9 +26,10 @@ class CatalogSeedLoader(
     suspend fun mergeCatalog(seed: CatalogSeedDto) {
         database.withTransaction {
             val stored = catalogDao.findCatalogByCode(seed.code)
-            val catalogId = catalogDao.upsertCatalog(
+            catalogDao.upsertCatalog(
                 seed.toEntity(existingId = stored?.id ?: 0),
             )
+            val catalogId = catalogDao.findCatalogByCode(seed.code)!!.id
             for (categorySeed in seed.categories) {
                 mergeCategory(catalogId, categorySeed)
             }
@@ -37,12 +38,13 @@ class CatalogSeedLoader(
 
     private suspend fun mergeCategory(catalogId: Long, categorySeed: CategorySeedDto) {
         val existing = catalogDao.findCategoryByCatalogAndCode(catalogId, categorySeed.code)
-        val categoryId = catalogDao.upsertCategory(
+        catalogDao.upsertCategory(
             categorySeed.toEntity(
                 catalogId = catalogId,
                 existingId = existing?.id ?: 0,
             ),
         )
+        val categoryId = catalogDao.findCategoryByCatalogAndCode(catalogId, categorySeed.code)!!.id
         for (badgeSeed in categorySeed.badges) {
             mergeBadge(categoryId, badgeSeed)
         }
@@ -50,12 +52,13 @@ class CatalogSeedLoader(
 
     private suspend fun mergeBadge(categoryId: Long, badgeSeed: BadgeSeedDto) {
         val existing = catalogDao.findBadgeByCategoryAndCode(categoryId, badgeSeed.code)
-        val badgeId = catalogDao.upsertBadge(
+        catalogDao.upsertBadge(
             badgeSeed.toEntity(
                 categoryId = categoryId,
                 existingId = existing?.id ?: 0,
             ),
         )
+        val badgeId = catalogDao.findBadgeByCategoryAndCode(categoryId, badgeSeed.code)!!.id
         for (requirementSeed in badgeSeed.requirements) {
             mergeRequirement(badgeId, requirementSeed)
         }
