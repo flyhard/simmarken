@@ -3,13 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-07-22T17:17:01.644Z"
-last_activity: 2026-07-22 -- Phase 02 planning complete
+stopped_at: Phase 2 context gathered
+last_updated: "2026-07-22T17:27:43.403Z"
+last_activity: 2026-07-22
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 7
-  completed_plans: 3
+  completed_plans: 4
   percent: 17
 ---
 
@@ -20,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-22)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Phase 01 — android-foundation-database
+**Current focus:** Phase 02 — catalog-seeding
 
 ## Current Position
 
-Phase: 01 (android-foundation-database) — EXECUTING
-Plan: 1 of 3
+Phase: 02 (catalog-seeding) — EXECUTING
+Plan: 2 of 4
 Status: Ready to execute
-Last activity: 2026-07-22 -- Phase 02 planning complete
+Last activity: 2026-07-22
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -50,6 +51,8 @@ Progress: [░░░░░░░░░░] 0%
 - Last 5 plans: —
 - Trend: —
 
+| Phase 02-catalog-seeding P01 | 22min | 3 tasks | 8 files |
+
 ## Accumulated Context
 
 ### Decisions
@@ -60,6 +63,8 @@ Recent decisions affecting current work:
 - Both Svensk Simidrott and SLS catalogs in v1
 - JSON export/import for backup (no cloud)
 - Clean minimal UI, Swedish + English
+- [Phase ?]: Omitted guldmarket — affisch progression ends at Kandidaten without separate Guldmärket pin
+- [Phase ?]: Unit tests parse seed JSON with kotlinx-serialization on JVM
 
 ### Pending Todos
 
@@ -79,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-22T17:03:34.217Z
+Last session: 2026-07-22T17:27:28.737Z
 Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-catalog-seeding/02-CONTEXT.md
+Resume file: None
