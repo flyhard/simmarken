@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
+status: verifying
 stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-07-22T17:38:07.400Z"
+last_updated: "2026-07-22T17:54:58.899Z"
 last_activity: 2026-07-22
 progress:
   total_phases: 6
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-07-22)
 
 Phase: 02 (catalog-seeding) — EXECUTING
 Plan: 4 of 4
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-07-22
 
 Progress: [░░░░░░░░░░] 0%
@@ -54,6 +54,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02-catalog-seeding P01 | 22min | 3 tasks | 8 files |
 | Phase 02-catalog-seeding P02 | 18min | 3 tasks | 5 files |
 | Phase 02-catalog-seeding P04 | 25 | 3 tasks | 37 files |
+| Phase 02-catalog-seeding P03 | 25 | 3 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,9 @@ Recent decisions affecting current work:
 - [Phase ?]: Simidrott pins mapped from affisch pdfimages by progression order
 - [Phase ?]: SLS badge images from official shop product JSON at 512px
 - [Phase ?]: BadgePlaceholderColors tier fallback for simsättsmärken and Kandidaten
+- [Phase ?]: CatalogSeedLoader bypasses CatalogRepository and talks to CatalogDao directly
+- [Phase ?]: ID-preserving merge uses lookup-by-code before REPLACE upsert (D-15)
+- [Phase ?]: Room withTransaction wraps full catalog merge for FK integrity
 
 ### Pending Todos
 
@@ -92,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-22T17:38:03.701Z
+Last session: 2026-07-22T17:54:34.434Z
 Stopped at: Completed 02-04-PLAN.md
 Resume file: None
