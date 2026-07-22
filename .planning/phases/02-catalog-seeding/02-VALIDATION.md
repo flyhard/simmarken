@@ -40,11 +40,11 @@ created: 2026-07-22
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
 | 02-01-01 | 02-01 | 1 | CATA-01 | — | N/A | unit | `./gradlew :app:testDebugUnitTest --tests "*.SimidrottRequirementAccuracyTest"` | ❌ W0 | ⬜ pending |
 | 02-02-01 | 02-02 | 1 | CATA-02 | — | N/A | unit | `./gradlew :app:testDebugUnitTest --tests "*.SlsRequirementAccuracyTest"` | ❌ W0 | ⬜ pending |
-| 02-03-01 | 02-03 | 2 | CATA-01, CATA-02, CATA-03 | T-2-01 | Strict JSON parse; reject malformed seed | unit | `./gradlew :app:testDebugUnitTest --tests "*.CatalogSeedParserTest"` | ❌ W0 | ⬜ pending |
-| 02-03-02 | 02-03 | 2 | CATA-01, CATA-02 | — | N/A | instrumented | `./gradlew :app:connectedDebugAndroidTest --tests "*.CatalogSeedLoaderTest"` | ❌ W0 | ⬜ pending |
+| 02-04-01 | 02-04 | 2 | CATA-05 | — | N/A | build | `test -f docs/SOURCES.md && find app/src/main/assets/badges -name '*.webp' \| wc -l` | ❌ W0 | ⬜ pending |
+| 02-03-01 | 02-03 | 3 | CATA-01, CATA-02, CATA-03 | T-2-01 | Strict JSON parse; reject malformed seed | unit | `./gradlew :app:testDebugUnitTest --tests "*.CatalogSeedParserTest"` | ❌ W0 | ⬜ pending |
+| 02-03-02 | 02-03 | 3 | CATA-01, CATA-02 | — | N/A | instrumented | `./gradlew :app:connectedDebugAndroidTest --tests "*.CatalogSeedLoaderSmokeTest"` | ❌ W0 | ⬜ pending |
 | 02-03-03 | 02-03 | 3 | D-13, D-14, D-15 | — | N/A | instrumented | `./gradlew :app:connectedDebugAndroidTest --tests "*.CatalogSeedMergeTest"` | ❌ W0 | ⬜ pending |
-| 02-03-04 | 02-03 | 2 | CATA-03 | — | N/A | unit | `./gradlew :app:testDebugUnitTest --tests "*.CatalogVersionTest"` | ❌ W0 | ⬜ pending |
-| 02-04-01 | 02-04 | 2 | CATA-05 | — | N/A | instrumented | `./gradlew :app:connectedDebugAndroidTest --tests "*.CatalogSeedLoaderTest.badgeImagesResolvable"` | ❌ W0 | ⬜ pending |
+| 02-03-04 | 02-03 | 3 | CATA-03, CATA-05 | — | N/A | instrumented | `./gradlew :app:connectedDebugAndroidTest --tests "*.CatalogSeedLoaderTest"` | ❌ W0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -56,7 +56,8 @@ created: 2026-07-22
 - [ ] `app/src/test/java/se/simmarken/data/seed/CatalogSeedParserTest.kt` — JSON → DTO from test fixture
 - [ ] `app/src/test/java/se/simmarken/data/seed/SimidrottRequirementAccuracyTest.kt` — golden files for Baddaren, Hajen
 - [ ] `app/src/test/java/se/simmarken/data/seed/SlsRequirementAccuracyTest.kt` — golden files for SLS basics
-- [ ] `app/src/androidTest/java/se/simmarken/data/seed/CatalogSeedLoaderTest.kt` — first-run population
+- [ ] `app/src/androidTest/java/se/simmarken/data/seed/CatalogSeedLoaderSmokeTest.kt` — loader invoked at startup
+- [ ] `app/src/androidTest/java/se/simmarken/data/seed/CatalogSeedLoaderTest.kt` — first-run population + image/fallback assertions
 - [ ] `app/src/androidTest/java/se/simmarken/data/seed/CatalogSeedMergeTest.kt` — progress preservation on version bump
 - [ ] `app/src/test/resources/seed/simidrott_sample.json` — minimal fixture for unit tests
 - [ ] `CatalogDao` lookup-by-code queries + transactional merge support
