@@ -1,0 +1,55 @@
+{
+  "code": "simidrott",
+  "nameSv": "Svensk Simidrott",
+  "nameEn": "Swedish Swimming",
+  "catalogVersion": "2026.03.02",
+  "sortOrder": 0,
+  "categories": [
+    {
+      "code": "vattenvana",
+      "nameSv": "Vattenvana",
+      "nameEn": "Water confidence",
+      "sortOrder": 1,
+      "badges": [
+        {
+          "code": "baddaren-gron",
+          "nameSv": "Baddaren Grön",
+          "nameEn": "Baddaren Green",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/baddaren_gron.webp",
+          "requirements": [
+            {
+              "code": "baddaren-gron-01",
+              "textSv": "Doppa hakan och ena örat under vattnet. Upprepa fem gånger för varje sida.",
+              "textEn": "Dip your chin and one ear under the water. Repeat five times on each side.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "hajen",
+      "nameSv": "Hajen",
+      "nameEn": "Shark",
+      "sortOrder": 3,
+      "badges": [
+        {
+          "code": "hajen-silver",
+          "nameSv": "Hajen Silver",
+          "nameEn": "Shark Silver",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/hajen_silver.webp",
+          "requirements": [
+            {
+              "code": "hajen-silver-01",
+              "textSv": "Simma 100 m valfritt simsätt varav 25 m i ryggläge på djupt vatten.",
+              "textEn": "Swim 100 m in any stroke, including 25 m on your back, in deep water.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
