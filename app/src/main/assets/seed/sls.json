@@ -1,0 +1,460 @@
+{
+  "code": "sls",
+  "nameSv": "Svenska Livräddningssällskapet",
+  "nameEn": "Swedish Life Saving Society",
+  "catalogVersion": "2026.07.22",
+  "sortOrder": 1,
+  "categories": [
+    {
+      "code": "grund",
+      "nameSv": "Grund",
+      "nameEn": "Foundation",
+      "sortOrder": 1,
+      "badges": [
+        {
+          "code": "droppen",
+          "nameSv": "Droppen",
+          "nameEn": "Droppen",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/droppen.webp",
+          "requirements": [
+            {
+              "code": "droppen-01",
+              "textSv": "För att ta Droppen finns inga kunskapskrav.",
+              "textEn": "There are no knowledge requirements to earn Droppen.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "skraddaren",
+          "nameSv": "Skräddaren",
+          "nameEn": "Skräddaren",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/skraddaren.webp",
+          "requirements": [
+            {
+              "code": "skraddaren-01",
+              "textSv": "Spring på botten framlänges 5 meter samt baklänges 5 meter.",
+              "textEn": "Run on the bottom forward 5 meters and backward 5 meters.",
+              "sortOrder": 1
+            },
+            {
+              "code": "skraddaren-02",
+              "textSv": "Hoppa jämfota på botten 5 gånger.",
+              "textEn": "Jump with feet together on the bottom 5 times.",
+              "sortOrder": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "doppingen",
+      "nameSv": "Doppingen",
+      "nameEn": "Doppingen",
+      "sortOrder": 2,
+      "badges": [
+        {
+          "code": "doppingen-turkos",
+          "nameSv": "Doppingen Turkos",
+          "nameEn": "Doppingen Turquoise",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/doppingen_turkos.webp",
+          "requirements": [
+            {
+              "code": "doppingen-turkos-01",
+              "textSv": "Titta under vattnet 3 gånger.",
+              "textEn": "Look under the water 3 times.",
+              "sortOrder": 1
+            },
+            {
+              "code": "doppingen-turkos-02",
+              "textSv": "Dyk under en rockring eller liknande 3 gånger.",
+              "textEn": "Dive under a pool ring or similar 3 times.",
+              "sortOrder": 2
+            },
+            {
+              "code": "doppingen-turkos-03",
+              "textSv": "Hoppa ifrån bassängkant 3 gånger.",
+              "textEn": "Jump from the pool edge 3 times.",
+              "sortOrder": 3
+            }
+          ]
+        },
+        {
+          "code": "doppingen-bla-utomhus",
+          "nameSv": "Doppingen Blå - utomhus",
+          "nameEn": "Doppingen Blue - outdoors",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/doppingen_bla_utomhus.webp",
+          "requirements": [
+            {
+              "code": "doppingen-bla-utomhus-01",
+              "textSv": "Titta under vattnet 3 gånger.",
+              "textEn": "Look under the water 3 times.",
+              "sortOrder": 1
+            },
+            {
+              "code": "doppingen-bla-utomhus-02",
+              "textSv": "Dyka under en rockring eller liknande 3 gånger.",
+              "textEn": "Dive under a pool ring or similar 3 times.",
+              "sortOrder": 2
+            },
+            {
+              "code": "doppingen-bla-utomhus-03",
+              "textSv": "Hoppa ifrån klippa, brygga eller motsvarande 3 gånger.",
+              "textEn": "Jump from a rock, jetty, or equivalent 3 times.",
+              "sortOrder": 3
+            },
+            {
+              "code": "doppingen-bla-utomhus-04",
+              "textSv": "Momenten utförs utomhus i öppet vatten.",
+              "textEn": "The tasks are performed outdoors in open water.",
+              "sortOrder": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "livbojen",
+      "nameSv": "Livbojen",
+      "nameEn": "Lifebuoy",
+      "sortOrder": 3,
+      "badges": [
+        {
+          "code": "livbojen-bla",
+          "nameSv": "Livbojen Blå",
+          "nameEn": "Lifebuoy Blue",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/livbojen_bla.webp",
+          "requirements": [
+            {
+              "code": "livbojen-bla-01",
+              "textSv": "Flyt med räddningsväst och kläder",
+              "textEn": "Float wearing a life jacket and clothes",
+              "sortOrder": 1
+            },
+            {
+              "code": "livbojen-bla-02",
+              "textSv": "Livräddning: Genomgång av Badvett och larmrutiner.",
+              "textEn": "Rescue skills: Review of water safety rules and emergency procedures.",
+              "sortOrder": 2
+            }
+          ]
+        },
+        {
+          "code": "livbojen-rod",
+          "nameSv": "Livbojen Röd",
+          "nameEn": "Lifebuoy Red",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/livbojen_rod.webp",
+          "requirements": [
+            {
+              "code": "livbojen-rod-01",
+              "textSv": "Flyt med räddningsväst och kläder",
+              "textEn": "Float wearing a life jacket and clothes",
+              "sortOrder": 1
+            },
+            {
+              "code": "livbojen-rod-02",
+              "textSv": "Livräddning: Flyta och förflytta sig med hjälp av livboj.",
+              "textEn": "Rescue skills: Float and move using a lifebuoy.",
+              "sortOrder": 2
+            },
+            {
+              "code": "livbojen-rod-03",
+              "textSv": "Kasta livboj till person som flyter i räddningsväst och dra in personen till kanten eller bryggan.",
+              "textEn": "Throw a lifebuoy to a person floating in a life jacket and pull them to the edge or jetty.",
+              "sortOrder": 3
+            },
+            {
+              "code": "livbojen-rod-04",
+              "textSv": "Genomgång av Båtvett och larmrutiner.",
+              "textEn": "Review of boating safety rules and emergency procedures.",
+              "sortOrder": 4
+            }
+          ]
+        },
+        {
+          "code": "livbojen-gron",
+          "nameSv": "Livbojen Grön",
+          "nameEn": "Lifebuoy Green",
+          "sortOrder": 3,
+          "imageAssetPath": "badges/sls/livbojen_gron.webp",
+          "requirements": [
+            {
+              "code": "livbojen-gron-01",
+              "textSv": "Flyt med räddningsväst och kläder",
+              "textEn": "Float wearing a life jacket and clothes",
+              "sortOrder": 1
+            },
+            {
+              "code": "livbojen-gron-02",
+              "textSv": "Livräddning: Kasta räddningslina och livboj till person som flyter i flytväst och dra in personen till kant eller brygga.",
+              "textEn": "Rescue skills: Throw a rescue line and lifebuoy to a person floating in a buoyancy aid and pull them to the edge or jetty.",
+              "sortOrder": 2
+            },
+            {
+              "code": "livbojen-gron-03",
+              "textSv": "Genomgång av Isvett, larmrutiner och islivräddningsutrustning.",
+              "textEn": "Review of ice safety rules, emergency procedures, and ice rescue equipment.",
+              "sortOrder": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "krabban",
+      "nameSv": "Krabban",
+      "nameEn": "Crab",
+      "sortOrder": 4,
+      "badges": [
+        {
+          "code": "krabban-bla",
+          "nameSv": "Krabban Blå",
+          "nameEn": "Crab Blue",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/krabban_bla.webp",
+          "requirements": [
+            {
+              "code": "krabban-bla-01",
+              "textSv": "Falla i på djupt vatten , få huvudet under vattnet, vända och ta sig tillbaka till utgångsläget. Upprepas 3 gånger.",
+              "textEn": "Fall into deep water, get your head under the water, turn around, and return to the starting position. Repeat 3 times.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "krabban-rod",
+          "nameSv": "Krabban Röd",
+          "nameEn": "Crab Red",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/krabban_rod.webp",
+          "requirements": [
+            {
+              "code": "krabban-rod-01",
+              "textSv": "Falla i på djupt vatten , vända runt och flyta på rygg. Upprepas 3 gånger.",
+              "textEn": "Fall into deep water, turn around, and float on your back. Repeat 3 times.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "uttern",
+      "nameSv": "Uttern",
+      "nameEn": "Otter",
+      "sortOrder": 5,
+      "badges": [
+        {
+          "code": "uttern-jarn",
+          "nameSv": "Uttern Järn",
+          "nameEn": "Otter Iron",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/uttern_jarn.webp",
+          "requirements": [
+            {
+              "code": "uttern-jarn-01",
+              "textSv": "Flyt 5 sekunder i ryggläge tre gånger.",
+              "textEn": "Float on your back for 5 seconds three times.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "uttern-brons",
+          "nameSv": "Uttern Brons",
+          "nameEn": "Otter Bronze",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/uttern_brons.webp",
+          "requirements": [
+            {
+              "code": "uttern-brons-01",
+              "textSv": "Ta sig fram 5 meter i ryggläge utan att nudda botten eller kant.",
+              "textEn": "Travel 5 meters on your back without touching the bottom or the edge.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "krokodilen",
+      "nameSv": "Krokodilen",
+      "nameEn": "Crocodile",
+      "sortOrder": 6,
+      "badges": [
+        {
+          "code": "krokodilen-silver",
+          "nameSv": "Krokodilen Silver",
+          "nameEn": "Crocodile Silver",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/krokodilen_silver.webp",
+          "requirements": [
+            {
+              "code": "krokodilen-silver-01",
+              "textSv": "Hoppa från bassängkant eller brygga på grunt vatten.",
+              "textEn": "Jump from the pool edge or jetty in shallow water.",
+              "sortOrder": 1
+            },
+            {
+              "code": "krokodilen-silver-02",
+              "textSv": "Doppa hela huvudet under vattnet och ta upp ett föremål från botten.",
+              "textEn": "Dip your entire head under the water and pick up an object from the bottom.",
+              "sortOrder": 2
+            },
+            {
+              "code": "krokodilen-silver-03",
+              "textSv": "Ta sig fram 5 meter med ansiktet under eller ovanför vattenytan utan att nudda botten eller kant.",
+              "textEn": "Travel 5 meters with your face under or above the surface without touching the bottom or the edge.",
+              "sortOrder": 3
+            }
+          ]
+        },
+        {
+          "code": "krokodilen-guld",
+          "nameSv": "Krokodilen Guld",
+          "nameEn": "Crocodile Gold",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/krokodilen_guld.webp",
+          "requirements": [
+            {
+              "code": "krokodilen-guld-01",
+              "textSv": "Stå på händer i 3 sekunder.",
+              "textEn": "Stand on your hands for 3 seconds.",
+              "sortOrder": 1
+            },
+            {
+              "code": "krokodilen-guld-02",
+              "textSv": "Gör kullerbytta i vattnet, fram- eller baklänges.",
+              "textEn": "Do a somersault in the water, forward or backward.",
+              "sortOrder": 2
+            },
+            {
+              "code": "krokodilen-guld-03",
+              "textSv": "Simma 5 meter bröstsim på grunt vatten.",
+              "textEn": "Swim 5 meters breaststroke in shallow water.",
+              "sortOrder": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "grodan",
+      "nameSv": "Grodan",
+      "nameEn": "Frog",
+      "sortOrder": 7,
+      "badges": [
+        {
+          "code": "silvergrodan",
+          "nameSv": "Silvergrodan",
+          "nameEn": "Silver Frog",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/silvergrodan.webp",
+          "requirements": [
+            {
+              "code": "silvergrodan-01",
+              "textSv": "Hoppa från bassängkant eller brygga på grunt vatten.",
+              "textEn": "Jump from the pool edge or jetty in shallow water.",
+              "sortOrder": 1
+            },
+            {
+              "code": "silvergrodan-02",
+              "textSv": "Doppa hela huvudet under vattnet och ta upp ett föremål från botten på grunt vatten.",
+              "textEn": "Dip your entire head under the water and pick up an object from the bottom in shallow water.",
+              "sortOrder": 2
+            },
+            {
+              "code": "silvergrodan-03",
+              "textSv": "Simma 10 meter bröstsim på grunt vatten.",
+              "textEn": "Swim 10 meters breaststroke in shallow water.",
+              "sortOrder": 3
+            }
+          ]
+        },
+        {
+          "code": "guldgrodan",
+          "nameSv": "Guldgrodan",
+          "nameEn": "Gold Frog",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/guldgrodan.webp",
+          "requirements": [
+            {
+              "code": "guldgrodan-01",
+              "textSv": "Hoppa från bassängkant eller brygga på djupt vatten.",
+              "textEn": "Jump from the pool edge or jetty in deep water.",
+              "sortOrder": 1
+            },
+            {
+              "code": "guldgrodan-02",
+              "textSv": "Doppa hela huvudet under vattnet och plocka upp ett föremål från botten på grunt vatten.",
+              "textEn": "Dip your entire head under the water and pick up an object from the bottom in shallow water.",
+              "sortOrder": 2
+            },
+            {
+              "code": "guldgrodan-03",
+              "textSv": "Simma 10 meter bröstsim på djupt vatten.",
+              "textEn": "Swim 10 meters breaststroke in deep water.",
+              "sortOrder": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "sal",
+      "nameSv": "Säl",
+      "nameEn": "Seal",
+      "sortOrder": 8,
+      "badges": [
+        {
+          "code": "silversalen",
+          "nameSv": "Silversälen",
+          "nameEn": "Silver Seal",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/sls/silversalen.webp",
+          "requirements": [
+            {
+              "code": "silversalen-01",
+              "textSv": "Simma 25 meter med valfritt simsätt i magläge på grunt vatten.",
+              "textEn": "Swim 25 meters with any stroke on your front in shallow water.",
+              "sortOrder": 1
+            },
+            {
+              "code": "silversalen-02",
+              "textSv": "Livräddning: Bogsera 10 meter med bröstbentag, av jämnstor person i livboj.",
+              "textEn": "Rescue skills: Tow a person of similar size in a lifebuoy for 10 meters using breaststroke kicks.",
+              "sortOrder": 2
+            }
+          ]
+        },
+        {
+          "code": "guldsalen",
+          "nameSv": "Guldsälen",
+          "nameEn": "Gold Seal",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/sls/guldsalen.webp",
+          "requirements": [
+            {
+              "code": "guldsalen-01",
+              "textSv": "Simma 25 meter med valfritt simsätt i magläge på djupt vatten.",
+              "textEn": "Swim 25 meters with any stroke on your front in deep water.",
+              "sortOrder": 1
+            },
+            {
+              "code": "guldsalen-02",
+              "textSv": "Livräddning: Bogsera jämnstor person i livboj, 10 meter med bröstbentag.",
+              "textEn": "Rescue skills: Tow a person of similar size in a lifebuoy for 10 meters using breaststroke kicks.",
+              "sortOrder": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
