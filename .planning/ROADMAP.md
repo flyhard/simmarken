@@ -95,9 +95,17 @@ Plans:
 
 Plans:
 
-- [ ] 03-01: Kid entity CRUD repository and ViewModel
-- [ ] 03-02: Home screen with child cards and FAB
-- [ ] 03-03: Add/edit child dialog with avatar/color picker
+**Wave 1**
+
+- [ ] 03-01-PLAN.md — Add-child vertical slice: persistence extensions, Wave 0 tests, FAB bottom sheet, home list
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 03-02-PLAN.md — Home polish: ChildCard, EmptyState, catalog placeholder navigation
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 03-03-PLAN.md — Edit/delete vertical slice: overflow menu, edit sheet, delete confirmation
 
 ### Phase 4: Catalog View & Visual States
 
