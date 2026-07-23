@@ -25,7 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import se.simmarken.domain.model.BadgeVisualState
-import se.simmarken.ui.badge.components.RequirementChecklistRow
+import se.simmarken.ui.badge.components.RequirementChecklist
+import se.simmarken.ui.badge.components.ZeroRequirementNote
 import se.simmarken.ui.components.BadgePinSize
 import se.simmarken.ui.components.BadgePinVisual
 
@@ -124,11 +125,13 @@ fun BadgeDetailScreen(
                             .padding(bottom = 24.dp),
                         verticalArrangement = Arrangement.Top,
                     ) {
-                        uiState.requirements.forEach { requirement ->
-                            RequirementChecklistRow(
-                                requirement = requirement,
-                                onToggle = { viewModel.toggleRequirement(requirement.id) },
+                        if (uiState.totalRequirements > 0) {
+                            RequirementChecklist(
+                                requirements = uiState.requirements,
+                                onToggle = viewModel::toggleRequirement,
                             )
+                        } else {
+                            ZeroRequirementNote()
                         }
                         Text(
                             text = "Fysiskt märke köpt",
