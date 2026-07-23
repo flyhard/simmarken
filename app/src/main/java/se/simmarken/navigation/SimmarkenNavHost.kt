@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import se.simmarken.SimmarkenApplication
-import se.simmarken.ui.badge.BadgeDetailPlaceholderScreen
+import se.simmarken.ui.badge.BadgeDetailScreen
 import se.simmarken.ui.badge.BadgeDetailViewModel
 import se.simmarken.ui.child.ChildCatalogScreen
 import se.simmarken.ui.child.ChildCatalogViewModel
@@ -55,7 +55,7 @@ fun SimmarkenNavHost() {
                     progressRepository = application.container.progressRepository,
                 ),
             )
-            BadgeDetailPlaceholderScreen(
+            BadgeDetailScreen(
                 viewModel = detailViewModel,
                 onBack = { navController.popBackStack() },
             )
