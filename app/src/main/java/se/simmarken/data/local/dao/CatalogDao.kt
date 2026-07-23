@@ -26,6 +26,12 @@ interface CatalogDao {
     @Query("SELECT * FROM requirements")
     fun observeAllRequirements(): Flow<List<RequirementEntity>>
 
+    @Query("SELECT * FROM badges ORDER BY sortOrder, nameSv")
+    fun observeAllBadges(): Flow<List<BadgeEntity>>
+
+    @Query("SELECT * FROM categories")
+    fun observeAllCategories(): Flow<List<CategoryEntity>>
+
     @Query("SELECT * FROM badges WHERE id = :badgeId LIMIT 1")
     fun observeBadgeById(badgeId: Long): Flow<BadgeEntity?>
 
@@ -40,6 +46,25 @@ interface CatalogDao {
 
     @Query("SELECT * FROM badges WHERE categoryId = :categoryId AND code = :code LIMIT 1")
     suspend fun findBadgeByCategoryAndCode(categoryId: Long, code: String): BadgeEntity?
+
+    @Query(
+        """
+        SELECT badges.* FROM badges
+        INNER JOIN categories ON badges.categoryId = categories.id
+        WHERE categories.catalogId = :catalogId AND badges.code = :code
+        LIMIT 1
+        """,
+    )
+    suspend fun findBadgeByCatalogAndCode(catalogId: Long, code: String): BadgeEntity?
+
+    @Query("SELECT * FROM categories WHERE catalogId = :catalogId ORDER BY sortOrder, nameSv")
+    suspend fun listCategoriesForCatalog(catalogId: Long): List<CategoryEntity>
+
+    @Query("DELETE FROM categories WHERE id = :categoryId")
+    suspend fun deleteCategoryById(categoryId: Long)
+
+    @Query("DELETE FROM badges WHERE id = :badgeId")
+    suspend fun deleteBadgeById(badgeId: Long)
 
     @Query("SELECT * FROM requirements WHERE badgeId = :badgeId AND code = :code LIMIT 1")
     suspend fun findRequirementByBadgeAndCode(badgeId: Long, code: String): RequirementEntity?

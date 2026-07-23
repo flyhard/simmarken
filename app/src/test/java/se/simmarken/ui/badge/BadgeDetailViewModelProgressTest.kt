@@ -434,6 +434,10 @@ class BadgeDetailViewModelProgressTest {
 
         override fun observeAllRequirements(): Flow<List<RequirementEntity>> = requirementsForBadge
 
+        override fun observeAllBadges(): Flow<List<BadgeEntity>> = badges
+
+        override fun observeAllCategories(): Flow<List<CategoryEntity>> = categories
+
         override fun observeBadgeById(badgeId: Long): Flow<BadgeEntity?> = badgeById
 
         override fun observeCategoryById(categoryId: Long): Flow<CategoryEntity?> = categoryById
