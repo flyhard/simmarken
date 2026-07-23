@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import se.simmarken.SimmarkenApplication
-import se.simmarken.ui.child.ChildCatalogPlaceholderScreen
+import se.simmarken.ui.child.ChildCatalogScreen
 import se.simmarken.ui.child.ChildCatalogViewModel
 import se.simmarken.ui.home.HomeScreen
 import se.simmarken.ui.home.HomeViewModel
@@ -29,13 +29,16 @@ fun SimmarkenNavHost() {
             val route = backStackEntry.toRoute<ChildCatalog>()
             val catalogViewModel: ChildCatalogViewModel = viewModel(
                 factory = ChildCatalogViewModelFactory(
-                    application.container.kidRepository,
-                    route.kidId,
+                    kidRepository = application.container.kidRepository,
+                    catalogRepository = application.container.catalogRepository,
+                    progressRepository = application.container.progressRepository,
+                    kidId = route.kidId,
                 ),
             )
-            ChildCatalogPlaceholderScreen(
+            ChildCatalogScreen(
                 viewModel = catalogViewModel,
                 onBack = { navController.popBackStack() },
+                onBadgeClick = {},
             )
         }
     }
