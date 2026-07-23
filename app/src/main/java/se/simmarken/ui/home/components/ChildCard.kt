@@ -1,6 +1,7 @@
 package se.simmarken.ui.home.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -33,8 +34,12 @@ fun ChildCard(
     onEditClick: () -> Unit,
     onDeleteClick: () -> Unit,
     modifier: Modifier = Modifier,
+    inProgressCount: Int = 0,
+    toBuyCount: Int = 0,
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
+    val hasSubtitles = inProgressCount > 0 || toBuyCount > 0
+    val minHeight = if (hasSubtitles) 80.dp else 72.dp
 
     ElevatedCard(
         modifier = modifier.fillMaxWidth(),
@@ -42,7 +47,7 @@ fun ChildCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 72.dp)
+                .heightIn(min = minHeight)
                 .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -56,15 +61,38 @@ fun ChildCard(
                     name = name,
                     avatarColorArgb = avatarColorArgb,
                 )
-                Text(
-                    text = name,
-                    style = MaterialTheme.typography.bodyLarge,
+                Column(
                     modifier = Modifier
                         .weight(1f)
                         .padding(start = 16.dp),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                ) {
+                    Text(
+                        text = name,
+                        style = MaterialTheme.typography.bodyLarge,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                    if (inProgressCount > 0) {
+                        Text(
+                            text = "$inProgressCount pågår",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(top = 4.dp),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
+                    if (toBuyCount > 0) {
+                        Text(
+                            text = "$toBuyCount att köpa",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(top = 4.dp),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
+                }
             }
             IconButton(
                 onClick = { menuExpanded = true },

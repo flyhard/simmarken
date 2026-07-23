@@ -75,9 +75,12 @@ fun HomeScreen(
                 verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp),
             ) {
                 items(uiState.kids, key = { it.id }) { kid ->
+                    val summary = uiState.summariesByKidId[kid.id]
                     ChildCard(
                         name = kid.name,
                         avatarColorArgb = kid.avatarColorArgb,
+                        inProgressCount = summary?.inProgressCount ?: 0,
+                        toBuyCount = summary?.toBuyCount ?: 0,
                         onCardClick = {
                             navController.navigate(ChildCatalog(kidId = kid.id))
                         },
