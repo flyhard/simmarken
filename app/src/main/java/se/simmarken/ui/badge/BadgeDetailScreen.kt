@@ -25,7 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import se.simmarken.domain.model.BadgeVisualState
+import se.simmarken.ui.badge.components.PurchaseToggleRow
 import se.simmarken.ui.badge.components.RequirementChecklist
+import se.simmarken.ui.badge.components.UncheckPurchaseDialog
 import se.simmarken.ui.badge.components.ZeroRequirementNote
 import se.simmarken.ui.components.BadgePinSize
 import se.simmarken.ui.components.BadgePinVisual
@@ -44,6 +46,13 @@ fun BadgeDetailScreen(
     onBack: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    if (uiState.showUncheckPurchaseDialog) {
+        UncheckPurchaseDialog(
+            onConfirm = viewModel::confirmClearGotten,
+            onDismiss = viewModel::dismissClearGotten,
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -133,10 +142,16 @@ fun BadgeDetailScreen(
                         } else {
                             ZeroRequirementNote()
                         }
-                        Text(
-                            text = "Fysiskt märke köpt",
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.padding(top = 24.dp),
+                        PurchaseToggleRow(
+                            isGotten = uiState.isGotten,
+                            isPurchaseEnabled = uiState.isPurchaseEnabled,
+                            onCheckedChange = { checked ->
+                                if (checked) {
+                                    viewModel.setGotten(true)
+                                } else {
+                                    viewModel.requestClearGotten()
+                                }
+                            },
                         )
                     }
                 }
