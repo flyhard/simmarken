@@ -2,18 +2,18 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 4
-status: ready_to_execute
-stopped_at: Phase 4 plans created — ready to execute 04-01
-last_updated: "2026-07-23T08:05:22.458Z"
+current_phase: 04
+current_phase_name: catalog-view-visual-states
+status: executing
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-07-23T10:05:52.533Z"
 last_activity: 2026-07-23
-last_activity_desc: Phase 4 planning complete
+last_activity_desc: Phase 04 execution started
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 14
-  completed_plans: 14
-  percent: 50
+  completed_plans: 12
 ---
 
 # Project State
@@ -23,16 +23,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-22)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Phase 4 — catalog view & visual states
+**Current focus:** Phase 04 — catalog-view-visual-states
 
 ## Current Position
 
-Phase: 4
-Plan: 04-01 (not started)
+Phase: 04 (catalog-view-visual-states) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
-Last activity: 2026-07-23 — Phase 4 planning complete
+Last activity: 2026-07-23 — Phase 04 execution started
 
-Progress: [░░░░░░░░░░] 0% (3 plans ready)
+Progress: [█████████░] 86% (3 plans ready)
 
 ## Performance Metrics
 
@@ -58,6 +58,11 @@ Progress: [░░░░░░░░░░] 0% (3 plans ready)
 | Phase 02-catalog-seeding P02 | 18min | 3 tasks | 5 files |
 | Phase 02-catalog-seeding P04 | 25 | 3 tasks | 37 files |
 | Phase 02-catalog-seeding P03 | 25 | 3 tasks | 12 files |
+**Per-Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 04 P01 | 25min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -80,6 +85,9 @@ Recent decisions affecting current work:
 - [Phase ?]: CatalogSeedLoader bypasses CatalogRepository and talks to CatalogDao directly
 - [Phase ?]: ID-preserving merge uses lookup-by-code before REPLACE upsert (D-15)
 - [Phase ?]: Room withTransaction wraps full catalog merge for FK integrity
+- [Phase ?]: BadgeVisualState derived at read time via BadgeStateCalculator — never persisted (D-29)
+- [Phase ?]: State precedence D-30: gotten → GOTTEN; zero-req or all achieved → ACHIEVED_TO_BUY; partial → IN_PROGRESS; none → LOCKED
+- [Phase ?]: Absent RequirementProgressEntity rows default to isAchieved=false in BadgeCatalogMapper (D-05)
 
 ### Pending Todos
 
@@ -99,6 +107,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-23T09:50:00.000Z
-Stopped at: Phase 4 plans created — ready to execute 04-01
-Resume file: .planning/phases/04-catalog-view-visual-states/04-01-PLAN.md
+Last session: 2026-07-23T10:05:52.518Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: None
