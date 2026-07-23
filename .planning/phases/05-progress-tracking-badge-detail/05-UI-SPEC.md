@@ -67,7 +67,7 @@ Declared values (multiples of 4, unit **dp**) — **unchanged from Phase 4** unl
 | Purchase toggle row min height | 48dp (2xl) | Switch + label row |
 | Purchase toggle row top divider | Optional `HorizontalDivider` 1dp `outlineVariant`, `24dp` top padding | Separates checklist from köpt control |
 | Zero-requirement note vertical padding | 16dp (md) top/bottom | Replaces checklist block |
-| ChildCard subtitle line gap | 2dp | Between name and first subtitle, and between subtitle lines |
+| ChildCard subtitle line gap | 4dp (xs) | Between name and first subtitle, and between subtitle lines |
 | ChildCard subtitle top padding | 4dp (xs) | Below child name |
 | ChildCard min height | 72dp → **80dp** when any subtitle visible | Accommodate 1–2 subtitle lines without clipping |
 | Scroll content bottom padding | 24dp (lg) | Clear purchase toggle above nav gesture area |
@@ -309,7 +309,7 @@ All strings hardcoded Swedish this phase. Phase 6 migrates to `strings.xml`.
 | New params | `inProgressCount: Int = 0`, `toBuyCount: Int = 0` |
 | Subtitle 1 | `"{inProgressCount} pågår"` — visible only when `inProgressCount > 0` (D-14) |
 | Subtitle 2 | `"{toBuyCount} att köpa"` — visible only when `toBuyCount > 0` (D-14) |
-| Subtitle style | `bodySmall`, `onSurfaceVariant`, 2dp gap between lines, 4dp below name |
+| Subtitle style | `bodySmall`, `onSurfaceVariant`, 4dp (xs) gap between lines, 4dp below name |
 | Ordering | Name → pågår line → att köpa line (D-13) |
 | Counts scope | Both catalogs combined per child (D-15) |
 | Excluded | No gotten/köpta count (D-16) |

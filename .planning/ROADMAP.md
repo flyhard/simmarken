@@ -157,9 +157,17 @@ Plans:
 
 Plans:
 
-- [ ] 05-01: Progress repository (requirement toggle, badge purchase flag)
-- [ ] 05-02: Badge detail screen with checklist and purchase toggle
-- [ ] 05-03: Home screen summary counts derived from progress state
+**Wave 1**
+
+- [ ] 05-01-PLAN.md — Progress writes tracer: requirement toggle e2e, achievedAt write-once, purchase flag API
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 05-02-PLAN.md — BadgeDetailScreen with checklist, zero-requirement note, purchase toggle + köpt dialog
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 05-03-PLAN.md — Home ChildCard summary counts (pågår / att köpa) via KidProgressSummaryCalculator
 
 ### Phase 6: Export/Import & i18n
 
