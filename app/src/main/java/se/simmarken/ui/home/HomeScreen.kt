@@ -80,40 +80,70 @@ fun HomeScreen(
                         onCardClick = {
                             navController.navigate(ChildCatalog(kidId = kid.id))
                         },
+                        onEditClick = {
+                            viewModel.openEditSheet(kid.id)
+                        },
+                        onDeleteClick = {
+                            viewModel.requestDelete(kid)
+                        },
                     )
                 }
             }
         }
     }
 
-    if (uiState.sheetState is KidSheetState.Add) {
-        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
-        val scope = rememberCoroutineScope()
-        val formViewModel: KidFormViewModel = viewModel(
-            factory = KidFormViewModelFactory(application.container.kidRepository, null),
-        )
-        val saveCompleted by formViewModel.saveCompleted.collectAsStateWithLifecycle()
-
-        val dismissSheet: () -> Unit = {
-            scope.launch {
-                sheetState.hide()
-            }.invokeOnCompletion {
-                if (!sheetState.isVisible) {
-                    viewModel.closeSheet()
-                }
-            }
+    when (val sheet = uiState.sheetState) {
+        is KidSheetState.Add -> {
+            KidFormSheetContent(
+                kidId = null,
+                kidRepository = application.container.kidRepository,
+                onClose = viewModel::closeSheet,
+            )
         }
-
-        LaunchedEffect(saveCompleted) {
-            if (saveCompleted) {
-                dismissSheet()
-            }
+        is KidSheetState.Edit -> {
+            KidFormSheetContent(
+                kidId = sheet.kidId,
+                kidRepository = application.container.kidRepository,
+                onClose = viewModel::closeSheet,
+            )
         }
-
-        KidFormBottomSheet(
-            viewModel = formViewModel,
-            sheetState = sheetState,
-            onDismiss = dismissSheet,
-        )
+        KidSheetState.Hidden -> Unit
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun KidFormSheetContent(
+    kidId: Long?,
+    kidRepository: se.simmarken.domain.repository.KidRepository,
+    onClose: () -> Unit,
+) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
+    val scope = rememberCoroutineScope()
+    val formViewModel: KidFormViewModel = viewModel(
+        factory = KidFormViewModelFactory(kidRepository, kidId),
+    )
+    val saveCompleted by formViewModel.saveCompleted.collectAsStateWithLifecycle()
+
+    val dismissSheet: () -> Unit = {
+        scope.launch {
+            sheetState.hide()
+        }.invokeOnCompletion {
+            if (!sheetState.isVisible) {
+                onClose()
+            }
+        }
+    }
+
+    LaunchedEffect(saveCompleted) {
+        if (saveCompleted) {
+            dismissSheet()
+        }
+    }
+
+    KidFormBottomSheet(
+        viewModel = formViewModel,
+        sheetState = sheetState,
+        onDismiss = dismissSheet,
+    )
 }

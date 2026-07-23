@@ -15,9 +15,13 @@ import se.simmarken.ui.theme.KidAvatarColors
 
 class KidFormViewModel(
     private val kidRepository: KidRepository,
-    @Suppress("UnusedPrivateProperty") private val kidId: Long?,
+    private val kidId: Long?,
 ) : ViewModel() {
+    val isEditMode: Boolean = kidId != null
+
     private var userPickedColor = false
+    private var existingKid: KidEntity? = null
+    private var initialLoadDone = false
 
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
@@ -33,6 +37,22 @@ class KidFormViewModel(
 
     private val _saveCompleted = MutableStateFlow(false)
     val saveCompleted: StateFlow<Boolean> = _saveCompleted.asStateFlow()
+
+    init {
+        if (kidId != null) {
+            viewModelScope.launch {
+                kidRepository.observeById(kidId).collect { kid ->
+                    if (kid != null && !initialLoadDone) {
+                        existingKid = kid
+                        _name.value = kid.name
+                        _selectedColorArgb.value = kid.avatarColorArgb
+                        userPickedColor = true
+                        initialLoadDone = true
+                    }
+                }
+            }
+        }
+    }
 
     fun updateName(value: String) {
         _name.value = value
@@ -56,16 +76,26 @@ class KidFormViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             _isSaving.value = true
             try {
-                val kids = kidRepository.observeAll().first()
-                val sortOrder = (kids.maxOfOrNull { it.sortOrder } ?: -1) + 1
-                kidRepository.upsert(
-                    KidEntity(
-                        name = _name.value.trim(),
-                        avatarColorArgb = _selectedColorArgb.value,
-                        sortOrder = sortOrder,
-                        createdAtEpochMillis = System.currentTimeMillis(),
-                    ),
-                )
+                if (isEditMode) {
+                    val existing = existingKid ?: return@launch
+                    kidRepository.upsert(
+                        existing.copy(
+                            name = _name.value.trim(),
+                            avatarColorArgb = _selectedColorArgb.value,
+                        ),
+                    )
+                } else {
+                    val kids = kidRepository.observeAll().first()
+                    val sortOrder = (kids.maxOfOrNull { it.sortOrder } ?: -1) + 1
+                    kidRepository.upsert(
+                        KidEntity(
+                            name = _name.value.trim(),
+                            avatarColorArgb = _selectedColorArgb.value,
+                            sortOrder = sortOrder,
+                            createdAtEpochMillis = System.currentTimeMillis(),
+                        ),
+                    )
+                }
                 _saveCompleted.value = true
             } finally {
                 _isSaving.value = false

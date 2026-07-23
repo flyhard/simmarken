@@ -12,6 +12,7 @@ import se.simmarken.domain.repository.KidRepository
 sealed interface KidSheetState {
     data object Hidden : KidSheetState
     data object Add : KidSheetState
+    data class Edit(val kidId: Long) : KidSheetState
 }
 
 data class HomeUiState(
@@ -39,7 +40,15 @@ class HomeViewModel(
         sheetState.value = KidSheetState.Add
     }
 
+    fun openEditSheet(kidId: Long) {
+        sheetState.value = KidSheetState.Edit(kidId)
+    }
+
     fun closeSheet() {
         sheetState.value = KidSheetState.Hidden
+    }
+
+    fun requestDelete(kid: KidEntity) {
+        // Implemented in Task 2 — delete confirmation dialog
     }
 }

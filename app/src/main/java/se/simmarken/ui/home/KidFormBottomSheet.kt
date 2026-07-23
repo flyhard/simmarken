@@ -37,6 +37,9 @@ fun KidFormBottomSheet(
     val nameError by viewModel.nameError.collectAsStateWithLifecycle()
     val isSaving by viewModel.isSaving.collectAsStateWithLifecycle()
 
+    val sheetTitle = if (viewModel.isEditMode) "Redigera barn" else "Nytt barn"
+    val saveLabel = if (viewModel.isEditMode) "Spara" else "Lägg till"
+
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
@@ -48,7 +51,7 @@ fun KidFormBottomSheet(
                 .padding(horizontal = 24.dp)
                 .padding(bottom = 24.dp),
         ) {
-            Text(text = "Nytt barn", style = androidx.compose.material3.MaterialTheme.typography.titleLarge)
+            Text(text = sheetTitle, style = androidx.compose.material3.MaterialTheme.typography.titleLarge)
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
                 value = name,
@@ -86,7 +89,7 @@ fun KidFormBottomSheet(
                     onClick = viewModel::save,
                     enabled = !isSaving,
                 ) {
-                    Text("Lägg till")
+                    Text(saveLabel)
                 }
             }
         }
