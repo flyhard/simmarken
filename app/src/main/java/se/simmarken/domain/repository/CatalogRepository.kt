@@ -11,6 +11,8 @@ interface CatalogRepository {
     fun observeCategories(catalogId: Long): Flow<List<CategoryEntity>>
     fun observeBadges(categoryId: Long): Flow<List<BadgeEntity>>
     fun observeRequirements(badgeId: Long): Flow<List<RequirementEntity>>
+    fun observeAllRequirements(): Flow<List<RequirementEntity>>
+    fun observeBadgeById(badgeId: Long): Flow<BadgeEntity?>
     suspend fun upsertCatalog(catalog: CatalogEntity): Long
     suspend fun upsertCategory(category: CategoryEntity): Long
     suspend fun upsertBadge(badge: BadgeEntity): Long
