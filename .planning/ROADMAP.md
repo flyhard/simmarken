@@ -153,7 +153,7 @@ Plans:
   4. Purchase toggle marks badge as Gotten independently of skill completion
   5. Home screen child cards show "X badges in progress" and "Y badges to buy" summaries
 
-**Plans**: 1/3 plans executed
+**Plans**: 2/3 plans executed
 
 Plans:
 
@@ -163,7 +163,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 05-02-PLAN.md — BadgeDetailScreen with checklist, zero-requirement note, purchase toggle + köpt dialog
+- [x] 05-02-PLAN.md — BadgeDetailScreen with checklist, zero-requirement note, purchase toggle + köpt dialog
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -203,5 +203,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Catalog Seeding | 5/5 | Complete    | 2026-07-22 |
 | 3. Child Profiles & Home | 3/3 | Complete    | 2026-07-23 |
 | 4. Catalog View & Visual States | 3/3 | In Progress|  |
-| 5. Progress Tracking & Badge Detail | 1/3 | In Progress|  |
+| 5. Progress Tracking & Badge Detail | 2/3 | In Progress|  |
 | 6. Export/Import & i18n | 0/3 | Not started | - |

@@ -32,7 +32,7 @@
 
 - [x] **UI-01**: Home screen uses kid-first navigation with FAB to add a child
 - [ ] **UI-02**: Child profile screen shows catalog badges grouped by category in a grid
-- [ ] **UI-03**: Badge detail screen shows badge image, requirement checklist, and purchase toggle
+- [x] **UI-03**: Badge detail screen shows badge image, requirement checklist, and purchase toggle
 - [x] **UI-04**: Four visual badge states are clearly distinguishable (grayscale, partial progress, cart overlay, checkmark/star)
 
 ### Data & Offline

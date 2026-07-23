@@ -5,15 +5,15 @@ milestone_name: milestone
 current_phase: 05
 current_phase_name: progress-tracking-badge-detail
 status: executing
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-07-23T12:00:39.324Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-07-23T12:31:00.000Z"
 last_activity: 2026-07-23
 last_activity_desc: Phase 05 execution started
 progress:
   total_phases: 5
   completed_phases: 4
   total_plans: 17
-  completed_plans: 15
+  completed_plans: 16
 ---
 
 # Project State
@@ -28,11 +28,11 @@ See: .planning/PROJECT.md (updated 2026-07-22)
 ## Current Position
 
 Phase: 05 (progress-tracking-badge-detail) — EXECUTING
-Plan: 2 of 3
-Status: Ready to execute
-Last activity: 2026-07-23 — Phase 05 execution started
+Plan: 3 of 3
+Status: Ready to execute 05-03
+Last activity: 2026-07-23 — Completed 05-02 BadgeDetailScreen
 
-Progress: [█████████░] 88% (3 plans ready)
+Progress: [██████████] 94% (1 plan ready)
 
 ## Performance Metrics
 
@@ -65,6 +65,7 @@ Progress: [█████████░] 88% (3 plans ready)
 | Phase 04 P01 | 25min | 3 tasks | 9 files |
 | Phase 04 P03 | 45min | 3 tasks | 15 files |
 | Phase 05 P01 | 35 | 3 tasks | 9 files |
+| Phase 05 P02 | 28 | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -94,7 +95,8 @@ Recent decisions affecting current work:
 - [Phase ?]: BadgePinVisual shared between grid and detail via BadgePinSize enum
 - [Phase ?]: BadgeDetailViewModel uses BadgeStateCalculator.compute only — no inline state logic
 - [Phase ?]: ioDispatcher constructor param enables JVM ViewModel tests while keeping Dispatchers.IO in production
-- [Phase ?]: Purchase dialog state uses MutableStateFlow merged into BadgeDetailUiState per HomeViewModel pattern
+- [Phase 05]: Fixed pin header outside verticalScroll; checklist and purchase scroll together
+- [Phase 05]: PurchaseToggleRow disabled label uses 38% onSurface opacity per UI-SPEC
 
 ### Pending Todos
 
@@ -114,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-23T12:00:39.313Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-07-23T12:31:00.000Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
