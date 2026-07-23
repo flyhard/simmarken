@@ -168,6 +168,94 @@ class BadgeDetailViewModelProgressTest {
         collector.cancel()
     }
 
+    @Test
+    fun lastRequirement_setsAchievedToBuy() = runTest {
+        val catalogRepo = FakeCatalogRepository()
+        val progressRepo = FakeProgressRepository()
+        val kidId = 1L
+        val badgeId = 10L
+        val requirements = listOf(
+            requirement(id = 101L, badgeId = badgeId, sortOrder = 0, text = "Req 1"),
+            requirement(id = 102L, badgeId = badgeId, sortOrder = 1, text = "Req 2"),
+        )
+        catalogRepo.seedBadgeDetail(badgeId, categoryId = 5L, requirements = requirements)
+        progressRepo.setRequirementProgress(
+            listOf(
+                RequirementProgressEntity(kidId, 101L, isAchieved = true, achievedAtEpochMillis = 1L),
+            ),
+        )
+
+        val viewModel = BadgeDetailViewModel(
+            kidId = kidId,
+            badgeId = badgeId,
+            catalogRepository = catalogRepo,
+            progressRepository = progressRepo,
+            ioDispatcher = testDispatcher,
+        )
+        val collector = launch { viewModel.uiState.collect {} }
+        advanceUntilIdle()
+
+        viewModel.toggleRequirement(102L)
+        advanceUntilIdle()
+
+        assertEquals(BadgeVisualState.ACHIEVED_TO_BUY, viewModel.uiState.value.visualState)
+        assertNotNull(progressRepo.lastBadgeUpsert?.achievedAtEpochMillis)
+
+        collector.cancel()
+    }
+
+    @Test
+    fun uncheckWhileGotten_clearsGotten() = runTest {
+        val catalogRepo = FakeCatalogRepository()
+        val progressRepo = FakeProgressRepository()
+        val kidId = 1L
+        val badgeId = 10L
+        catalogRepo.seedBadgeDetail(
+            badgeId = badgeId,
+            categoryId = 5L,
+            requirements = listOf(
+                requirement(id = 101L, badgeId = badgeId, sortOrder = 0, text = "Req 1"),
+            ),
+        )
+        progressRepo.setRequirementProgress(
+            listOf(
+                RequirementProgressEntity(kidId, 101L, isAchieved = true, achievedAtEpochMillis = 1L),
+            ),
+        )
+        progressRepo.setBadgeProgress(
+            listOf(
+                BadgeProgressEntity(
+                    kidId = kidId,
+                    badgeId = badgeId,
+                    isGotten = true,
+                    achievedAtEpochMillis = 1L,
+                    gottenAtEpochMillis = 2L,
+                ),
+            ),
+        )
+
+        val viewModel = BadgeDetailViewModel(
+            kidId = kidId,
+            badgeId = badgeId,
+            catalogRepository = catalogRepo,
+            progressRepository = progressRepo,
+            ioDispatcher = testDispatcher,
+        )
+        val collector = launch { viewModel.uiState.collect {} }
+        advanceUntilIdle()
+        assertEquals(BadgeVisualState.GOTTEN, viewModel.uiState.value.visualState)
+
+        viewModel.toggleRequirement(101L)
+        advanceUntilIdle()
+
+        assertEquals(BadgeVisualState.LOCKED, viewModel.uiState.value.visualState)
+        assertEquals(false, progressRepo.lastBadgeUpsert?.isGotten)
+        assertEquals(null, progressRepo.lastBadgeUpsert?.gottenAtEpochMillis)
+        assertNotNull(progressRepo.lastBadgeUpsert?.achievedAtEpochMillis)
+
+        collector.cancel()
+    }
+
     private fun requirement(
         id: Long,
         badgeId: Long,
