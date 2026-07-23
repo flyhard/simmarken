@@ -5,15 +5,15 @@ milestone_name: milestone
 current_phase: 05
 current_phase_name: progress-tracking-badge-detail
 status: executing
-stopped_at: Completed 05-02-PLAN.md
-last_updated: "2026-07-23T12:31:00.000Z"
+stopped_at: Completed 05-03-PLAN.md
+last_updated: "2026-07-23T12:27:44.711Z"
 last_activity: 2026-07-23
-last_activity_desc: Phase 05 execution started
+last_activity_desc: Completed 05-02 BadgeDetailScreen
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 17
-  completed_plans: 16
+  completed_plans: 17
 ---
 
 # Project State
@@ -32,7 +32,7 @@ Plan: 3 of 3
 Status: Ready to execute 05-03
 Last activity: 2026-07-23 — Completed 05-02 BadgeDetailScreen
 
-Progress: [██████████] 94% (1 plan ready)
+Progress: [██████████] 100% (1 plan ready)
 
 ## Performance Metrics
 
@@ -66,6 +66,7 @@ Progress: [██████████] 94% (1 plan ready)
 | Phase 04 P03 | 45min | 3 tasks | 15 files |
 | Phase 05 P01 | 35 | 3 tasks | 9 files |
 | Phase 05 P02 | 28 | 3 tasks | 7 files |
+| Phase 05 P03 | 18 | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -97,6 +98,8 @@ Recent decisions affecting current work:
 - [Phase ?]: ioDispatcher constructor param enables JVM ViewModel tests while keeping Dispatchers.IO in production
 - [Phase 05]: Fixed pin header outside verticalScroll; checklist and purchase scroll together
 - [Phase 05]: PurchaseToggleRow disabled label uses 38% onSurface opacity per UI-SPEC
+- [Phase ?]: Home summary counts reuse BadgeCatalogMapper — same BadgeStateCalculator path as catalog grid
+- [Phase ?]: ChildCard hides pågår/att köpa lines when count is zero per D-14
 
 ### Pending Todos
 
@@ -116,6 +119,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-23T12:31:00.000Z
-Stopped at: Completed 05-02-PLAN.md
+Last session: 2026-07-23T12:27:44.699Z
+Stopped at: Completed 05-03-PLAN.md
 Resume file: None

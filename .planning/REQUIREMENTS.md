@@ -26,7 +26,7 @@
 - [x] **PROG-02**: Badge automatically becomes Achieved when all requirements are checked
 - [x] **PROG-03**: Parent can mark a badge as physically purchased (Gotten) via a toggle
 - [x] **PROG-04**: Badge visual state reflects locked, in progress, achieved-to-buy, or gotten
-- [ ] **PROG-05**: Home screen child card shows summary counts (badges in progress, badges to buy)
+- [x] **PROG-05**: Home screen child card shows summary counts (badges in progress, badges to buy)
 
 ### User Interface
 
@@ -85,11 +85,11 @@
 | UI-02 | Phase 4 | Pending |
 | UI-04 | Phase 4 | Complete |
 | PROG-04 | Phase 4 | Complete |
-| UI-03 | Phase 5 | Pending |
+| UI-03 | Phase 5 | Complete |
 | PROG-01 | Phase 5 | Complete |
 | PROG-02 | Phase 5 | Complete |
 | PROG-03 | Phase 5 | Complete |
-| PROG-05 | Phase 5 | Pending |
+| PROG-05 | Phase 5 | Complete |
 | DATA-02 | Phase 6 | Pending |
 | DATA-03 | Phase 6 | Pending |
 | I18N-01 | Phase 6 | Pending |
