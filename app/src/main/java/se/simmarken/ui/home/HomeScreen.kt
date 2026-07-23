@@ -98,6 +98,7 @@ fun HomeScreen(
             is KidSheetState.Add -> {
                 KidFormSheetContent(
                     kidId = null,
+                    sessionId = sheet.sessionId,
                     kidRepository = application.container.kidRepository,
                     onClose = viewModel::closeSheet,
                 )
@@ -105,6 +106,7 @@ fun HomeScreen(
             is KidSheetState.Edit -> {
                 KidFormSheetContent(
                     kidId = sheet.kidId,
+                    sessionId = sheet.sessionId,
                     kidRepository = application.container.kidRepository,
                     onClose = viewModel::closeSheet,
                 )
@@ -126,13 +128,14 @@ fun HomeScreen(
 @Composable
 private fun KidFormSheetContent(
     kidId: Long?,
+    sessionId: Long,
     kidRepository: se.simmarken.domain.repository.KidRepository,
     onClose: () -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
     val scope = rememberCoroutineScope()
     val formViewModel: KidFormViewModel = viewModel(
-        key = kidId?.toString() ?: "add",
+        key = "${kidId ?: "add"}-$sessionId",
         factory = KidFormViewModelFactory(kidRepository, kidId),
     )
     val saveCompleted by formViewModel.saveCompleted.collectAsStateWithLifecycle()

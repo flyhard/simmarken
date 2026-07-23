@@ -13,8 +13,8 @@ import se.simmarken.domain.repository.KidRepository
 
 sealed interface KidSheetState {
     data object Hidden : KidSheetState
-    data object Add : KidSheetState
-    data class Edit(val kidId: Long) : KidSheetState
+    data class Add(val sessionId: Long) : KidSheetState
+    data class Edit(val kidId: Long, val sessionId: Long) : KidSheetState
 }
 
 data class HomeUiState(
@@ -28,6 +28,7 @@ class HomeViewModel(
 ) : ViewModel() {
     private val sheetState = MutableStateFlow<KidSheetState>(KidSheetState.Hidden)
     private val deleteTarget = MutableStateFlow<KidEntity?>(null)
+    private var nextSheetSessionId = 0L
 
     val uiState = combine(
         kidRepository.observeAll(),
@@ -43,12 +44,12 @@ class HomeViewModel(
 
     fun openAddSheet() {
         deleteTarget.value = null
-        sheetState.value = KidSheetState.Add
+        sheetState.value = KidSheetState.Add(sessionId = nextSheetSessionId++)
     }
 
     fun openEditSheet(kidId: Long) {
         deleteTarget.value = null
-        sheetState.value = KidSheetState.Edit(kidId)
+        sheetState.value = KidSheetState.Edit(kidId = kidId, sessionId = nextSheetSessionId++)
     }
 
     fun closeSheet() {
