@@ -20,7 +20,7 @@ fun SimmarkenNavHost() {
             val viewModel: HomeViewModel = viewModel(
                 factory = HomeViewModelFactory(application.container.kidRepository),
             )
-            HomeScreen(viewModel = viewModel)
+            HomeScreen(viewModel = viewModel, navController = navController)
         }
     }
 }
