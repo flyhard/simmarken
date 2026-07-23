@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
-import se.simmarken.domain.BadgeStateCalculator
+import se.simmarken.domain.BadgeCatalogMapper
 import se.simmarken.domain.model.BadgeDetailUiState
 import se.simmarken.domain.repository.CatalogRepository
 import se.simmarken.domain.repository.ProgressRepository
@@ -32,25 +32,21 @@ class BadgeDetailViewModel(
                     val requirementProgressById =
                         reqProgress.associate { it.requirementId to it.isAchieved }
                     val isGotten = badgeProgress.any { it.badgeId == badgeId && it.isGotten }
-                    val totalRequirements = requirements.size
-                    val achievedCount = requirements.count { requirement ->
-                        requirementProgressById[requirement.id] == true
-                    }
-                    BadgeDetailUiState(
-                        nameSv = badge.nameSv,
-                        imageAssetPath = badge.imageAssetPath,
+                    val cell = BadgeCatalogMapper.toBadgeCellUiModel(
+                        badge = badge,
                         categoryCode = category?.code.orEmpty(),
-                        visualState = BadgeStateCalculator.compute(
-                            totalRequirements = totalRequirements,
-                            achievedCount = achievedCount,
-                            isGotten = isGotten,
-                        ),
-                        progressFraction = BadgeStateCalculator.progressFraction(
-                            achievedCount = achievedCount,
-                            totalRequirements = totalRequirements,
-                        ),
-                        achievedCount = achievedCount,
-                        totalRequirements = totalRequirements,
+                        requirements = requirements,
+                        requirementProgressById = requirementProgressById,
+                        isGotten = isGotten,
+                    )
+                    BadgeDetailUiState(
+                        nameSv = cell.nameSv,
+                        imageAssetPath = cell.imageAssetPath,
+                        categoryCode = cell.categoryCode,
+                        visualState = cell.visualState,
+                        progressFraction = cell.progressFraction,
+                        achievedCount = cell.achievedCount,
+                        totalRequirements = cell.totalRequirements,
                         badgeMissing = false,
                         isLoading = category == null,
                     )
