@@ -126,9 +126,17 @@ Plans:
 
 Plans:
 
-- [ ] 04-01: BadgeStateCalculator domain logic with unit tests
-- [ ] 04-02: Category-grouped badge grid Composable
-- [ ] 04-03: Badge card component with 4-tier visual overlays
+**Wave 1**
+
+- [ ] 04-01-PLAN.md — BadgeStateCalculator domain logic, BadgeCatalogMapper, DAO read extensions, JVM tests
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 04-02-PLAN.md — Category-grouped badge grid, dual-catalog tabs, ChildCatalogScreen replaces placeholder
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 04-03-PLAN.md — BadgePinVisual 4-tier overlays, Coil, BadgeDetail placeholder navigation
 
 ### Phase 5: Progress Tracking & Badge Detail
 
