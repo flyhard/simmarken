@@ -29,6 +29,7 @@ import se.simmarken.SimmarkenApplication
 import se.simmarken.navigation.ChildCatalog
 import se.simmarken.navigation.KidFormViewModelFactory
 import se.simmarken.ui.home.components.ChildCard
+import se.simmarken.ui.home.components.DeleteKidDialog
 import se.simmarken.ui.home.components.EmptyState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,22 +93,32 @@ fun HomeScreen(
         }
     }
 
-    when (val sheet = uiState.sheetState) {
-        is KidSheetState.Add -> {
-            KidFormSheetContent(
-                kidId = null,
-                kidRepository = application.container.kidRepository,
-                onClose = viewModel::closeSheet,
-            )
+    if (uiState.deleteTarget == null) {
+        when (val sheet = uiState.sheetState) {
+            is KidSheetState.Add -> {
+                KidFormSheetContent(
+                    kidId = null,
+                    kidRepository = application.container.kidRepository,
+                    onClose = viewModel::closeSheet,
+                )
+            }
+            is KidSheetState.Edit -> {
+                KidFormSheetContent(
+                    kidId = sheet.kidId,
+                    kidRepository = application.container.kidRepository,
+                    onClose = viewModel::closeSheet,
+                )
+            }
+            KidSheetState.Hidden -> Unit
         }
-        is KidSheetState.Edit -> {
-            KidFormSheetContent(
-                kidId = sheet.kidId,
-                kidRepository = application.container.kidRepository,
-                onClose = viewModel::closeSheet,
-            )
-        }
-        KidSheetState.Hidden -> Unit
+    }
+
+    uiState.deleteTarget?.let { kid ->
+        DeleteKidDialog(
+            name = kid.name,
+            onConfirm = viewModel::confirmDelete,
+            onDismiss = viewModel::dismissDelete,
+        )
     }
 }
 
