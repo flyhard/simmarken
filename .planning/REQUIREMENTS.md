@@ -7,10 +7,10 @@
 
 ### Child Profiles
 
-- [ ] **KIDS-01**: Parent can add a child with a name
-- [ ] **KIDS-02**: Parent can assign an avatar or color theme to a child
-- [ ] **KIDS-03**: Parent can view all children as cards on the home screen
-- [ ] **KIDS-04**: Parent can edit or remove a child profile
+- [x] **KIDS-01**: Parent can add a child with a name
+- [x] **KIDS-02**: Parent can assign an avatar or color theme to a child
+- [x] **KIDS-03**: Parent can view all children as cards on the home screen
+- [x] **KIDS-04**: Parent can edit or remove a child profile
 
 ### Catalog
 
@@ -30,7 +30,7 @@
 
 ### User Interface
 
-- [ ] **UI-01**: Home screen uses kid-first navigation with FAB to add a child
+- [x] **UI-01**: Home screen uses kid-first navigation with FAB to add a child
 - [ ] **UI-02**: Child profile screen shows catalog badges grouped by category in a grid
 - [ ] **UI-03**: Badge detail screen shows badge image, requirement checklist, and purchase toggle
 - [ ] **UI-04**: Four visual badge states are clearly distinguishable (grayscale, partial progress, cart overlay, checkmark/star)
@@ -77,11 +77,11 @@
 | CATA-03 | Phase 2 | Complete |
 | CATA-04 | Phase 2 | Complete |
 | CATA-05 | Phase 2 | Complete |
-| KIDS-01 | Phase 3 | Pending |
-| KIDS-02 | Phase 3 | Pending |
-| KIDS-03 | Phase 3 | Pending |
-| KIDS-04 | Phase 3 | Pending |
-| UI-01 | Phase 3 | Pending |
+| KIDS-01 | Phase 3 | Complete |
+| KIDS-02 | Phase 3 | Complete |
+| KIDS-03 | Phase 3 | Complete |
+| KIDS-04 | Phase 3 | Complete |
+| UI-01 | Phase 3 | Complete |
 | UI-02 | Phase 4 | Pending |
 | UI-04 | Phase 4 | Pending |
 | PROG-04 | Phase 4 | Pending |

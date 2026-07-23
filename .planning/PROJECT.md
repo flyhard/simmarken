@@ -12,11 +12,11 @@ At the swim hall, a parent can open the app and immediately answer: "Did they pa
 
 ### Validated
 
-(None yet — ship to validate)
+- Parent can add and manage child profiles (name, avatar/color theme) — **Validated in Phase 3**
+- Kid-first home screen with child cards, empty state, and catalog navigation placeholder — **Validated in Phase 3**
 
 ### Active
 
-- [ ] Parent can add and manage child profiles (name, avatar/color theme)
 - [ ] Parent can view badges from Svensk Simidrott and SLS catalogs, grouped by category
 - [ ] Parent can check off individual skill requirements per child; badge auto-achieves when all requirements are met
 - [ ] Parent can mark a badge as physically purchased/sewn on (separate from skill completion)
@@ -87,4 +87,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-22 after initialization*
+*Last updated: 2026-07-23 after Phase 3 completion*
