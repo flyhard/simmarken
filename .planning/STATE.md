@@ -5,15 +5,15 @@ milestone_name: milestone
 current_phase: 04
 current_phase_name: catalog-view-visual-states
 status: executing
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-07-23T10:05:52.533Z"
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-07-23T10:25:24.121Z"
 last_activity: 2026-07-23
 last_activity_desc: Phase 04 execution started
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 14
-  completed_plans: 12
+  completed_plans: 14
 ---
 
 # Project State
@@ -28,11 +28,11 @@ See: .planning/PROJECT.md (updated 2026-07-22)
 ## Current Position
 
 Phase: 04 (catalog-view-visual-states) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-07-23 — Phase 04 execution started
 
-Progress: [█████████░] 86% (3 plans ready)
+Progress: [██████████] 100% (3 plans ready)
 
 ## Performance Metrics
 
@@ -63,6 +63,7 @@ Progress: [█████████░] 86% (3 plans ready)
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 04 P01 | 25min | 3 tasks | 9 files |
+| Phase 04 P03 | 45min | 3 tasks | 15 files |
 
 ## Accumulated Context
 
@@ -88,6 +89,9 @@ Recent decisions affecting current work:
 - [Phase ?]: BadgeVisualState derived at read time via BadgeStateCalculator — never persisted (D-29)
 - [Phase ?]: State precedence D-30: gotten → GOTTEN; zero-req or all achieved → ACHIEVED_TO_BUY; partial → IN_PROGRESS; none → LOCKED
 - [Phase ?]: Absent RequirementProgressEntity rows default to isAchieved=false in BadgeCatalogMapper (D-05)
+- [Phase ?]: compileSdk 36 required for coil-compose 3.5.0 AAR metadata
+- [Phase ?]: BadgePinVisual shared between grid and detail via BadgePinSize enum
+- [Phase ?]: BadgeDetailViewModel uses BadgeStateCalculator.compute only — no inline state logic
 
 ### Pending Todos
 
@@ -107,6 +111,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-23T10:05:52.518Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-07-23T10:25:24.110Z
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
