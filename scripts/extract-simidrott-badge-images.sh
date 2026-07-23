@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# LEGACY: Superseded 2026-07-23 — bundled Simidrott pin images now come from the
+# official shop (https://privat.ssfshopen.se/marken-simmarken). See docs/SOURCES.md
+# and scripts/apply-transparent-badge-backgrounds.sh.
+#
 # Extract Simidrott badge pin images from official simmärkesaffisch PDF.
 # Maps embedded PDF images to seed JSON filenames via affisch progression order.
 set -euo pipefail

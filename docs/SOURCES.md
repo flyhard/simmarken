@@ -2,7 +2,8 @@
 
 Provenance for bundled badge catalogs and pin artwork. Source URLs and extraction dates live here only — not in the Room schema (`D-16`).
 
-**Extraction date:** 2026-07-22  
+**Requirements extraction date:** 2026-07-22  
+**Image extraction date:** 2026-07-23  
 **Affisch version basis:** 2026.03.02 (`simmärkesmaterial` last updated)
 
 ---
@@ -17,12 +18,15 @@ Provenance for bundled badge catalogs and pin artwork. Source URLs and extractio
 | Simmärkesmaterial (protocols + affisch) | https://svensksimidrott.se/simkunnighet/simmarken/simmarkesmaterial |
 | Simmärkesaffisch 2024 PDF | https://svensksimidrott.se/download/18.2834ddaa18d0e8137e44ef74/1705584326390/simm%C3%A4rkesaffisch%202024.pdf |
 | 2026 affisch announcement | https://svensksimidrott.se/nyheter-svensk-simidrott/svensk-simidrott/2026-02-11-nu-ar-2026-ars-simmarkesaffischer-och-folder-har |
+| Official shop — simmärken | https://privat.ssfshopen.se/marken-simmarken |
 
 ### Licensing (promotional use)
 
-Svensk Simidrott's simmärkesmaterial page states that the material may be downloaded and used for marketing and promotion of simmärken (swimming badges). Badge pin artwork in this app is cropped from the official simmärkesaffisch and protocol PDFs downloaded from that page, used solely to help parents identify official badges their children have earned.
+Svensk Simidrott's simmärkesmaterial page states that the material may be downloaded and used for marketing and promotion of simmärken (swimming badges). Requirement text in this app comes from the official simmärkesmaterial protocols and affisch downloaded from that page.
 
-Maintainer download script: `scripts/extract-simidrott.sh`  
+Badge pin artwork is taken from official product photos on the [Svensk Simidrott shop](https://privat.ssfshopen.se/marken-simmarken) (NeH e-commerce, `images.neh.com`), used solely to help parents identify official badges their children have earned. White studio backgrounds are removed in post-processing; see **Images (Bilder)** below.
+
+Maintainer scripts: `scripts/extract-simidrott.sh` (requirements) · `scripts/apply-transparent-badge-backgrounds.sh` (images)  
 Seed JSON: `app/src/main/assets/seed/simidrott.json` (`catalogVersion`: `2026.03.02`)
 
 ---
@@ -49,23 +53,24 @@ Seed JSON: `app/src/main/assets/seed/sls.json` (`catalogVersion`: `2026.07.22`)
 
 ## Images (Bilder)
 
-Badge pin images are cropped from official source materials per `D-01` and `D-02`:
+Badge pin images are official product photos per `D-01` and `D-02`:
 
 | Catalog | Source material | Output path |
 |---------|-----------------|-------------|
-| Svensk Simidrott | Simmärkesaffisch 2024 PDF (`pdfimages` extraction) | `app/src/main/assets/badges/simidrott/*.webp` |
-| SLS | Official shop product images | `app/src/main/assets/badges/sls/*.webp` |
+| Svensk Simidrott | [SSF shop](https://privat.ssfshopen.se/marken-simmarken) product images (`images.neh.com/.../high/`) | `app/src/main/assets/badges/simidrott/*.webp` |
+| SLS | [SLS shop](https://shop.svenskalivraddningssallskapet.se/collections/sim-och-livraddningsmarken) product images | `app/src/main/assets/badges/sls/*.webp` |
 
 ### Format and dimensions
 
-- **Format:** WebP (`cwebp -q 85`)
+- **Format:** WebP with alpha (`cwebp -q 85 -alpha_q 100`)
+- **Background:** White studio matte removed via border flood-fill (`scripts/remove-white-background.py`)
 - **Grid size:** 256×256 px (detail views may use the same asset scaled by Coil in Phase 4)
 - **Target grid reference:** ~128 px display; 256 px source for retina (`ARCHITECTURE.md`)
 - **Metadata:** EXIF stripped during `cwebp` conversion (`-metadata none`)
 - **APK budget:** Total badge assets under 5 MB; individual files targeted under 50 KB
 
-Conversion script: `scripts/convert-badge-images.sh`  
-Extraction mapping: `scripts/extract-simidrott-badge-images.sh`
+Conversion scripts: `scripts/convert-badge-images.sh` · `scripts/apply-transparent-badge-backgrounds.sh`  
+Legacy affisch crop mapping (superseded for images): `scripts/extract-simidrott-badge-images.sh`
 
 Paths in seed JSON use the convention `badges/{catalog}/{badge_code_underscores}.webp` (e.g. `baddaren-gron` → `baddaren_gron.webp`).
 
@@ -80,7 +85,9 @@ Each bundled seed JSON carries a `catalogVersion` string on the root catalog obj
 | `simidrott` | `2026.03.02` | `YYYY.MM.DD` | Date of simmärkesmaterial "Senast uppdaterad" |
 | `sls` | `2026.07.22` | `YYYY.MM.DD` | Date shop products were verified for v1 seed |
 
-When Svensk Simidrott publishes a new affisch, update the seed JSON `catalogVersion`, re-extract requirements and images, and document the change here.
+Image assets for both catalogs were last verified against shop product pages on **2026-07-23**.
+
+When Svensk Simidrott publishes a new affisch, update the seed JSON `catalogVersion`, re-extract requirements from simmärkesmaterial, and document the change here. Re-verify shop product images when pins are redesigned or new products appear on [marken-simmarken](https://privat.ssfshopen.se/marken-simmarken).
 
 ---
 
