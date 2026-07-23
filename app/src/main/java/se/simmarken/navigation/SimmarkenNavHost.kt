@@ -3,12 +3,15 @@ package se.simmarken.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import se.simmarken.SimmarkenApplication
-import se.simmarken.ui.home.HomeScreen
-import se.simmarken.ui.home.HomeViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import se.simmarken.SimmarkenApplication
+import se.simmarken.ui.child.ChildCatalogPlaceholderScreen
+import se.simmarken.ui.child.ChildCatalogViewModel
+import se.simmarken.ui.home.HomeScreen
+import se.simmarken.ui.home.HomeViewModel
 
 @Composable
 fun SimmarkenNavHost() {
@@ -21,6 +24,19 @@ fun SimmarkenNavHost() {
                 factory = HomeViewModelFactory(application.container.kidRepository),
             )
             HomeScreen(viewModel = viewModel, navController = navController)
+        }
+        composable<ChildCatalog> { backStackEntry ->
+            val route = backStackEntry.toRoute<ChildCatalog>()
+            val catalogViewModel: ChildCatalogViewModel = viewModel(
+                factory = ChildCatalogViewModelFactory(
+                    application.container.kidRepository,
+                    route.kidId,
+                ),
+            )
+            ChildCatalogPlaceholderScreen(
+                viewModel = catalogViewModel,
+                onBack = { navController.popBackStack() },
+            )
         }
     }
 }
