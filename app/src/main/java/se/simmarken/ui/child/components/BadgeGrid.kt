@@ -25,13 +25,13 @@ fun BadgeGrid(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         sections.forEach { section ->
-            stickyHeader(key = section.categoryId) {
+            stickyHeader(key = "header-${section.categoryId}") {
                 CategoryStickyHeader(nameSv = section.categoryNameSv)
             }
             val badgeRows = section.badges.chunked(3)
             items(
                 items = badgeRows,
-                key = { row -> row.first().id },
+                key = { row -> "row-${section.categoryId}-${row.first().id}" },
             ) { row ->
                 Row(
                     modifier = Modifier
