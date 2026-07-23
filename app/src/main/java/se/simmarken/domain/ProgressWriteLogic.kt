@@ -16,4 +16,9 @@ object ProgressWriteLogic {
 
     fun shouldClearGottenOnUncheck(isGotten: Boolean, flippingToAchieved: Boolean): Boolean =
         isGotten && !flippingToAchieved
+
+    fun isPurchaseEnabled(totalRequirements: Int, visualState: BadgeVisualState): Boolean =
+        totalRequirements == 0 ||
+            visualState == BadgeVisualState.ACHIEVED_TO_BUY ||
+            visualState == BadgeVisualState.GOTTEN
 }

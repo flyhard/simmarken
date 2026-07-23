@@ -5,10 +5,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -29,20 +30,30 @@ class BadgeDetailViewModel(
     private val progressRepository: ProgressRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : ViewModel() {
+    private val showUncheckPurchaseDialog = MutableStateFlow(false)
+
     val uiState = catalogRepository.observeBadgeById(badgeId)
         .flatMapLatest { badge ->
             if (badge == null) {
-                flowOf(BadgeDetailUiState(badgeMissing = true, isLoading = false))
+                showUncheckPurchaseDialog.map { showDialog ->
+                    BadgeDetailUiState(
+                        badgeMissing = true,
+                        isLoading = false,
+                        showUncheckPurchaseDialog = showDialog,
+                    )
+                }
             } else {
                 combine(
                     catalogRepository.observeCategoryById(badge.categoryId),
                     catalogRepository.observeRequirements(badgeId),
                     progressRepository.observeRequirementProgress(kidId),
                     progressRepository.observeBadgeProgress(kidId),
-                ) { category, requirements, reqProgress, badgeProgress ->
+                    showUncheckPurchaseDialog,
+                ) { category, requirements, reqProgress, badgeProgress, showDialog ->
                     val requirementProgressById =
                         reqProgress.associate { it.requirementId to it.isAchieved }
-                    val isGotten = badgeProgress.any { it.badgeId == badgeId && it.isGotten }
+                    val badgeProgressEntity = badgeProgress.find { it.badgeId == badgeId }
+                    val isGotten = badgeProgressEntity?.isGotten == true
                     val cell = BadgeCatalogMapper.toBadgeCellUiModel(
                         badge = badge,
                         categoryCode = category?.code.orEmpty(),
@@ -68,6 +79,12 @@ class BadgeDetailViewModel(
                         achievedCount = cell.achievedCount,
                         totalRequirements = cell.totalRequirements,
                         requirements = requirementRows,
+                        isGotten = isGotten,
+                        isPurchaseEnabled = ProgressWriteLogic.isPurchaseEnabled(
+                            totalRequirements = cell.totalRequirements,
+                            visualState = cell.visualState,
+                        ),
+                        showUncheckPurchaseDialog = showDialog,
                         badgeMissing = false,
                         isLoading = category == null,
                     )
@@ -139,6 +156,46 @@ class BadgeDetailViewModel(
             if (badgeProgressDirty) {
                 progressRepository.upsertBadgeProgress(badgeProgress)
             }
+        }
+    }
+
+    fun setGotten(value: Boolean) {
+        if (!value) return
+        viewModelScope.launch(ioDispatcher) {
+            val existing = progressRepository.observeBadgeProgress(kidId)
+                .first()
+                .find { it.badgeId == badgeId }
+            val base = existing ?: BadgeProgressEntity(kidId = kidId, badgeId = badgeId)
+            progressRepository.upsertBadgeProgress(
+                base.copy(
+                    isGotten = true,
+                    gottenAtEpochMillis = System.currentTimeMillis(),
+                ),
+            )
+        }
+    }
+
+    fun requestClearGotten() {
+        showUncheckPurchaseDialog.value = true
+    }
+
+    fun dismissClearGotten() {
+        showUncheckPurchaseDialog.value = false
+    }
+
+    fun confirmClearGotten() {
+        showUncheckPurchaseDialog.value = false
+        viewModelScope.launch(ioDispatcher) {
+            val existing = progressRepository.observeBadgeProgress(kidId)
+                .first()
+                .find { it.badgeId == badgeId }
+                ?: return@launch
+            progressRepository.upsertBadgeProgress(
+                existing.copy(
+                    isGotten = false,
+                    gottenAtEpochMillis = null,
+                ),
+            )
         }
     }
 }

@@ -9,6 +9,9 @@ data class BadgeDetailUiState(
     val achievedCount: Int = 0,
     val totalRequirements: Int = 0,
     val requirements: List<RequirementRowUiModel> = emptyList(),
+    val isGotten: Boolean = false,
+    val isPurchaseEnabled: Boolean = false,
+    val showUncheckPurchaseDialog: Boolean = false,
     val badgeMissing: Boolean = false,
     val isLoading: Boolean = true,
 )

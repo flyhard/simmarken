@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import se.simmarken.domain.model.BadgeVisualState
 
 class ProgressWriteLogicTest {
     @Test
@@ -59,5 +60,15 @@ class ProgressWriteLogicTest {
             ),
         )
         assertEquals(1L, ProgressWriteLogic.preserveAchievedAt(existing = 1L, proposed = null))
+    }
+
+    @Test
+    fun isPurchaseEnabled_zeroRequirements() {
+        assertTrue(
+            ProgressWriteLogic.isPurchaseEnabled(
+                totalRequirements = 0,
+                visualState = BadgeVisualState.ACHIEVED_TO_BUY,
+            ),
+        )
     }
 }

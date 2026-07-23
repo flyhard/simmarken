@@ -13,6 +13,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -252,6 +253,121 @@ class BadgeDetailViewModelProgressTest {
         assertEquals(false, progressRepo.lastBadgeUpsert?.isGotten)
         assertEquals(null, progressRepo.lastBadgeUpsert?.gottenAtEpochMillis)
         assertNotNull(progressRepo.lastBadgeUpsert?.achievedAtEpochMillis)
+
+        collector.cancel()
+    }
+
+    @Test
+    fun setGotten_true_upsertsGottenFields() = runTest {
+        val catalogRepo = FakeCatalogRepository()
+        val progressRepo = FakeProgressRepository()
+        val kidId = 1L
+        val badgeId = 10L
+        catalogRepo.seedBadgeDetail(
+            badgeId = badgeId,
+            categoryId = 5L,
+            requirements = emptyList(),
+        )
+        progressRepo.setBadgeProgress(
+            listOf(
+                BadgeProgressEntity(
+                    kidId = kidId,
+                    badgeId = badgeId,
+                    achievedAtEpochMillis = 1L,
+                ),
+            ),
+        )
+
+        val viewModel = BadgeDetailViewModel(
+            kidId = kidId,
+            badgeId = badgeId,
+            catalogRepository = catalogRepo,
+            progressRepository = progressRepo,
+            ioDispatcher = testDispatcher,
+        )
+        val collector = launch { viewModel.uiState.collect {} }
+        advanceUntilIdle()
+
+        viewModel.setGotten(true)
+        advanceUntilIdle()
+
+        assertTrue(progressRepo.lastBadgeUpsert!!.isGotten)
+        assertNotNull(progressRepo.lastBadgeUpsert!!.gottenAtEpochMillis)
+        assertEquals(BadgeVisualState.GOTTEN, viewModel.uiState.value.visualState)
+
+        collector.cancel()
+    }
+
+    @Test
+    fun confirmClearGotten_clearsGottenRetainsAchievedAt() = runTest {
+        val catalogRepo = FakeCatalogRepository()
+        val progressRepo = FakeProgressRepository()
+        val kidId = 1L
+        val badgeId = 10L
+        catalogRepo.seedBadgeDetail(
+            badgeId = badgeId,
+            categoryId = 5L,
+            requirements = emptyList(),
+        )
+        progressRepo.setBadgeProgress(
+            listOf(
+                BadgeProgressEntity(
+                    kidId = kidId,
+                    badgeId = badgeId,
+                    isGotten = true,
+                    achievedAtEpochMillis = 42L,
+                    gottenAtEpochMillis = 99L,
+                ),
+            ),
+        )
+
+        val viewModel = BadgeDetailViewModel(
+            kidId = kidId,
+            badgeId = badgeId,
+            catalogRepository = catalogRepo,
+            progressRepository = progressRepo,
+            ioDispatcher = testDispatcher,
+        )
+        val collector = launch { viewModel.uiState.collect {} }
+        advanceUntilIdle()
+
+        viewModel.requestClearGotten()
+        advanceUntilIdle()
+        assertTrue(viewModel.uiState.value.showUncheckPurchaseDialog)
+
+        viewModel.confirmClearGotten()
+        advanceUntilIdle()
+
+        assertFalse(viewModel.uiState.value.showUncheckPurchaseDialog)
+        assertEquals(false, progressRepo.lastBadgeUpsert?.isGotten)
+        assertEquals(null, progressRepo.lastBadgeUpsert?.gottenAtEpochMillis)
+        assertEquals(42L, progressRepo.lastBadgeUpsert?.achievedAtEpochMillis)
+
+        collector.cancel()
+    }
+
+    @Test
+    fun isPurchaseEnabled_trueForZeroRequirementBadge() = runTest {
+        val catalogRepo = FakeCatalogRepository()
+        val progressRepo = FakeProgressRepository()
+        catalogRepo.seedBadgeDetail(
+            badgeId = 10L,
+            categoryId = 5L,
+            requirements = emptyList(),
+        )
+
+        val viewModel = BadgeDetailViewModel(
+            kidId = 1L,
+            badgeId = 10L,
+            catalogRepository = catalogRepo,
+            progressRepository = progressRepo,
+            ioDispatcher = testDispatcher,
+        )
+        val collector = launch { viewModel.uiState.collect {} }
+        advanceUntilIdle()
+
+        assertEquals(BadgeVisualState.ACHIEVED_TO_BUY, viewModel.uiState.value.visualState)
+        assertTrue(viewModel.uiState.value.isPurchaseEnabled)
 
         collector.cancel()
     }
