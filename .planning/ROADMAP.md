@@ -122,7 +122,7 @@ Plans:
   4. Gotten badges show full color with star/checkmark overlay
   5. Tapping a badge navigates to detail screen (placeholder OK until Phase 5)
 
-**Plans**: 1/3 plans executed
+**Plans**: 2/3 plans executed
 
 Plans:
 
@@ -132,7 +132,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 04-02-PLAN.md — Category-grouped badge grid, dual-catalog tabs, ChildCatalogScreen replaces placeholder
+- [x] 04-02-PLAN.md — Category-grouped badge grid, dual-catalog tabs, ChildCatalogScreen replaces placeholder
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -194,6 +194,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Android Foundation & Database | 3/3 | Complete   | 2026-07-22 |
 | 2. Catalog Seeding | 5/5 | Complete    | 2026-07-22 |
 | 3. Child Profiles & Home | 3/3 | Complete    | 2026-07-23 |
-| 4. Catalog View & Visual States | 1/3 | In Progress|  |
+| 4. Catalog View & Visual States | 2/3 | In Progress|  |
 | 5. Progress Tracking & Badge Detail | 0/3 | Not started | - |
 | 6. Export/Import & i18n | 0/3 | Not started | - |
