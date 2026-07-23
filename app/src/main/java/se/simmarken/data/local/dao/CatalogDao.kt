@@ -29,6 +29,9 @@ interface CatalogDao {
     @Query("SELECT * FROM badges WHERE id = :badgeId LIMIT 1")
     fun observeBadgeById(badgeId: Long): Flow<BadgeEntity?>
 
+    @Query("SELECT * FROM categories WHERE id = :categoryId LIMIT 1")
+    fun observeCategoryById(categoryId: Long): Flow<CategoryEntity?>
+
     @Query("SELECT * FROM catalogs WHERE code = :code LIMIT 1")
     suspend fun findCatalogByCode(code: String): CatalogEntity?
 

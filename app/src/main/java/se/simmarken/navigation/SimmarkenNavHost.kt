@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import se.simmarken.SimmarkenApplication
+import se.simmarken.ui.badge.BadgeDetailPlaceholderScreen
+import se.simmarken.ui.badge.BadgeDetailViewModel
 import se.simmarken.ui.child.ChildCatalogScreen
 import se.simmarken.ui.child.ChildCatalogViewModel
 import se.simmarken.ui.home.HomeScreen
@@ -38,7 +40,24 @@ fun SimmarkenNavHost() {
             ChildCatalogScreen(
                 viewModel = catalogViewModel,
                 onBack = { navController.popBackStack() },
-                onBadgeClick = {},
+                onBadgeClick = { badgeId ->
+                    navController.navigate(BadgeDetail(kidId = route.kidId, badgeId = badgeId))
+                },
+            )
+        }
+        composable<BadgeDetail> { backStackEntry ->
+            val route = backStackEntry.toRoute<BadgeDetail>()
+            val detailViewModel: BadgeDetailViewModel = viewModel(
+                factory = BadgeDetailViewModelFactory(
+                    kidId = route.kidId,
+                    badgeId = route.badgeId,
+                    catalogRepository = application.container.catalogRepository,
+                    progressRepository = application.container.progressRepository,
+                ),
+            )
+            BadgeDetailPlaceholderScreen(
+                viewModel = detailViewModel,
+                onBack = { navController.popBackStack() },
             )
         }
     }

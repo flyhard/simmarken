@@ -7,3 +7,6 @@ object Home
 
 @Serializable
 data class ChildCatalog(val kidId: Long)
+
+@Serializable
+data class BadgeDetail(val kidId: Long, val badgeId: Long)
