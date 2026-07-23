@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "se.simmarken"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "se.simmarken"
@@ -55,6 +55,15 @@ android {
     }
 }
 
+configurations.configureEach {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion(libs.versions.kotlin.get())
+            because("Align Kotlin artifacts with project compiler")
+        }
+    }
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
@@ -73,6 +82,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
 

@@ -1,6 +1,5 @@
 package se.simmarken.ui.child.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import se.simmarken.domain.model.BadgeCellUiModel
-import se.simmarken.ui.badge.BadgePlaceholderColors
+import se.simmarken.domain.model.BadgeVisualState
+import se.simmarken.ui.components.BadgePinSize
+import se.simmarken.ui.components.BadgePinVisual
+
+private fun badgeStateLabel(visualState: BadgeVisualState): String = when (visualState) {
+    BadgeVisualState.LOCKED -> "låst"
+    BadgeVisualState.IN_PROGRESS -> "pågår"
+    BadgeVisualState.ACHIEVED_TO_BUY -> "klar att köpa"
+    BadgeVisualState.GOTTEN -> "köpt"
+}
 
 @Composable
 fun BadgeGridItem(
@@ -32,12 +40,18 @@ fun BadgeGridItem(
         Box(
             modifier = Modifier
                 .weight(1f)
-                .fillMaxWidth()
-                .padding(4.dp)
-                .background(BadgePlaceholderColors.forCategoryCode(badge.categoryCode)),
+                .fillMaxWidth(),
             contentAlignment = Alignment.Center,
         ) {
-            // Placeholder pin box — BadgePinVisual wired in 04-03
+            BadgePinVisual(
+                imageAssetPath = badge.imageAssetPath,
+                categoryCode = badge.categoryCode,
+                visualState = badge.visualState,
+                progressFraction = badge.progressFraction,
+                contentDescription = "${badge.nameSv}, ${badgeStateLabel(badge.visualState)}",
+                size = BadgePinSize.Grid,
+                totalRequirements = badge.totalRequirements,
+            )
         }
         Text(
             text = badge.nameSv,
