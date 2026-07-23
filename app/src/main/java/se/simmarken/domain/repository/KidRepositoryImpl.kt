@@ -7,5 +7,7 @@ class KidRepositoryImpl(
     private val kidDao: KidDao,
 ) : KidRepository {
     override fun observeAll() = kidDao.observeAll()
+    override fun observeById(kidId: Long) = kidDao.observeById(kidId)
     override suspend fun upsert(kid: KidEntity) = kidDao.upsert(kid)
+    override suspend fun delete(kidId: Long) = kidDao.deleteById(kidId)
 }
