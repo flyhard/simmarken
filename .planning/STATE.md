@@ -2,18 +2,18 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 04
-current_phase_name: catalog-view-visual-states
+current_phase: 05
+current_phase_name: progress-tracking-badge-detail
 status: executing
-stopped_at: Phase 5 context gathered
-last_updated: "2026-07-23T11:35:50.940Z"
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-07-23T12:00:39.324Z"
 last_activity: 2026-07-23
-last_activity_desc: Phase 04 execution started
+last_activity_desc: Phase 05 execution started
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 14
-  completed_plans: 14
+  total_plans: 17
+  completed_plans: 15
 ---
 
 # Project State
@@ -23,16 +23,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-22)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Phase 04 — catalog-view-visual-states
+**Current focus:** Phase 05 — progress-tracking-badge-detail
 
 ## Current Position
 
-Phase: 04 (catalog-view-visual-states) — EXECUTING
-Plan: 3 of 3
+Phase: 05 (progress-tracking-badge-detail) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
-Last activity: 2026-07-23 — Phase 04 execution started
+Last activity: 2026-07-23 — Phase 05 execution started
 
-Progress: [██████████] 100% (3 plans ready)
+Progress: [█████████░] 88% (3 plans ready)
 
 ## Performance Metrics
 
@@ -64,6 +64,7 @@ Progress: [██████████] 100% (3 plans ready)
 |------|----------|-------|-------|
 | Phase 04 P01 | 25min | 3 tasks | 9 files |
 | Phase 04 P03 | 45min | 3 tasks | 15 files |
+| Phase 05 P01 | 35 | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,8 @@ Recent decisions affecting current work:
 - [Phase ?]: compileSdk 36 required for coil-compose 3.5.0 AAR metadata
 - [Phase ?]: BadgePinVisual shared between grid and detail via BadgePinSize enum
 - [Phase ?]: BadgeDetailViewModel uses BadgeStateCalculator.compute only — no inline state logic
+- [Phase ?]: ioDispatcher constructor param enables JVM ViewModel tests while keeping Dispatchers.IO in production
+- [Phase ?]: Purchase dialog state uses MutableStateFlow merged into BadgeDetailUiState per HomeViewModel pattern
 
 ### Pending Todos
 
@@ -111,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-23T11:35:50.918Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-progress-tracking-badge-detail/05-CONTEXT.md
+Last session: 2026-07-23T12:00:39.313Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: None
