@@ -8,6 +8,7 @@ data class BadgeDetailUiState(
     val progressFraction: Float = 0f,
     val achievedCount: Int = 0,
     val totalRequirements: Int = 0,
+    val requirements: List<RequirementRowUiModel> = emptyList(),
     val badgeMissing: Boolean = false,
     val isLoading: Boolean = true,
 )

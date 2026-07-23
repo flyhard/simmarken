@@ -2,13 +2,19 @@ package se.simmarken.ui.badge
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import se.simmarken.data.local.entity.RequirementProgressEntity
 import se.simmarken.domain.BadgeCatalogMapper
 import se.simmarken.domain.model.BadgeDetailUiState
+import se.simmarken.domain.model.RequirementRowUiModel
 import se.simmarken.domain.repository.CatalogRepository
 import se.simmarken.domain.repository.ProgressRepository
 
@@ -17,6 +23,7 @@ class BadgeDetailViewModel(
     private val badgeId: Long,
     private val catalogRepository: CatalogRepository,
     private val progressRepository: ProgressRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : ViewModel() {
     val uiState = catalogRepository.observeBadgeById(badgeId)
         .flatMapLatest { badge ->
@@ -39,6 +46,15 @@ class BadgeDetailViewModel(
                         requirementProgressById = requirementProgressById,
                         isGotten = isGotten,
                     )
+                    val requirementRows = requirements
+                        .sortedBy { it.sortOrder }
+                        .map { requirement ->
+                            RequirementRowUiModel(
+                                id = requirement.id,
+                                textSv = requirement.textSv,
+                                isAchieved = requirementProgressById[requirement.id] == true,
+                            )
+                        }
                     BadgeDetailUiState(
                         nameSv = cell.nameSv,
                         imageAssetPath = cell.imageAssetPath,
@@ -47,6 +63,7 @@ class BadgeDetailViewModel(
                         progressFraction = cell.progressFraction,
                         achievedCount = cell.achievedCount,
                         totalRequirements = cell.totalRequirements,
+                        requirements = requirementRows,
                         badgeMissing = false,
                         isLoading = category == null,
                     )
@@ -58,4 +75,22 @@ class BadgeDetailViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = BadgeDetailUiState(),
         )
+
+    fun toggleRequirement(requirementId: Long) {
+        viewModelScope.launch(ioDispatcher) {
+            val requirementProgressById = progressRepository.observeRequirementProgress(kidId)
+                .first()
+                .associate { it.requirementId to it.isAchieved }
+            val currentlyAchieved = requirementProgressById[requirementId] == true
+            val flipped = !currentlyAchieved
+            progressRepository.upsertRequirementProgress(
+                RequirementProgressEntity(
+                    kidId = kidId,
+                    requirementId = requirementId,
+                    isAchieved = flipped,
+                    achievedAtEpochMillis = if (flipped) System.currentTimeMillis() else null,
+                ),
+            )
+        }
+    }
 }

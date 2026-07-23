@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import se.simmarken.domain.model.BadgeVisualState
+import se.simmarken.ui.badge.components.RequirementChecklistRow
 import se.simmarken.ui.components.BadgePinSize
 import se.simmarken.ui.components.BadgePinVisual
 
@@ -84,7 +86,7 @@ fun BadgeDetailPlaceholderScreen(
                     .padding(innerPadding)
                     .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
             ) {
                 BadgePinVisual(
                     imageAssetPath = uiState.imageAssetPath,
@@ -94,18 +96,25 @@ fun BadgeDetailPlaceholderScreen(
                     contentDescription = "${uiState.nameSv}, ${badgeStateLabel(uiState.visualState)}",
                     size = BadgePinSize.Detail,
                     totalRequirements = uiState.totalRequirements,
+                    modifier = Modifier.padding(top = 16.dp),
                 )
                 Text(
                     text = uiState.nameSv,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(top = 24.dp),
                 )
-                Text(
-                    text = "Checklista kommer snart",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(top = 16.dp),
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                ) {
+                    uiState.requirements.forEach { requirement ->
+                        RequirementChecklistRow(
+                            requirement = requirement,
+                            onToggle = { viewModel.toggleRequirement(requirement.id) },
+                        )
+                    }
+                }
             }
         }
     }
