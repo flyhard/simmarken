@@ -1,7 +1,7 @@
 ---
 phase: 3
 slug: child-profiles-home
-status: draft
+status: approved
 platform: android-compose-m3
 shadcn_initialized: false
 preset: not-applicable
@@ -51,7 +51,9 @@ Declared values (multiples of 4, unit **dp**):
 | 3xl | 64dp | Avatar circle diameter |
 
 **Exceptions:**
-- Child card minimum height: **72dp** (avatar 48dp + 12dp vertical padding × 2) — exceeds touch target without extra padding
+- Card vertical padding: **12dp** — balances 48dp avatar inside 72dp min-height card
+- Home content bottom inset: **88dp** — clears 56dp FAB + 16dp margin + safe area
+- Child card minimum height: **72dp** (avatar 48dp + 12dp vertical padding × 2)
 - FAB size: **56dp** (Material 3 standard Large FAB)
 - Bottom sheet drag handle area: **32dp** top inset (system default)
 
@@ -68,7 +70,9 @@ Use `MaterialTheme.typography` roles — do not introduce custom font families i
 | Body | 16sp | 400 (Regular) | 1.5 (24sp) | `bodyLarge` | Card child name, form labels, dialog body |
 | Label | 14sp | 500 (Medium) | 1.43 (20sp) | `labelLarge` | FAB extended label (if used), validation error, button labels |
 | Heading | 22sp | 400 (Regular) | 1.27 (28sp) | `titleLarge` | Top app bar title, bottom sheet title, empty state heading |
-| Display | 28sp | 400 (Regular) | 1.2 (34sp) | `headlineSmall` | Avatar initials inside 48dp circle (scale down to 20sp if name yields 3+ chars) |
+| Display | 28sp | 400 (Regular) | 1.2 (34sp) | `headlineSmall` | Empty-state icon area only (not used for inline text this phase) |
+
+**Avatar initials:** Reuse **Heading** (`titleLarge`, 22sp) inside the 48dp circle with `maxLines = 1` and `TextOverflow.Clip` — no fifth size.
 
 **Weights used:** Regular (400) + Medium (500) only. Semibold not introduced this phase.
 
@@ -169,6 +173,7 @@ All strings hardcoded Swedish this phase. Phase 6 migrates to `strings.xml`.
 | FAB | `FloatingActionButton`, `Icons.Default.Add`, `primary` container, anchored `Scaffold` default (bottom-end), 16dp margin from edges |
 | Content padding | horizontal 16dp, top 8dp, bottom 88dp (clear FAB) |
 | States | `loading` (optional shimmer — skip if Room Flow is instant), `empty`, `populated` |
+| Focal point | **Empty:** empty-state heading (`Lägg till ditt första barn`). **Populated:** child card list (primary scan target). FAB is persistent secondary action, not the focal point. |
 
 **Interaction:**
 - FAB tap → open `KidFormBottomSheet` in add mode
@@ -189,7 +194,7 @@ All strings hardcoded Swedish this phase. Phase 6 migrates to `strings.xml`.
 | Layout | `Row(verticalAlignment = CenterVertically)` |
 | Avatar | `KidAvatar` composable, 48dp circle, left |
 | Name | `bodyLarge`, `Modifier.weight(1f)`, `padding(start = 16dp)`, single line + `TextOverflow.Ellipsis` |
-| Overflow | `IconButton` 48dp, `Icons.Default.MoreVert`, trailing; opens `DropdownMenu` |
+| Overflow | `IconButton` 48dp, `Icons.Default.MoreVert`, trailing; `contentDescription = "Alternativ för {name}"`; opens `DropdownMenu` |
 | Ripple | Full card clickable except overflow button hit area |
 
 **Interaction:**
@@ -210,7 +215,7 @@ All strings hardcoded Swedish this phase. Phase 6 migrates to `strings.xml`.
 |----------|------|
 | Size | 48dp diameter (`Box` + `CircleShape` + `background(avatarColor)`) |
 | Initials | First letter of first two whitespace-separated words, uppercase; single word → first two letters; max 2 chars |
-| Text style | `titleMedium` 20sp, white (or black on yellow) |
+| Text style | `titleLarge` (22sp), white (or black on yellow); `maxLines = 1`, `TextOverflow.Clip` |
 | Border | None on card; selected swatch in grid gets `2dp primary` ring |
 
 ---
@@ -439,14 +444,14 @@ Follow existing MVVM pattern: Composable observes `StateFlow`, events call ViewM
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS
+- [x] Dimension 5 Spacing: PASS
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved 2026-07-23
 
 ---
 
