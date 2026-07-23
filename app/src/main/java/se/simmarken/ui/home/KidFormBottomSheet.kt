@@ -36,6 +36,7 @@ fun KidFormBottomSheet(
     val selectedColorArgb by viewModel.selectedColorArgb.collectAsStateWithLifecycle()
     val nameError by viewModel.nameError.collectAsStateWithLifecycle()
     val isSaving by viewModel.isSaving.collectAsStateWithLifecycle()
+    val isReadyToSave by viewModel.isReadyToSave.collectAsStateWithLifecycle()
 
     val sheetTitle = if (viewModel.isEditMode) "Redigera barn" else "Nytt barn"
     val saveLabel = if (viewModel.isEditMode) "Spara" else "Lägg till"
@@ -87,7 +88,7 @@ fun KidFormBottomSheet(
                 }
                 Button(
                     onClick = viewModel::save,
-                    enabled = !isSaving,
+                    enabled = isReadyToSave && !isSaving,
                 ) {
                     Text(saveLabel)
                 }

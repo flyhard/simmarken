@@ -132,6 +132,7 @@ private fun KidFormSheetContent(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
     val scope = rememberCoroutineScope()
     val formViewModel: KidFormViewModel = viewModel(
+        key = kidId?.toString() ?: "add",
         factory = KidFormViewModelFactory(kidRepository, kidId),
     )
     val saveCompleted by formViewModel.saveCompleted.collectAsStateWithLifecycle()

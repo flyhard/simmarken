@@ -35,6 +35,9 @@ class KidFormViewModel(
     private val _isSaving = MutableStateFlow(false)
     val isSaving: StateFlow<Boolean> = _isSaving.asStateFlow()
 
+    private val _isReadyToSave = MutableStateFlow(!isEditMode)
+    val isReadyToSave: StateFlow<Boolean> = _isReadyToSave.asStateFlow()
+
     private val _saveCompleted = MutableStateFlow(false)
     val saveCompleted: StateFlow<Boolean> = _saveCompleted.asStateFlow()
 
@@ -48,6 +51,7 @@ class KidFormViewModel(
                         _selectedColorArgb.value = kid.avatarColorArgb
                         userPickedColor = true
                         initialLoadDone = true
+                        _isReadyToSave.value = true
                     }
                 }
             }
@@ -68,6 +72,7 @@ class KidFormViewModel(
     }
 
     fun save() {
+        if (_isSaving.value) return
         val error = KidNameValidation.validateName(_name.value)
         if (error != null) {
             _nameError.value = error
@@ -77,7 +82,11 @@ class KidFormViewModel(
             _isSaving.value = true
             try {
                 if (isEditMode) {
-                    val existing = existingKid ?: return@launch
+                    val existing = existingKid
+                    if (existing == null) {
+                        _nameError.value = "Kunde inte ladda barnet"
+                        return@launch
+                    }
                     kidRepository.upsert(
                         existing.copy(
                             name = _name.value.trim(),
