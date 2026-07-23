@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import se.simmarken.data.local.entity.BadgeEntity
-import kotlinx.coroutines.flow.update
 import se.simmarken.data.local.entity.CategoryEntity
 import se.simmarken.domain.BadgeCatalogMapper
 import se.simmarken.domain.model.CategorySection
@@ -21,6 +21,7 @@ import se.simmarken.domain.repository.ProgressRepository
 data class ChildCatalogUiState(
     val sections: List<CategorySection> = emptyList(),
     val catalogs: List<se.simmarken.data.local.entity.CatalogEntity> = emptyList(),
+    val selectedCatalogId: Long? = null,
     val kidMissing: Boolean = false,
 )
 
@@ -31,6 +32,17 @@ class ChildCatalogViewModel(
     private val kidId: Long,
 ) : ViewModel() {
     private val selectedCatalogId = MutableStateFlow<Long?>(null)
+
+    init {
+        viewModelScope.launch {
+            catalogRepository.observeCatalogs().collect { catalogs ->
+                if (selectedCatalogId.value == null && catalogs.isNotEmpty()) {
+                    selectedCatalogId.value =
+                        catalogs.find { it.code == "simidrott" }?.id ?: catalogs.first().id
+                }
+            }
+        }
+    }
 
     val childName = kidRepository.observeById(kidId)
         .map { kid -> kid?.name ?: "" }
@@ -86,13 +98,10 @@ class ChildCatalogViewModel(
         kidRepository.observeById(kidId).map { it == null },
         selectedCatalogId,
     ) { sections, catalogs, kidMissing, selectedId ->
-        if (selectedId == null && catalogs.isNotEmpty()) {
-            val defaultCatalog = catalogs.find { it.code == "simidrott" } ?: catalogs.first()
-            selectedCatalogId.update { defaultCatalog.id }
-        }
         ChildCatalogUiState(
             sections = sections,
             catalogs = catalogs,
+            selectedCatalogId = selectedId,
             kidMissing = kidMissing,
         )
     }.stateIn(

@@ -1,7 +1,7 @@
 package se.simmarken.ui.child
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -14,11 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -35,11 +31,11 @@ fun ChildCatalogScreen(
 ) {
     val childName by viewModel.childName.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
-
-    LaunchedEffect(Unit) {
-        selectedTabIndex = 0
-    }
+    val sortedCatalogs = uiState.catalogs.sortedBy { it.sortOrder }
+    val selectedTabIndex = sortedCatalogs
+        .indexOfFirst { it.id == uiState.selectedCatalogId }
+        .coerceAtLeast(0)
+    val isCatalogEmpty = uiState.sections.all { it.badges.isEmpty() }
 
     Scaffold(
         topBar = {
@@ -77,12 +73,9 @@ fun ChildCatalogScreen(
             ) {
                 CatalogTabRow(
                     selectedTabIndex = selectedTabIndex,
-                    onTabSelected = { index ->
-                        selectedTabIndex = index
-                        viewModel.selectCatalogByTabIndex(index)
-                    },
+                    onTabSelected = viewModel::selectCatalogByTabIndex,
                 )
-                if (uiState.sections.isEmpty()) {
+                if (isCatalogEmpty) {
                     CatalogEmptyState(modifier = Modifier.weight(1f))
                 } else {
                     BadgeGrid(
