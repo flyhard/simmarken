@@ -2,16 +2,24 @@ package se.simmarken.navigation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import se.simmarken.domain.repository.CatalogRepository
 import se.simmarken.domain.repository.KidRepository
+import se.simmarken.domain.repository.ProgressRepository
 import se.simmarken.ui.home.HomeViewModel
 
 class HomeViewModelFactory(
     private val kidRepository: KidRepository,
+    private val catalogRepository: CatalogRepository,
+    private val progressRepository: ProgressRepository,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(kidRepository) as T
+            return HomeViewModel(
+                kidRepository = kidRepository,
+                catalogRepository = catalogRepository,
+                progressRepository = progressRepository,
+            ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

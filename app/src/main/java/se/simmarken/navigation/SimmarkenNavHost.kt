@@ -23,7 +23,11 @@ fun SimmarkenNavHost() {
     NavHost(navController = navController, startDestination = Home) {
         composable<Home> {
             val viewModel: HomeViewModel = viewModel(
-                factory = HomeViewModelFactory(application.container.kidRepository),
+                factory = HomeViewModelFactory(
+                    kidRepository = application.container.kidRepository,
+                    catalogRepository = application.container.catalogRepository,
+                    progressRepository = application.container.progressRepository,
+                ),
             )
             HomeScreen(viewModel = viewModel, navController = navController)
         }
