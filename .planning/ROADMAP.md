@@ -188,9 +188,17 @@ Plans:
 
 Plans:
 
-- [ ] 06-01: Versioned JSON export/import with validation
-- [ ] 06-02: Swedish and English string resources for all screens
-- [ ] 06-03: Settings screen with language picker
+**Wave 1**
+
+- [ ] 06-01-PLAN.md — Export/import tracer: Room v2 stableId, versioned JSON, share sheet, merge-with-confirm, intents
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 06-02-PLAN.md — Swedish/English string resources for all chrome and progress UI (I18N-01/02)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 06-03-PLAN.md — Language picker, DataStore locale preference, AppCompatDelegate apply (I18N-03)
 
 ## Progress
 
