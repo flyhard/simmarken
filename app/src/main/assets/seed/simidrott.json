@@ -2,9 +2,32 @@
   "code": "simidrott",
   "nameSv": "Svensk Simidrott",
   "nameEn": "Swedish Swimming",
-  "catalogVersion": "2026.03.02",
+  "catalogVersion": "2026.07.24",
   "sortOrder": 0,
   "categories": [
+    {
+      "code": "sjohasten",
+      "nameSv": "Sjöhästen",
+      "nameEn": "Seahorse",
+      "sortOrder": 0,
+      "badges": [
+        {
+          "code": "sjohasten",
+          "nameSv": "Sjöhästen",
+          "nameEn": "Seahorse",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/sjohasten.webp",
+          "requirements": [
+            {
+              "code": "sjohasten-01",
+              "textSv": "Inga prestationskrav — märket uppmuntrar glädje, gemenskap och deltagande i vattnet för barn 4–8 år.",
+              "textEn": "No performance requirements — the badge encourages joy, community, and participation in the water for children aged 4–8.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
     {
       "code": "vattenvana",
       "nameSv": "Vattenvana",
@@ -191,40 +214,10 @@
           ]
         },
         {
-          "code": "simsattmarke-1",
-          "nameSv": "Simsättsmärke 1",
-          "nameEn": "Stroke Badge 1",
-          "sortOrder": 3,
-          "imageAssetPath": null,
-          "requirements": [
-            {
-              "code": "simsattmarke-1-01",
-              "textSv": "Simma 10 m ryggsim.",
-              "textEn": "Swim 10 m backstroke.",
-              "sortOrder": 1
-            }
-          ]
-        },
-        {
-          "code": "simsattmarke-2",
-          "nameSv": "Simsättsmärke 2",
-          "nameEn": "Stroke Badge 2",
-          "sortOrder": 4,
-          "imageAssetPath": null,
-          "requirements": [
-            {
-              "code": "simsattmarke-2-01",
-              "textSv": "Simma 10 m i magläge (crawl, bröstsim eller fjärilsim).",
-              "textEn": "Swim 10 m on your front (front crawl, breaststroke, or butterfly).",
-              "sortOrder": 1
-            }
-          ]
-        },
-        {
           "code": "silverfisken",
           "nameSv": "Silverfisken",
           "nameEn": "Silverfish",
-          "sortOrder": 5,
+          "sortOrder": 3,
           "imageAssetPath": "badges/simidrott/silverfisken.webp",
           "requirements": [
             {
@@ -245,7 +238,7 @@
           "code": "guldfisken",
           "nameSv": "Guldfisken",
           "nameEn": "Goldfish",
-          "sortOrder": 6,
+          "sortOrder": 4,
           "imageAssetPath": "badges/simidrott/guldfisken.webp",
           "requirements": [
             {
@@ -265,10 +258,78 @@
       ]
     },
     {
+      "code": "simsattmarke",
+      "nameSv": "Simsättsmärken",
+      "nameEn": "Stroke badges",
+      "sortOrder": 3,
+      "badges": [
+        {
+          "code": "fjarilsim",
+          "nameSv": "Fjärilsim",
+          "nameEn": "Butterfly",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/fjarilsim.webp",
+          "requirements": [
+            {
+              "code": "fjarilsim-01",
+              "textSv": "Simma 10 m fjärilsim.",
+              "textEn": "Swim 10 m butterfly.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "ryggsim",
+          "nameSv": "Ryggsim",
+          "nameEn": "Backstroke",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/ryggsim.webp",
+          "requirements": [
+            {
+              "code": "ryggsim-01",
+              "textSv": "Simma 10 m ryggsim.",
+              "textEn": "Swim 10 m backstroke.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "brostsim",
+          "nameSv": "Bröstsim",
+          "nameEn": "Breaststroke",
+          "sortOrder": 3,
+          "imageAssetPath": "badges/simidrott/brostsim.webp",
+          "requirements": [
+            {
+              "code": "brostsim-01",
+              "textSv": "Simma 10 m bröstsim.",
+              "textEn": "Swim 10 m breaststroke.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "crawl",
+          "nameSv": "Crawl",
+          "nameEn": "Front crawl",
+          "sortOrder": 4,
+          "imageAssetPath": "badges/simidrott/crawl.webp",
+          "requirements": [
+            {
+              "code": "crawl-01",
+              "textSv": "Simma 10 m crawl.",
+              "textEn": "Swim 10 m front crawl.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
       "code": "hajen",
       "nameSv": "Hajen",
       "nameEn": "Shark",
-      "sortOrder": 3,
+      "sortOrder": 4,
       "badges": [
         {
           "code": "hajen-brons",
@@ -350,62 +411,299 @@
               "sortOrder": 6
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "code": "vattenprovet",
+      "nameSv": "Vattenprovet",
+      "nameEn": "The Water Test",
+      "sortOrder": 5,
+      "badges": [
         {
-          "code": "simsattmarke-3",
-          "nameSv": "Simsättsmärke 3",
-          "nameEn": "Stroke Badge 3",
-          "sortOrder": 4,
-          "imageAssetPath": null,
+          "code": "vattenprovet-majblomman-2026",
+          "nameSv": "Vattenprovet Majblomman 2026",
+          "nameEn": "Water Test Majblomman 2026",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/vattenprovet_majblomman_2026.webp",
           "requirements": [
             {
-              "code": "simsattmarke-3-01",
-              "textSv": "Crawl",
-              "textEn": "Front crawl",
+              "code": "vattenprovet-majblomman-2026-01",
+              "textSv": "Hoppa eller dyk i på djupt vatten så att huvudet kommer under ytan och efter att ha tagit sig upp till ytan simma 200 m i en följd varav 50 m i ryggläge. Hela provet utförs på djupt vatten.",
+              "textEn": "Jump or dive into deep water so your head goes under the surface, then swim 200 m in one stretch including 50 m on your back. The entire test is done in deep water.",
               "sortOrder": 1
             },
             {
-              "code": "simsattmarke-3-02",
-              "textSv": "Bröstsim",
-              "textEn": "Breaststroke",
+              "code": "vattenprovet-majblomman-2026-02",
+              "textSv": "För varje sålt märke går 10 kronor till Majblomman.",
+              "textEn": "For each badge sold, 10 SEK goes to Majblomman.",
               "sortOrder": 2
-            },
-            {
-              "code": "simsattmarke-3-03",
-              "textSv": "Fjärilsim",
-              "textEn": "Butterfly",
-              "sortOrder": 3
             }
           ]
         },
         {
-          "code": "simsattmarke-4",
-          "nameSv": "Simsättsmärke 4",
-          "nameEn": "Stroke Badge 4",
-          "sortOrder": 5,
-          "imageAssetPath": null,
+          "code": "sallyprovet-oppet-vatten",
+          "nameSv": "Sallyprovet öppet vatten",
+          "nameEn": "Sally Test open water",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/sallyprovet_oppet_vatten.webp",
           "requirements": [
             {
-              "code": "simsattmarke-4-01",
-              "textSv": "Start från kant eller startpall i alla fyra simsätt, inklusive uppgång och simma tre simtag.",
-              "textEn": "Start from the edge or starting block in all four strokes, including surfacing and swimming three strokes.",
+              "code": "sallyprovet-oppet-vatten-01",
+              "textSv": "Hoppa eller dyk i på djupt vatten så att huvudet kommer under ytan och efter att ha tagit sig upp till ytan simma 200 m i en följd varav 50 m i ryggläge. Hela provet utförs på djupt och öppet vatten.",
+              "textEn": "Jump or dive into deep water so your head goes under the surface, then swim 200 m in one stretch including 50 m on your back. The entire test is done in deep open water.",
               "sortOrder": 1
-            },
-            {
-              "code": "simsattmarke-4-02",
-              "textSv": "Simma 100 m medley.",
-              "textEn": "Swim 100 m individual medley.",
-              "sortOrder": 2
             }
           ]
         }
       ]
     },
     {
-      "code": "jarn",
-      "nameSv": "Järn",
-      "nameEn": "Iron",
-      "sortOrder": 4,
+      "code": "simborgarmarke",
+      "nameSv": "Simborgarmärken",
+      "nameEn": "Swim guild badges",
+      "sortOrder": 6,
+      "badges": [
+        {
+          "code": "simborgarmarke-2026",
+          "nameSv": "Simborgarmärket 2026",
+          "nameEn": "Swim Guild Badge 2026",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/simborgarmarke_2026.webp",
+          "requirements": [
+            {
+              "code": "simborgarmarke-2026-01",
+              "textSv": "Simma 200 m valfritt simsätt i mag- eller ryggläge på djupt vatten.",
+              "textEn": "Swim 200 m in any stroke on your front or back in deep water.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simborgarmarke-5-ar",
+          "nameSv": "5-årsmärke",
+          "nameEn": "5-year badge",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/simborgarmarke_5_ar.webp",
+          "requirements": [
+            {
+              "code": "simborgarmarke-5-ar-01",
+              "textSv": "Simma 200 m valfritt simsätt i mag- eller ryggläge på djupt vatten. Märket delas ut efter fem år som simborgare.",
+              "textEn": "Swim 200 m in any stroke on your front or back in deep water. Awarded after five years as a swim guild member.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simborgarmarke-10-ar",
+          "nameSv": "10-årsmärke",
+          "nameEn": "10-year badge",
+          "sortOrder": 3,
+          "imageAssetPath": "badges/simidrott/simborgarmarke_10_ar.webp",
+          "requirements": [
+            {
+              "code": "simborgarmarke-10-ar-01",
+              "textSv": "Simma 200 m valfritt simsätt i mag- eller ryggläge på djupt vatten. Märket delas ut efter tio år som simborgare.",
+              "textEn": "Swim 200 m in any stroke on your front or back in deep water. Awarded after ten years as a swim guild member.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simborgarmarke-25-ar",
+          "nameSv": "25-årsmärke",
+          "nameEn": "25-year badge",
+          "sortOrder": 4,
+          "imageAssetPath": "badges/simidrott/simborgarmarke_25_ar.webp",
+          "requirements": [
+            {
+              "code": "simborgarmarke-25-ar-01",
+              "textSv": "Simma 200 m valfritt simsätt i mag- eller ryggläge på djupt vatten. Märket delas ut efter tjugofem år som simborgare.",
+              "textEn": "Swim 200 m in any stroke on your front or back in deep water. Awarded after twenty-five years as a swim guild member.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simborgarmarke-40-ar",
+          "nameSv": "40-årsmärke",
+          "nameEn": "40-year badge",
+          "sortOrder": 5,
+          "imageAssetPath": "badges/simidrott/simborgarmarke_40_ar.webp",
+          "requirements": [
+            {
+              "code": "simborgarmarke-40-ar-01",
+              "textSv": "Simma 200 m valfritt simsätt i mag- eller ryggläge på djupt vatten. Märket delas ut efter fyrtio år som simborgare.",
+              "textEn": "Swim 200 m in any stroke on your front or back in deep water. Awarded after forty years as a swim guild member.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simborgarmarke-50-ar",
+          "nameSv": "50-årsmärke",
+          "nameEn": "50-year badge",
+          "sortOrder": 6,
+          "imageAssetPath": "badges/simidrott/simborgarmarke_50_ar.webp",
+          "requirements": [
+            {
+              "code": "simborgarmarke-50-ar-01",
+              "textSv": "Simma 200 m valfritt simsätt i mag- eller ryggläge på djupt vatten. Märket delas ut efter femtio år som simborgare.",
+              "textEn": "Swim 200 m in any stroke on your front or back in deep water. Awarded after fifty years as a swim guild member.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "kilometermarke",
+      "nameSv": "Kilometermärken",
+      "nameEn": "Kilometre badges",
+      "sortOrder": 7,
+      "badges": [
+        {
+          "code": "km-1",
+          "nameSv": "1 km",
+          "nameEn": "1 km",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/km_1.webp",
+          "requirements": [
+            {
+              "code": "km-1-01",
+              "textSv": "Simma 1 km med valfritt simsätt i mag- eller ryggläge. Minst 200 m och högst 2000 m per tillfälle och dag.",
+              "textEn": "Swim 1 km in any stroke on your front or back. At least 200 m and at most 2000 m per session and day.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-5",
+          "nameSv": "5 km",
+          "nameEn": "5 km",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/km_5.webp",
+          "requirements": [
+            {
+              "code": "km-5-01",
+              "textSv": "Simma 5 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 5 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-10",
+          "nameSv": "10 km",
+          "nameEn": "10 km",
+          "sortOrder": 3,
+          "imageAssetPath": "badges/simidrott/km_10.webp",
+          "requirements": [
+            {
+              "code": "km-10-01",
+              "textSv": "Simma 10 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 10 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-25",
+          "nameSv": "25 km",
+          "nameEn": "25 km",
+          "sortOrder": 4,
+          "imageAssetPath": "badges/simidrott/km_25.webp",
+          "requirements": [
+            {
+              "code": "km-25-01",
+              "textSv": "Simma 25 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 25 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-50",
+          "nameSv": "50 km",
+          "nameEn": "50 km",
+          "sortOrder": 5,
+          "imageAssetPath": "badges/simidrott/km_50.webp",
+          "requirements": [
+            {
+              "code": "km-50-01",
+              "textSv": "Simma 50 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 50 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-100",
+          "nameSv": "100 km",
+          "nameEn": "100 km",
+          "sortOrder": 6,
+          "imageAssetPath": "badges/simidrott/km_100.webp",
+          "requirements": [
+            {
+              "code": "km-100-01",
+              "textSv": "Simma 100 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 100 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-250",
+          "nameSv": "250 km",
+          "nameEn": "250 km",
+          "sortOrder": 7,
+          "imageAssetPath": "badges/simidrott/km_250.webp",
+          "requirements": [
+            {
+              "code": "km-250-01",
+              "textSv": "Simma 250 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 250 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-500",
+          "nameSv": "500 km",
+          "nameEn": "500 km",
+          "sortOrder": 8,
+          "imageAssetPath": "badges/simidrott/km_500.webp",
+          "requirements": [
+            {
+              "code": "km-500-01",
+              "textSv": "Simma 500 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 500 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "km-1000",
+          "nameSv": "1000 km",
+          "nameEn": "1000 km",
+          "sortOrder": 9,
+          "imageAssetPath": "badges/simidrott/km_1000.webp",
+          "requirements": [
+            {
+              "code": "km-1000-01",
+              "textSv": "Simma 1000 km med valfritt simsätt i mag- eller ryggläge. Simmad sträcka på lägre valör räknas mot högre.",
+              "textEn": "Swim 1000 km in any stroke on your front or back. Distance from lower tiers counts toward higher tiers.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "jarn-till-kandidaten",
+      "nameSv": "Järnmärket – Kandidaten",
+      "nameEn": "Iron Badge to the Candidate",
+      "sortOrder": 8,
       "badges": [
         {
           "code": "jarnmarket",
@@ -439,20 +737,12 @@
               "sortOrder": 4
             }
           ]
-        }
-      ]
-    },
-    {
-      "code": "brons",
-      "nameSv": "Brons",
-      "nameEn": "Bronze",
-      "sortOrder": 5,
-      "badges": [
+        },
         {
           "code": "bronsmarket",
           "nameSv": "Bronsmärket",
           "nameEn": "Bronze Badge",
-          "sortOrder": 1,
+          "sortOrder": 2,
           "imageAssetPath": "badges/simidrott/bronsmarket.webp",
           "requirements": [
             {
@@ -486,20 +776,12 @@
               "sortOrder": 5
             }
           ]
-        }
-      ]
-    },
-    {
-      "code": "silver",
-      "nameSv": "Silver",
-      "nameEn": "Silver",
-      "sortOrder": 6,
-      "badges": [
+        },
         {
           "code": "silvermarket",
           "nameSv": "Silvermärket",
           "nameEn": "Silver Badge",
-          "sortOrder": 1,
+          "sortOrder": 3,
           "imageAssetPath": "badges/simidrott/silvermarket.webp",
           "requirements": [
             {
@@ -545,21 +827,13 @@
               "sortOrder": 7
             }
           ]
-        }
-      ]
-    },
-    {
-      "code": "guld",
-      "nameSv": "Guld",
-      "nameEn": "Gold",
-      "sortOrder": 7,
-      "badges": [
+        },
         {
           "code": "kandidaten",
           "nameSv": "Kandidaten",
           "nameEn": "The Candidate",
-          "sortOrder": 1,
-          "imageAssetPath": null,
+          "sortOrder": 4,
+          "imageAssetPath": "badges/simidrott/kandidaten.webp",
           "requirements": [
             {
               "code": "kandidaten-01",
@@ -614,6 +888,391 @@
               "textSv": "Livräddning: 16 m simning med livboj följt av ilandföring med hjälp av livboj 16 m. Maximal tid för momentet, 2 minuter 45 sekunder. Kunskap om punkterna 1-11 i bad- och båtvett. Utkast av livboj följt av simning med livboj 25 m. Kunna hjälpa nödställd person med förlängda armen.",
               "textEn": "Lifesaving: Swim 16 m with a buoy and bring a person to shore using the buoy for 16 m. Maximum time 2 minutes 45 seconds. Knowledge of points 1–11 in swimming and boating safety. Throw a buoy and swim 25 m towing it. Be able to help a person in distress with the extended arm.",
               "sortOrder": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "magistermarke",
+      "nameSv": "Magistermärken",
+      "nameEn": "Master badges",
+      "sortOrder": 9,
+      "badges": [
+        {
+          "code": "jarnmagistern",
+          "nameSv": "Järnmagistern",
+          "nameEn": "Iron Master",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/jarnmagistern.webp",
+          "requirements": [
+            {
+              "code": "jarnmagistern-01",
+              "textSv": "För märket fordras 9 betyg, ett betyg i varje delprov.",
+              "textEn": "The badge requires 9 grades, one grade in each test event.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "bronsmagistern",
+          "nameSv": "Bronsmagistern",
+          "nameEn": "Bronze Master",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/bronsmagistern.webp",
+          "requirements": [
+            {
+              "code": "bronsmagistern-01",
+              "textSv": "För Bronsmagistern fordras att man tagit Järnmagistern. Nya prov görs för minst 18 betyg. Betyg i varje delprov erfordras.",
+              "textEn": "Bronze Master requires Iron Master. New tests require at least 18 grades, one in each test event.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "silvermagistern",
+          "nameSv": "Silvermagistern",
+          "nameEn": "Silver Master",
+          "sortOrder": 3,
+          "imageAssetPath": "badges/simidrott/silvermagistern.webp",
+          "requirements": [
+            {
+              "code": "silvermagistern-01",
+              "textSv": "För Silvermagistern fordras att man tagit Bronsmagistern. Nya delprov görs för minst 22 betyg. Betyg i varje delprov erfordras.",
+              "textEn": "Silver Master requires Bronze Master. New tests require at least 22 grades, one in each test event.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "guldmagistern",
+          "nameSv": "Guldmagistern",
+          "nameEn": "Gold Master",
+          "sortOrder": 4,
+          "imageAssetPath": "badges/simidrott/guldmagistern.webp",
+          "requirements": [
+            {
+              "code": "guldmagistern-01",
+              "textSv": "För Guldmagistern fordras att man har tagit Silvermagistern. Nya delprov görs för minst 25 betyg. Betyg i varje delprov erfordras.",
+              "textEn": "Gold Master requires Silver Master. New tests require at least 25 grades, one in each test event.",
+              "sortOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "vattenpolomarke",
+      "nameSv": "Vattenpolomärken",
+      "nameEn": "Water polo badges",
+      "sortOrder": 10,
+      "badges": [
+        {
+          "code": "vattenpolobollen-brons",
+          "nameSv": "Vattenpolobollen Brons",
+          "nameEn": "Water Polo Ball Bronze",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/vattenpolobollen_brons.webp",
+          "requirements": [
+            {
+              "code": "vattenpolobollen-brons-01",
+              "textSv": "Passa boll i flytande rockring på 2 m avstånd – 3 av 5 passningar i ringen. Grunt vatten.",
+              "textEn": "Pass a ball into a floating ring from 2 m – 3 of 5 passes into the ring. Shallow water.",
+              "sortOrder": 1
+            },
+            {
+              "code": "vattenpolobollen-brons-02",
+              "textSv": "Fånga boll med en hand på 2 m avstånd – 3 av 5 passningar måste fångas. Grunt vatten.",
+              "textEn": "Catch a ball with one hand from 2 m – 3 of 5 passes must be caught. Shallow water.",
+              "sortOrder": 2
+            },
+            {
+              "code": "vattenpolobollen-brons-03",
+              "textSv": "Simma 15 m valfritt simsätt med bollen utan att röra botten.",
+              "textEn": "Swim 15 m in any stroke with the ball without touching the bottom.",
+              "sortOrder": 3
+            }
+          ]
+        },
+        {
+          "code": "vattenpolobollen-silver",
+          "nameSv": "Vattenpolobollen Silver",
+          "nameEn": "Water Polo Ball Silver",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/vattenpolobollen_silver.webp",
+          "requirements": [
+            {
+              "code": "vattenpolobollen-silver-01",
+              "textSv": "Trampa vatten på stället 1 minut och håll en boll över vattenytan. Båda händerna på bollen.",
+              "textEn": "Tread water for 1 minute holding a ball above the surface. Both hands on the ball.",
+              "sortOrder": 1
+            },
+            {
+              "code": "vattenpolobollen-silver-02",
+              "textSv": "Simma 25 m crawl med bollen framför huvudet.",
+              "textEn": "Swim 25 m front crawl with the ball in front of your head.",
+              "sortOrder": 2
+            },
+            {
+              "code": "vattenpolobollen-silver-03",
+              "textSv": "Passa boll i flytande rockring på 3 m avstånd – 3 av 5 passningar i ringen. Djupt vatten.",
+              "textEn": "Pass a ball into a floating ring from 3 m – 3 of 5 passes into the ring. Deep water.",
+              "sortOrder": 3
+            }
+          ]
+        },
+        {
+          "code": "vattenpolobollen-guld",
+          "nameSv": "Vattenpolobollen Guld",
+          "nameEn": "Water Polo Ball Gold",
+          "sortOrder": 3,
+          "imageAssetPath": "badges/simidrott/vattenpolobollen_guld.webp",
+          "requirements": [
+            {
+              "code": "vattenpolobollen-guld-01",
+              "textSv": "Trampa 15 m framåt och håll en boll ovanför vattnet med ena handen.",
+              "textEn": "Tread forward 15 m holding a ball above the water with one hand.",
+              "sortOrder": 1
+            },
+            {
+              "code": "vattenpolobollen-guld-02",
+              "textSv": "Passa och ta emot bollen med en hand på 2 m avstånd 2 och 2. Totalt 10 passningar, bollen får tappas/vidröra ytan 3 gånger.",
+              "textEn": "Pass and receive the ball with one hand from 2 m, 2 and 2. 10 passes total; the ball may touch the surface 3 times.",
+              "sortOrder": 2
+            },
+            {
+              "code": "vattenpolobollen-guld-03",
+              "textSv": "Skjut ner ett föremål från 3 m avstånd efter att ha simmat 10 m crawl med bollen framför huvudet. Upprepa 4 gånger till, minst 2 av 5 föremål ska skjutas ner.",
+              "textEn": "Knock down an object from 3 m after swimming 10 m crawl with the ball in front of your head. Repeat 4 more times; at least 2 of 5 objects must be knocked down.",
+              "sortOrder": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "konstsims",
+      "nameSv": "Konstsimsmärken",
+      "nameEn": "Artistic swimming badges",
+      "sortOrder": 11,
+      "badges": [
+        {
+          "code": "konstsimsmarke-1-guld",
+          "nameSv": "Konstsimsmärke 1 Guld",
+          "nameEn": "Artistic Swimming Badge 1 Gold",
+          "sortOrder": 1,
+          "imageAssetPath": null,
+          "requirements": [
+            {
+              "code": "konstsimsmarke-1-guld-01",
+              "textSv": "Visa kort musikprogram med dyk huvudet före, ryggbenspark 10 m, grupperad baklängesvolt och eggtramp på stället.",
+              "textEn": "Perform a short music routine with head-first dive, 10 m back kick, grouped back somersault, and eggbeater kick on the spot.",
+              "sortOrder": 1
+            },
+            {
+              "code": "konstsimsmarke-1-guld-02",
+              "textSv": "Visa split- och spagatpositioner samt brygga på land.",
+              "textEn": "Demonstrate split and straddle positions and a bridge on land.",
+              "sortOrder": 2
+            }
+          ]
+        },
+        {
+          "code": "konstsimsmarke-2-guld",
+          "nameSv": "Konstsimsmärke 2 Guld",
+          "nameEn": "Artistic Swimming Badge 2 Gold",
+          "sortOrder": 2,
+          "imageAssetPath": null,
+          "requirements": [
+            {
+              "code": "konstsimsmarke-2-guld-01",
+              "textSv": "Visa musikprogram i takt med ingång, dyk med sträckta ben, överslag framåt, balettben, upptramp utan armar och eggtramp i sidled.",
+              "textEn": "Perform a timed music routine with entry, straight-leg dive, front overshoot, ballet leg, vertical kick without arms, and sidestroke eggbeater.",
+              "sortOrder": 1
+            },
+            {
+              "code": "konstsimsmarke-2-guld-02",
+              "textSv": "Visa lodläge med 10 skoveltag och split/spagat med rakt framben på land.",
+              "textEn": "Demonstrate vertical position with 10 sculls and split/straddle with straight front leg on land.",
+              "sortOrder": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "hoppsmarke",
+      "nameSv": "Hoppmärken",
+      "nameEn": "Diving badges",
+      "sortOrder": 12,
+      "badges": [
+        {
+          "code": "simhopp-jarn",
+          "nameSv": "Simhopp Järn",
+          "nameEn": "Diving Iron",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/simhopp_jarn.webp",
+          "requirements": [
+            {
+              "code": "simhopp-jarn-01",
+              "textSv": "Dyk från 1 m.",
+              "textEn": "Dive from 1 m.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simhopp-brons",
+          "nameSv": "Simhopp Brons",
+          "nameEn": "Diving Bronze",
+          "sortOrder": 2,
+          "imageAssetPath": "badges/simidrott/simhopp_brons.webp",
+          "requirements": [
+            {
+              "code": "simhopp-brons-01",
+              "textSv": "Hoppa från 3 m.",
+              "textEn": "Jump from 3 m.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simhopp-silver",
+          "nameSv": "Simhopp Silver",
+          "nameEn": "Diving Silver",
+          "sortOrder": 3,
+          "imageAssetPath": "badges/simidrott/simhopp_silver.webp",
+          "requirements": [
+            {
+              "code": "simhopp-silver-01",
+              "textSv": "Hoppa från 5 m.",
+              "textEn": "Jump from 5 m.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "simhopp-guld",
+          "nameSv": "Simhopp Guld",
+          "nameEn": "Diving Gold",
+          "sortOrder": 4,
+          "imageAssetPath": "badges/simidrott/simhopp_guld.webp",
+          "requirements": [
+            {
+              "code": "simhopp-guld-01",
+              "textSv": "Dyk från 3 m.",
+              "textEn": "Dive from 3 m.",
+              "sortOrder": 1
+            }
+          ]
+        },
+        {
+          "code": "plumsaren",
+          "nameSv": "Plumsaren",
+          "nameEn": "Plumsaren",
+          "sortOrder": 5,
+          "imageAssetPath": "badges/simidrott/plumsaren.webp",
+          "requirements": [
+            {
+              "code": "plumsaren-01",
+              "textSv": "Bomben.",
+              "textEn": "The bomb.",
+              "sortOrder": 1
+            },
+            {
+              "code": "plumsaren-02",
+              "textSv": "Framlänges bukis (räkan).",
+              "textEn": "Forward pike (the shrimp).",
+              "sortOrder": 2
+            },
+            {
+              "code": "plumsaren-03",
+              "textSv": "Pikstående sittplask bakåt.",
+              "textEn": "Pike standing backward seat splash.",
+              "sortOrder": 3
+            },
+            {
+              "code": "plumsaren-04",
+              "textSv": "Delfinhopp.",
+              "textEn": "Dolphin jump.",
+              "sortOrder": 4
+            },
+            {
+              "code": "plumsaren-05",
+              "textSv": "Ståfall framåt.",
+              "textEn": "Forward fall from standing.",
+              "sortOrder": 5
+            },
+            {
+              "code": "plumsaren-06",
+              "textSv": "Fothopp bakåt.",
+              "textEn": "Backward foot jump.",
+              "sortOrder": 6
+            },
+            {
+              "code": "plumsaren-07",
+              "textSv": "Fothopp framåt i splitt.",
+              "textEn": "Forward foot jump in split.",
+              "sortOrder": 7
+            },
+            {
+              "code": "plumsaren-08",
+              "textSv": "Sittrullning framåt från fotsittande (köttbullen).",
+              "textEn": "Forward sitting roll from tuck sit (the meatball).",
+              "sortOrder": 8
+            },
+            {
+              "code": "plumsaren-09",
+              "textSv": "Fothopp framåt med en hel skruv.",
+              "textEn": "Forward foot jump with a full twist.",
+              "sortOrder": 9
+            },
+            {
+              "code": "plumsaren-10",
+              "textSv": "Ryggsimssstart med kullerbytta bakåt.",
+              "textEn": "Backstroke start with backward somersault.",
+              "sortOrder": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "sarahmarket",
+      "nameSv": "Sarahmärket",
+      "nameEn": "Sarah Badge",
+      "sortOrder": 13,
+      "badges": [
+        {
+          "code": "sarahmarket",
+          "nameSv": "Sarahmärket",
+          "nameEn": "Sarah Badge",
+          "sortOrder": 1,
+          "imageAssetPath": "badges/simidrott/sarahmarket.webp",
+          "requirements": [
+            {
+              "code": "sarahmarket-01",
+              "textSv": "Dyk från kant eller startpall.",
+              "textEn": "Dive from the edge or starting block.",
+              "sortOrder": 1
+            },
+            {
+              "code": "sarahmarket-02",
+              "textSv": "Simma 25 m valfritt simsätt på under 55,48 sekunder.",
+              "textEn": "Swim 25 m in any stroke in under 55.48 seconds.",
+              "sortOrder": 2
+            },
+            {
+              "code": "sarahmarket-03",
+              "textSv": "Gör 5 fjärilskickar under vattnet.",
+              "textEn": "Perform 5 butterfly kicks underwater.",
+              "sortOrder": 3
+            },
+            {
+              "code": "sarahmarket-04",
+              "textSv": "För varje sålt märke går 10 kronor till Barncancerfonden.",
+              "textEn": "For each badge sold, 10 SEK goes to the Swedish Childhood Cancer Fund.",
+              "sortOrder": 4
             }
           ]
         }

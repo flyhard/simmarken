@@ -486,5 +486,13 @@ class BadgeDetailViewModelProgressTest {
                 progress
             badgeProgress.value = updated
         }
+
+        override suspend fun applyRequirementToggle(
+            requirementProgress: RequirementProgressEntity,
+            badgeProgress: BadgeProgressEntity?,
+        ) {
+            badgeProgress?.let { upsertBadgeProgress(it) }
+            upsertRequirementProgress(requirementProgress)
+        }
     }
 }

@@ -495,16 +495,15 @@ composable<BadgeDetail> { entry ->
 
 **Items A1 verified:** `simidrott.json` and `sls.json` headers in `app/src/main/assets/seed/` [VERIFIED: codebase].
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should `observeAllRequirements()` live in CatalogDao or is per-badge `observeRequirements` sufficient?**
+1. **Should `observeAllRequirements()` live in CatalogDao or is per-badge `observeRequirements` sufficient?** *(RESOLVED — 04-01 plan task 3)*
    - What we know: State calc needs requirement IDs grouped by `badgeId` for every visible badge.
-   - What's unclear: Whether planner prefers minimal DAO surface vs one aggregate query.
-   - Recommendation: Add `@Query("SELECT * FROM requirements") fun observeAllRequirements(): Flow<List<RequirementEntity>>` — catalog is small (~hundreds of rows), static after seed, simplifies ViewModel.
+   - Resolution: Add `@Query("SELECT * FROM requirements") fun observeAllRequirements(): Flow<List<RequirementEntity>>` to `CatalogDao` with thin `CatalogRepository` passthrough. Catalog is small (~hundreds of rows), static after seed; one aggregate query avoids N+1 in ViewModel combine.
 
-2. **Loading UI for catalog screen?**
+2. **Loading UI for catalog screen?** *(RESOLVED — 04-02 plan)*
    - What we know: Room Flows emit quickly on local DB; UI-SPEC says optional loading indicator.
-   - Recommendation: Skip loading UI unless first emission is measurably slow; use populated/empty states only.
+   - Resolution: Skip dedicated loading UI in Phase 4. `ChildCatalogScreen` uses populated grid, `CatalogEmptyState`, or `Barnet hittades inte` error branch only — no spinner.
 
 ## Environment Availability
 

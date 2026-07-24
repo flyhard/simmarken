@@ -13,4 +13,10 @@ interface ProgressRepository {
     fun observeBadgeProgress(kidId: Long): Flow<List<BadgeProgressEntity>>
     suspend fun upsertRequirementProgress(progress: RequirementProgressEntity)
     suspend fun upsertBadgeProgress(progress: BadgeProgressEntity)
+
+    /** Atomically upserts badge side-effects (if any) before requirement progress. */
+    suspend fun applyRequirementToggle(
+        requirementProgress: RequirementProgressEntity,
+        badgeProgress: BadgeProgressEntity?,
+    )
 }

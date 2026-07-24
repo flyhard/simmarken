@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import se.simmarken.data.local.entity.BadgeProgressEntity
 import se.simmarken.data.local.entity.RequirementProgressEntity
 import se.simmarken.domain.BadgeCatalogMapper
@@ -31,6 +33,7 @@ class BadgeDetailViewModel(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : ViewModel() {
     private val showUncheckPurchaseDialog = MutableStateFlow(false)
+    private val toggleMutex = Mutex()
 
     val uiState = catalogRepository.observeBadgeById(badgeId)
         .flatMapLatest { badge ->
@@ -99,62 +102,62 @@ class BadgeDetailViewModel(
 
     fun toggleRequirement(requirementId: Long) {
         viewModelScope.launch(ioDispatcher) {
-            val requirements = catalogRepository.observeRequirements(badgeId).first()
-            val requirementProgressById = progressRepository.observeRequirementProgress(kidId)
-                .first()
-                .associate { it.requirementId to it.isAchieved }
-            val existingBadgeProgress = progressRepository.observeBadgeProgress(kidId)
-                .first()
-                .find { it.badgeId == badgeId }
+            toggleMutex.withLock {
+                val requirements = catalogRepository.observeRequirements(badgeId).first()
+                val requirementProgressById = progressRepository.observeRequirementProgress(kidId)
+                    .first()
+                    .associate { it.requirementId to it.isAchieved }
+                val existingBadgeProgress = progressRepository.observeBadgeProgress(kidId)
+                    .first()
+                    .find { it.badgeId == badgeId }
 
-            val currentlyAchieved = requirementProgressById[requirementId] == true
-            val flipped = !currentlyAchieved
-            var badgeProgress = existingBadgeProgress
-                ?: BadgeProgressEntity(kidId = kidId, badgeId = badgeId)
-            var badgeProgressDirty = false
+                val currentlyAchieved = requirementProgressById[requirementId] == true
+                val flipped = !currentlyAchieved
+                var badgeProgress = existingBadgeProgress
+                    ?: BadgeProgressEntity(kidId = kidId, badgeId = badgeId)
+                var badgeProgressDirty = false
 
-            if (ProgressWriteLogic.shouldClearGottenOnUncheck(
-                    isGotten = badgeProgress.isGotten,
-                    flippingToAchieved = flipped,
-                )
-            ) {
-                badgeProgress = badgeProgress.copy(
-                    isGotten = false,
-                    gottenAtEpochMillis = null,
-                )
-                badgeProgressDirty = true
-            }
+                if (ProgressWriteLogic.shouldClearGottenOnUncheck(
+                        isGotten = badgeProgress.isGotten,
+                        flippingToAchieved = flipped,
+                    )
+                ) {
+                    badgeProgress = badgeProgress.copy(
+                        isGotten = false,
+                        gottenAtEpochMillis = null,
+                    )
+                    badgeProgressDirty = true
+                }
 
-            progressRepository.upsertRequirementProgress(
-                RequirementProgressEntity(
+                val updatedProgressById = requirementProgressById.toMutableMap().apply {
+                    put(requirementId, flipped)
+                }
+                val achievedCount = requirements.count { updatedProgressById[it.id] == true }
+                if (ProgressWriteLogic.shouldSetAchievedAt(
+                        totalRequirements = requirements.size,
+                        achievedCountAfterToggle = achievedCount,
+                        existingAchievedAt = badgeProgress.achievedAtEpochMillis,
+                    )
+                ) {
+                    badgeProgress = badgeProgress.copy(
+                        achievedAtEpochMillis = ProgressWriteLogic.preserveAchievedAt(
+                            existing = badgeProgress.achievedAtEpochMillis,
+                            proposed = System.currentTimeMillis(),
+                        ),
+                    )
+                    badgeProgressDirty = true
+                }
+
+                val requirementProgress = RequirementProgressEntity(
                     kidId = kidId,
                     requirementId = requirementId,
                     isAchieved = flipped,
                     achievedAtEpochMillis = if (flipped) System.currentTimeMillis() else null,
-                ),
-            )
-
-            val updatedProgressById = requirementProgressById.toMutableMap().apply {
-                put(requirementId, flipped)
-            }
-            val achievedCount = requirements.count { updatedProgressById[it.id] == true }
-            if (ProgressWriteLogic.shouldSetAchievedAt(
-                    totalRequirements = requirements.size,
-                    achievedCountAfterToggle = achievedCount,
-                    existingAchievedAt = badgeProgress.achievedAtEpochMillis,
                 )
-            ) {
-                badgeProgress = badgeProgress.copy(
-                    achievedAtEpochMillis = ProgressWriteLogic.preserveAchievedAt(
-                        existing = badgeProgress.achievedAtEpochMillis,
-                        proposed = System.currentTimeMillis(),
-                    ),
+                progressRepository.applyRequirementToggle(
+                    requirementProgress = requirementProgress,
+                    badgeProgress = badgeProgress.takeIf { badgeProgressDirty },
                 )
-                badgeProgressDirty = true
-            }
-
-            if (badgeProgressDirty) {
-                progressRepository.upsertBadgeProgress(badgeProgress)
             }
         }
     }
@@ -162,10 +165,31 @@ class BadgeDetailViewModel(
     fun setGotten(value: Boolean) {
         if (!value) return
         viewModelScope.launch(ioDispatcher) {
-            val existing = progressRepository.observeBadgeProgress(kidId)
+            val requirements = catalogRepository.observeRequirements(badgeId).first()
+            val requirementProgressById = progressRepository.observeRequirementProgress(kidId)
+                .first()
+                .associate { it.requirementId to it.isAchieved }
+            val badgeProgressEntity = progressRepository.observeBadgeProgress(kidId)
                 .first()
                 .find { it.badgeId == badgeId }
-            val base = existing ?: BadgeProgressEntity(kidId = kidId, badgeId = badgeId)
+            val isGotten = badgeProgressEntity?.isGotten == true
+            val badge = catalogRepository.observeBadgeById(badgeId).first() ?: return@launch
+            val category = catalogRepository.observeCategoryById(badge.categoryId).first()
+            val cell = BadgeCatalogMapper.toBadgeCellUiModel(
+                badge = badge,
+                categoryCode = category?.code.orEmpty(),
+                requirements = requirements,
+                requirementProgressById = requirementProgressById,
+                isGotten = isGotten,
+            )
+            if (!ProgressWriteLogic.isPurchaseEnabled(
+                    totalRequirements = cell.totalRequirements,
+                    visualState = cell.visualState,
+                )
+            ) {
+                return@launch
+            }
+            val base = badgeProgressEntity ?: BadgeProgressEntity(kidId = kidId, badgeId = badgeId)
             progressRepository.upsertBadgeProgress(
                 base.copy(
                     isGotten = true,

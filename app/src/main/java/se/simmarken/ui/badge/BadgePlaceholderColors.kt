@@ -7,13 +7,20 @@ object BadgePlaceholderColors {
 
     private val categoryColors: Map<String, Color> = mapOf(
         // Simidrott affisch tiers
+        "sjohasten" to Color(0xFF00BCD4),
         "vattenvana" to Color(0xFF4CAF50),
         "nyborjare" to Color(0xFF03A9F4),
+        "simsattmarke" to Color(0xFF9C27B0),
         "hajen" to Color(0xFF607D8B),
-        "jarn" to Color(0xFF795548),
-        "brons" to Color(0xFFCD7F32),
-        "silver" to Color(0xFFB0BEC5),
-        "guld" to Color(0xFFFFC107),
+        "vattenprovet" to Color(0xFF26A69A),
+        "simborgarmarke" to Color(0xFF5D4037),
+        "kilometermarke" to Color(0xFF8BC34A),
+        "jarn-till-kandidaten" to Color(0xFF795548),
+        "magistermarke" to Color(0xFFFFC107),
+        "vattenpolomarke" to Color(0xFF1565C0),
+        "konstsims" to Color(0xFFE91E63),
+        "hoppsmarke" to Color(0xFF00ACC1),
+        "sarahmarket" to Color(0xFFF06292),
         // SLS shop groupings
         "grund" to Color(0xFF26C6DA),
         "doppingen" to Color(0xFF42A5F5),

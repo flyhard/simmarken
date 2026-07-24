@@ -1,14 +1,14 @@
 package se.simmarken.domain.repository
 
-import se.simmarken.data.local.dao.BadgeProgressDao
-import se.simmarken.data.local.dao.RequirementProgressDao
+import se.simmarken.data.local.AppDatabase
 import se.simmarken.data.local.entity.BadgeProgressEntity
 import se.simmarken.data.local.entity.RequirementProgressEntity
 
 class ProgressRepositoryImpl(
-    private val requirementProgressDao: RequirementProgressDao,
-    private val badgeProgressDao: BadgeProgressDao,
+    private val database: AppDatabase,
 ) : ProgressRepository {
+    private val requirementProgressDao = database.requirementProgressDao()
+    private val badgeProgressDao = database.badgeProgressDao()
     override fun observeRequirementProgress(kidId: Long) =
         requirementProgressDao.observeForKid(kidId)
 
@@ -19,4 +19,9 @@ class ProgressRepositoryImpl(
 
     override suspend fun upsertBadgeProgress(progress: BadgeProgressEntity) =
         badgeProgressDao.upsert(progress)
+
+    override suspend fun applyRequirementToggle(
+        requirementProgress: RequirementProgressEntity,
+        badgeProgress: BadgeProgressEntity?,
+    ) = database.applyRequirementToggle(requirementProgress, badgeProgress)
 }

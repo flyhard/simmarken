@@ -31,8 +31,5 @@ class AppContainer(context: Context) {
 
     val kidRepository: KidRepository = KidRepositoryImpl(database.kidDao())
     val catalogRepository: CatalogRepository = CatalogRepositoryImpl(database.catalogDao())
-    val progressRepository: ProgressRepository = ProgressRepositoryImpl(
-        requirementProgressDao = database.requirementProgressDao(),
-        badgeProgressDao = database.badgeProgressDao(),
-    )
+    val progressRepository: ProgressRepository = ProgressRepositoryImpl(database)
 }

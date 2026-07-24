@@ -30,9 +30,21 @@ class CatalogSeedLoader(
                 seed.toEntity(existingId = stored?.id ?: 0),
             )
             val catalogId = catalogDao.findCatalogByCode(seed.code)!!.id
+            val seedCategoryCodes = seed.categories.map { it.code }.toSet()
+            val seedBadgeCodesByCategory =
+                seed.categories.associate { category ->
+                    category.code to category.badges.map { it.code }.toSet()
+                }
+
             for (categorySeed in seed.categories) {
                 mergeCategory(catalogId, categorySeed)
             }
+
+            pruneObsoleteStructure(
+                catalogId = catalogId,
+                seedCategoryCodes = seedCategoryCodes,
+                seedBadgeCodesByCategory = seedBadgeCodesByCategory,
+            )
         }
     }
 
@@ -46,12 +58,22 @@ class CatalogSeedLoader(
         )
         val categoryId = catalogDao.findCategoryByCatalogAndCode(catalogId, categorySeed.code)!!.id
         for (badgeSeed in categorySeed.badges) {
-            mergeBadge(categoryId, badgeSeed)
+            mergeBadge(
+                catalogId = catalogId,
+                categoryId = categoryId,
+                badgeSeed = badgeSeed,
+            )
         }
     }
 
-    private suspend fun mergeBadge(categoryId: Long, badgeSeed: BadgeSeedDto) {
-        val existing = catalogDao.findBadgeByCategoryAndCode(categoryId, badgeSeed.code)
+    private suspend fun mergeBadge(
+        catalogId: Long,
+        categoryId: Long,
+        badgeSeed: BadgeSeedDto,
+    ) {
+        val existing =
+            catalogDao.findBadgeByCatalogAndCode(catalogId, badgeSeed.code)
+                ?: catalogDao.findBadgeByCategoryAndCode(categoryId, badgeSeed.code)
         catalogDao.upsertBadge(
             badgeSeed.toEntity(
                 categoryId = categoryId,
@@ -73,6 +95,28 @@ class CatalogSeedLoader(
             ),
         )
         // v1 merge intentionally does not prune requirements removed from seed assets.
+    }
+
+    private suspend fun pruneObsoleteStructure(
+        catalogId: Long,
+        seedCategoryCodes: Set<String>,
+        seedBadgeCodesByCategory: Map<String, Set<String>>,
+    ) {
+        val storedCategories = catalogDao.listCategoriesForCatalog(catalogId)
+        for (category in storedCategories) {
+            if (category.code !in seedCategoryCodes) {
+                catalogDao.deleteCategoryById(category.id)
+                continue
+            }
+
+            val seedBadgeCodes = seedBadgeCodesByCategory[category.code].orEmpty()
+            val storedBadges = catalogDao.listBadgesForCategory(category.id)
+            for (badge in storedBadges) {
+                if (badge.code !in seedBadgeCodes) {
+                    catalogDao.deleteBadgeById(badge.id)
+                }
+            }
+        }
     }
 
     companion object {
