@@ -14,12 +14,12 @@ At the swim hall, a parent can open the app and immediately answer: "Did they pa
 
 - Parent can add and manage child profiles (name, avatar/color theme) — **Validated in Phase 3**
 - Kid-first home screen with child cards, empty state, and catalog navigation placeholder — **Validated in Phase 3**
+- Parent can check off individual skill requirements per child; badge auto-achieves when all requirements are met — **Validated in Phase 5**
+- Parent can mark a badge as physically purchased/sewn on (separate from skill completion) — **Validated in Phase 5**
 
 ### Active
 
 - [ ] Parent can view badges from Svensk Simidrott and SLS catalogs, grouped by category
-- [ ] Parent can check off individual skill requirements per child; badge auto-achieves when all requirements are met
-- [ ] Parent can mark a badge as physically purchased/sewn on (separate from skill completion)
 - [ ] Badge visual states clearly distinguish: locked, in progress, achieved-to-buy, and gotten
 - [ ] App works fully offline with local Room database storage
 - [ ] Parent can export/import progress as a file for device migration
@@ -66,7 +66,8 @@ At the swim hall, a parent can open the app and immediately answer: "Did they pa
 | Research badge data from public sources | User doesn't have assets ready; official data ensures accuracy | — Pending |
 | JSON export/import for backup | User wants phone migration without cloud sync | — Pending |
 | Clean minimal design | Parent-focused, quick glance at swim hall | — Pending |
-| 4-tier badge visual state (locked → in progress → achieved/to buy → gotten) | Core UX differentiator; solves the "passed vs bought" problem | — Pending |
+| 4-tier badge visual state (locked → in progress → achieved/to buy → gotten) | Core UX differentiator; solves the "passed vs bought" problem | Shipped Phase 4–5; UAT confirmed skill checklist + köpt toggle |
+| achievedAt write-once + gotten auto-clear on skill uncheck | Prevents progress corruption and keeps köpt honest | Validated Phase 5 UAT |
 | No cloud/backend | Privacy, simplicity, offline reliability at pool | — Pending |
 
 ## Evolution
@@ -87,4 +88,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-23 after Phase 3 completion*
+*Last updated: 2026-07-24 after Phase 5*

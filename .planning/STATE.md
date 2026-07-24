@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 05
-current_phase_name: progress-tracking-badge-detail
-status: executing
+current_phase: 6
+current_phase_name: Export/Import & i18n
+status: planning
 stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-07-23T12:27:44.711Z"
-last_activity: 2026-07-23
-last_activity_desc: Completed 05-02 BadgeDetailScreen
+last_updated: "2026-07-24T11:02:09.014Z"
+last_activity: 2026-07-24
+last_activity_desc: Phase 05 complete, transitioned to Phase 6
 progress:
   total_phases: 5
   completed_phases: 5
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-22)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Phase 05 — progress-tracking-badge-detail
+**Current focus:** Phase 6 — Export/Import & i18n
 
 ## Current Position
 
-Phase: 05 (progress-tracking-badge-detail) — EXECUTING
-Plan: 3 of 3
-Status: Ready to execute 05-03
-Last activity: 2026-07-23 — Completed 05-02 BadgeDetailScreen
+Phase: 6 — Export/Import & i18n
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-07-24 — Phase 05 complete, transitioned to Phase 6
 
 Progress: [██████████] 100% (1 plan ready)
 
@@ -38,7 +38,7 @@ Progress: [██████████] 100% (1 plan ready)
 
 **Velocity:**
 
-- Total plans completed: 8
+- Total plans completed: 11
 - Average duration: —
 - Total execution time: —
 
@@ -48,6 +48,7 @@ Progress: [██████████] 100% (1 plan ready)
 |-------|-------|-------|----------|
 | 02 | 5 | - | - |
 | 3 | 3 | - | - |
+| 05 | 3 | - | - |
 
 **Recent Trend:**
 
