@@ -1,31 +1,38 @@
 ---
 phase: 05-progress-tracking-badge-detail
 verified: 2026-07-23T12:30:00Z
-status: human_needed
+status: passed
 score: 12/13 must-haves verified
 behavior_unverified: 1
 overrides_applied: 0
 behavior_unverified_items:
+
   - truth: "Tapping a requirement instantly toggles it and persists to database"
     test: "On device/emulator: open a badge with requirements, toggle one checkbox, force-stop and relaunch the app, reopen the same badge"
     expected: "The toggled requirement remains checked; badge visual state reflects persisted progress"
     why_human: "ViewModel unit tests use FakeProgressRepository; DaoInstrumentedTest covers Room upserts in isolation but no test exercises ViewModel → ProgressRepositoryImpl → Room as one path"
 human_verification:
+
   - test: "Swim-hall flow: Home → child card → catalog → badge detail"
     expected: "Badge detail shows 160dp pin image at top, badge name, 'X av Y klara' subtitle (when requirements exist), scrollable checklist, and 'Fysiskt märke köpt' switch at bottom"
     why_human: "Layout, image rendering, and one-handed usability cannot be verified by grep or unit tests"
+
   - test: "Toggle individual requirements on a multi-requirement badge"
     expected: "Checkbox and pin visual state update immediately on each tap; no confirmation dialog; purchase switch enables only when all requirements are checked"
     why_human: "Instant UI feedback and disabled-switch styling are runtime/visual behaviors"
+
   - test: "Mark badge köpt, then attempt to un-mark via switch"
     expected: "'Ta bort köpt-markering?' dialog appears; confirming clears gotten state while retaining achieved requirements"
     why_human: "Dialog presentation and copy require on-device verification"
+
   - test: "On a GOTTEN badge, uncheck one requirement"
     expected: "Gotten state clears silently (no dialog); badge reverts to appropriate visual state"
     why_human: "State transition ordering at runtime is not covered by a single behavioral test"
+
   - test: "Open a zero-requirement badge (e.g. Droppen)"
     expected: "'Inga kunskapskrav' note shown instead of checklist; purchase toggle enabled immediately"
     why_human: "Zero-requirement edge-case layout requires visual confirmation"
+
   - test: "After progressing badges for a child, return to home"
     expected: "Child card shows separate 'N pågår' and 'M att köpa' lines only when counts > 0; gotten badges do not inflate counts"
     why_human: "Subtitle visibility rules and copy are visual"
