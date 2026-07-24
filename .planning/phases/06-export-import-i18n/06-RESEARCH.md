@@ -437,22 +437,19 @@ res/values-en/strings.xml       # English
 | A4 | Filename `simmarken-backup-YYYY-MM-DD.json` is fine default | Discretion | Cosmetic only |
 | A5 | Android SDK/emulator available for instrumented intent tests (prior phases built) | Environment | Manual device testing only |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Room migration scope for stableId / updatedAt**
-   - What we know: D-01 needs cross-device kid match; D-04 needs mutation timestamps; DB is currently version 1.
-   - What's unclear: Whether discuss-phase expected schema change vs export-only UUID (UUID-only-in-JSON cannot update existing local kids' identity on first export round-trip cleanly).
-   - Recommendation: **Lock A3** — migrate Room to v2 with `kids.stableId` + progress `updatedAtEpochMillis`; backfill UUIDs and set `updatedAt` to `coalesce(achievedAt, gottenAt, createdAt, now)`.
+1. **Room migration scope for stableId / updatedAt** — **RESOLVED:** Lock A3 — migrate Room to v2 with `kids.stableId` + progress `updatedAtEpochMillis`; backfill UUIDs and set `updatedAt` to `coalesce(achievedAt, gottenAt, createdAt, now)`.
+   - What we knew: D-01 needs cross-device kid match; D-04 needs mutation timestamps; DB is currently version 1.
+   - What was unclear: Whether discuss-phase expected schema change vs export-only UUID (UUID-only-in-JSON cannot update existing local kids' identity on first export round-trip cleanly).
 
-2. **Unknown catalog codes in import**
-   - What we know: Codes may not exist if seed diverged.
-   - What's unclear: Skip-with-warning vs fail entire file.
-   - Recommendation: Fail validation only for schema/version errors; **skip unknown codes** with count in preview ("3 rows skipped — unknown badges") so phone migration still restores known progress.
+2. **Unknown catalog codes in import** — **RESOLVED:** Fail validation only for schema/version errors; **skip unknown codes** with count in preview ("3 rows skipped — unknown badges") so phone migration still restores known progress.
+   - What we knew: Codes may not exist if seed diverged.
+   - What was unclear: Skip-with-warning vs fail entire file.
 
-3. **Kid profile field merge (name/color)**
-   - What we know: D-04 text focuses on progress conflicts.
-   - What's unclear: If same `stableId` has different name locally vs file.
-   - Recommendation: On confirm for existing kid, **keep local profile** (name/color/sortOrder); only merge progress. New kids copy profile from file after per-kid confirm (D-02).
+3. **Kid profile field merge (name/color)** — **RESOLVED:** On confirm for existing kid, **keep local profile** (name/color/sortOrder); only merge progress. New kids copy profile from file after per-kid confirm (D-02).
+   - What we knew: D-04 text focuses on progress conflicts.
+   - What was unclear: If same `stableId` has different name locally vs file.
 
 ## Environment Availability
 

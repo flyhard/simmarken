@@ -5,10 +5,10 @@ milestone_name: milestone
 current_phase: 6
 current_phase_name: Export/Import & i18n
 status: planning
-stopped_at: Phase 6 research complete
-last_updated: "2026-07-24T12:50:00.000Z"
+stopped_at: Phase 6 UI-SPEC approved
+last_updated: "2026-07-24T15:22:35.698Z"
 last_activity: 2026-07-24
-last_activity_desc: Phase 6 RESEARCH.md written — export/import + i18n
+last_activity_desc: Phase 6 RESEARCH.md complete
 progress:
   total_phases: 6
   completed_phases: 5
@@ -120,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-24T12:30:02.648Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-export-import-i18n/06-CONTEXT.md
+Last session: 2026-07-24T15:22:35.683Z
+Stopped at: Phase 6 UI-SPEC approved
+Resume file: /Users/ues201/Projects/simmmärken/.planning/phases/06-export-import-i18n/06-UI-SPEC.md
