@@ -11,18 +11,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import se.simmarken.R
 import se.simmarken.domain.model.BadgeCellUiModel
 import se.simmarken.domain.model.BadgeVisualState
 import se.simmarken.ui.components.BadgePinSize
 import se.simmarken.ui.components.BadgePinVisual
 
-private fun badgeStateLabel(visualState: BadgeVisualState): String = when (visualState) {
-    BadgeVisualState.LOCKED -> "låst"
-    BadgeVisualState.IN_PROGRESS -> "pågår"
-    BadgeVisualState.ACHIEVED_TO_BUY -> "klar att köpa"
-    BadgeVisualState.GOTTEN -> "köpt"
+private fun badgeStateLabel(visualState: BadgeVisualState): Int = when (visualState) {
+    BadgeVisualState.LOCKED -> R.string.badge_state_locked
+    BadgeVisualState.IN_PROGRESS -> R.string.badge_state_in_progress
+    BadgeVisualState.ACHIEVED_TO_BUY -> R.string.badge_state_achieved_to_buy
+    BadgeVisualState.GOTTEN -> R.string.badge_state_gotten
 }
 
 @Composable
@@ -48,7 +50,11 @@ fun BadgeGridItem(
                 categoryCode = badge.categoryCode,
                 visualState = badge.visualState,
                 progressFraction = badge.progressFraction,
-                contentDescription = "${badge.nameSv}, ${badgeStateLabel(badge.visualState)}",
+                contentDescription = stringResource(
+                    R.string.badge_pin_content_description,
+                    badge.nameSv,
+                    stringResource(badgeStateLabel(badge.visualState)),
+                ),
                 size = BadgePinSize.Grid,
                 totalRequirements = badge.totalRequirements,
             )
