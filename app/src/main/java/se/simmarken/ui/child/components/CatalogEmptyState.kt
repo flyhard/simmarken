@@ -15,8 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import se.simmarken.R
 
 @Composable
 fun CatalogEmptyState(
@@ -38,12 +40,12 @@ fun CatalogEmptyState(
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Text(
-                text = "Inga simmärken",
+                text = stringResource(R.string.catalog_empty_title),
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
             )
             Text(
-                text = "Den här katalogen har inga märken än.",
+                text = stringResource(R.string.catalog_empty_body),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,

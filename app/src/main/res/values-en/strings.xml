@@ -10,4 +10,48 @@
     <string name="child_in_progress">%1$d in progress</string>
     <string name="child_to_buy">%1$d to buy</string>
     <string name="back_content_description">Back</string>
+
+    <!-- Child card -->
+    <string name="child_menu_content_description">Options for %1$s</string>
+    <string name="child_menu_edit">Edit</string>
+    <string name="child_menu_delete">Delete</string>
+
+    <!-- Delete kid dialog -->
+    <string name="delete_kid_title">Delete %1$s?</string>
+    <string name="delete_kid_body">All badge progress for %1$s will be removed. This cannot be undone.</string>
+    <string name="delete_kid_confirm">Delete</string>
+    <string name="common_cancel">Cancel</string>
+
+    <!-- Kid form -->
+    <string name="kid_form_title_add">New child</string>
+    <string name="kid_form_title_edit">Edit child</string>
+    <string name="kid_form_name_label">Name</string>
+    <string name="kid_form_name_placeholder">Child\'s name</string>
+    <string name="kid_form_color_label">Color</string>
+    <string name="kid_form_save">Save</string>
+    <string name="kid_form_add">Add</string>
+    <string name="kid_name_error_empty">Enter a name</string>
+    <string name="kid_name_error_too_long">Name must be at most 30 characters</string>
+    <string name="kid_load_error">Could not load child</string>
+
+    <!-- Catalog -->
+    <string name="catalog_kid_not_found">Child not found</string>
+    <string name="catalog_empty_title">No badges</string>
+    <string name="catalog_empty_body">This catalog has no badges yet.</string>
+    <string name="catalog_tab_simidrott" translatable="false">Simidrott</string>
+    <string name="catalog_tab_sls" translatable="false">SLS</string>
+
+    <!-- Badge detail -->
+    <string name="badge_not_found">Badge not found</string>
+    <string name="badge_progress_subtitle">%1$d of %2$d complete</string>
+    <string name="badge_purchase_label">Physical badge purchased</string>
+    <string name="badge_zero_requirements">No skill requirements</string>
+    <string name="badge_state_locked">locked</string>
+    <string name="badge_state_in_progress">in progress</string>
+    <string name="badge_state_achieved_to_buy">ready to buy</string>
+    <string name="badge_state_gotten">purchased</string>
+    <string name="badge_pin_content_description">%1$s, %2$s</string>
+    <string name="uncheck_purchase_title">Remove purchased mark?</string>
+    <string name="uncheck_purchase_body">The badge will no longer show as purchased. Checked requirements are kept.</string>
+    <string name="uncheck_purchase_confirm">Remove mark</string>
 </resources>

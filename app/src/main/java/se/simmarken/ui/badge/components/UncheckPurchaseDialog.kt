@@ -5,6 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import se.simmarken.R
 
 @Composable
 fun UncheckPurchaseDialog(
@@ -13,21 +15,21 @@ fun UncheckPurchaseDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Ta bort köpt-markering?") },
+        title = { Text(stringResource(R.string.uncheck_purchase_title)) },
         text = {
-            Text("Märket visas inte längre som köpt. Kraven du bockat av behålls.")
+            Text(stringResource(R.string.uncheck_purchase_body))
         },
         confirmButton = {
             TextButton(onClick = onConfirm) {
                 Text(
-                    text = "Ta bort markering",
+                    text = stringResource(R.string.uncheck_purchase_confirm),
                     color = MaterialTheme.colorScheme.error,
                 )
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Avbryt")
+                Text(stringResource(R.string.common_cancel))
             }
         },
     )

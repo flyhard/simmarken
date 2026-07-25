@@ -102,7 +102,7 @@ fun ChildCard(
             ) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
-                    contentDescription = "Alternativ för $name",
+                    contentDescription = stringResource(R.string.child_menu_content_description, name),
                 )
             }
             DropdownMenu(
@@ -110,7 +110,7 @@ fun ChildCard(
                 onDismissRequest = { menuExpanded = false },
             ) {
                 DropdownMenuItem(
-                    text = { Text("Redigera") },
+                    text = { Text(stringResource(R.string.child_menu_edit)) },
                     onClick = {
                         menuExpanded = false
                         onEditClick()
@@ -119,7 +119,7 @@ fun ChildCard(
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = "Ta bort",
+                            text = stringResource(R.string.child_menu_delete),
                             color = MaterialTheme.colorScheme.error,
                         )
                     },

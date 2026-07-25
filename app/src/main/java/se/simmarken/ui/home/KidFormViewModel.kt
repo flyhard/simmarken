@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 import se.simmarken.data.local.entity.KidEntity
 import se.simmarken.domain.repository.KidRepository
+import se.simmarken.domain.validation.KidNameError
 import se.simmarken.domain.validation.KidNameValidation
 import se.simmarken.ui.theme.KidAvatarColors
 
@@ -30,8 +31,8 @@ class KidFormViewModel(
     private val _selectedColorArgb = MutableStateFlow(KidAvatarColors.defaultForName(""))
     val selectedColorArgb: StateFlow<Int> = _selectedColorArgb.asStateFlow()
 
-    private val _nameError = MutableStateFlow<String?>(null)
-    val nameError: StateFlow<String?> = _nameError.asStateFlow()
+    private val _nameError = MutableStateFlow<KidFormFieldError?>(null)
+    val nameError: StateFlow<KidFormFieldError?> = _nameError.asStateFlow()
 
     private val _isSaving = MutableStateFlow(false)
     val isSaving: StateFlow<Boolean> = _isSaving.asStateFlow()
@@ -76,7 +77,10 @@ class KidFormViewModel(
         if (_isSaving.value) return
         val error = KidNameValidation.validateName(_name.value)
         if (error != null) {
-            _nameError.value = error
+            _nameError.value = when (error) {
+                KidNameError.EMPTY -> KidFormFieldError.NameEmpty
+                KidNameError.TOO_LONG -> KidFormFieldError.NameTooLong
+            }
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
@@ -85,7 +89,7 @@ class KidFormViewModel(
                 if (isEditMode) {
                     val existing = existingKid
                     if (existing == null) {
-                        _nameError.value = "Kunde inte ladda barnet"
+                        _nameError.value = KidFormFieldError.LoadFailed
                         return@launch
                     }
                     kidRepository.upsert(

@@ -10,4 +10,48 @@
     <string name="child_in_progress">%1$d pågår</string>
     <string name="child_to_buy">%1$d att köpa</string>
     <string name="back_content_description">Tillbaka</string>
+
+    <!-- Child card -->
+    <string name="child_menu_content_description">Alternativ för %1$s</string>
+    <string name="child_menu_edit">Redigera</string>
+    <string name="child_menu_delete">Ta bort</string>
+
+    <!-- Delete kid dialog -->
+    <string name="delete_kid_title">Ta bort %1$s?</string>
+    <string name="delete_kid_body">All simmarke-framsteg för %1$s tas bort. Detta går inte att ångra.</string>
+    <string name="delete_kid_confirm">Ta bort</string>
+    <string name="common_cancel">Avbryt</string>
+
+    <!-- Kid form -->
+    <string name="kid_form_title_add">Nytt barn</string>
+    <string name="kid_form_title_edit">Redigera barn</string>
+    <string name="kid_form_name_label">Namn</string>
+    <string name="kid_form_name_placeholder">Barnets namn</string>
+    <string name="kid_form_color_label">Färg</string>
+    <string name="kid_form_save">Spara</string>
+    <string name="kid_form_add">Lägg till</string>
+    <string name="kid_name_error_empty">Ange ett namn</string>
+    <string name="kid_name_error_too_long">Namnet får vara högst 30 tecken</string>
+    <string name="kid_load_error">Kunde inte ladda barnet</string>
+
+    <!-- Catalog -->
+    <string name="catalog_kid_not_found">Barnet hittades inte</string>
+    <string name="catalog_empty_title">Inga simmärken</string>
+    <string name="catalog_empty_body">Den här katalogen har inga märken än.</string>
+    <string name="catalog_tab_simidrott" translatable="false">Simidrott</string>
+    <string name="catalog_tab_sls" translatable="false">SLS</string>
+
+    <!-- Badge detail -->
+    <string name="badge_not_found">Märket hittades inte</string>
+    <string name="badge_progress_subtitle">%1$d av %2$d klara</string>
+    <string name="badge_purchase_label">Fysiskt märke köpt</string>
+    <string name="badge_zero_requirements">Inga kunskapskrav</string>
+    <string name="badge_state_locked">låst</string>
+    <string name="badge_state_in_progress">pågår</string>
+    <string name="badge_state_achieved_to_buy">klar att köpa</string>
+    <string name="badge_state_gotten">köpt</string>
+    <string name="badge_pin_content_description">%1$s, %2$s</string>
+    <string name="uncheck_purchase_title">Ta bort köpt-markering?</string>
+    <string name="uncheck_purchase_body">Märket visas inte längre som köpt. Kraven du bockat av behålls.</string>
+    <string name="uncheck_purchase_confirm">Ta bort markering</string>
 </resources>

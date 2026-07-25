@@ -13,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import se.simmarken.R
 
 @Composable
 fun PurchaseToggleRow(
@@ -36,7 +38,7 @@ fun PurchaseToggleRow(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Fysiskt märke köpt",
+                text = stringResource(R.string.badge_purchase_label),
                 style = MaterialTheme.typography.bodyLarge,
                 color = if (isPurchaseEnabled) {
                     MaterialTheme.colorScheme.onSurface

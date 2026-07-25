@@ -22,8 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import se.simmarken.R
 import se.simmarken.domain.model.BadgeVisualState
 import se.simmarken.ui.badge.components.PurchaseToggleRow
 import se.simmarken.ui.badge.components.RequirementChecklist
@@ -32,11 +34,11 @@ import se.simmarken.ui.badge.components.ZeroRequirementNote
 import se.simmarken.ui.components.BadgePinSize
 import se.simmarken.ui.components.BadgePinVisual
 
-private fun badgeStateLabel(visualState: BadgeVisualState): String = when (visualState) {
-    BadgeVisualState.LOCKED -> "låst"
-    BadgeVisualState.IN_PROGRESS -> "pågår"
-    BadgeVisualState.ACHIEVED_TO_BUY -> "klar att köpa"
-    BadgeVisualState.GOTTEN -> "köpt"
+private fun badgeStateLabel(visualState: BadgeVisualState): Int = when (visualState) {
+    BadgeVisualState.LOCKED -> R.string.badge_state_locked
+    BadgeVisualState.IN_PROGRESS -> R.string.badge_state_in_progress
+    BadgeVisualState.ACHIEVED_TO_BUY -> R.string.badge_state_achieved_to_buy
+    BadgeVisualState.GOTTEN -> R.string.badge_state_gotten
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,7 +64,7 @@ fun BadgeDetailScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Tillbaka",
+                            contentDescription = stringResource(R.string.back_content_description),
                         )
                     }
                 },
@@ -78,7 +80,7 @@ fun BadgeDetailScreen(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "Märket hittades inte",
+                        text = stringResource(R.string.badge_not_found),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -107,7 +109,11 @@ fun BadgeDetailScreen(
                         categoryCode = uiState.categoryCode,
                         visualState = uiState.visualState,
                         progressFraction = uiState.progressFraction,
-                        contentDescription = "${uiState.nameSv}, ${badgeStateLabel(uiState.visualState)}",
+                        contentDescription = stringResource(
+                            R.string.badge_pin_content_description,
+                            uiState.nameSv,
+                            stringResource(badgeStateLabel(uiState.visualState)),
+                        ),
                         size = BadgePinSize.Detail,
                         totalRequirements = uiState.totalRequirements,
                         modifier = Modifier.padding(top = 16.dp),
@@ -119,7 +125,11 @@ fun BadgeDetailScreen(
                     )
                     if (uiState.totalRequirements > 0) {
                         Text(
-                            text = "${uiState.achievedCount} av ${uiState.totalRequirements} klara",
+                            text = stringResource(
+                                R.string.badge_progress_subtitle,
+                                uiState.achievedCount,
+                                uiState.totalRequirements,
+                            ),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(top = 8.dp),

@@ -19,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import se.simmarken.R
 import se.simmarken.ui.home.components.ColorSwatchGrid
 import se.simmarken.ui.home.components.KidAvatar
 
@@ -38,8 +40,22 @@ fun KidFormBottomSheet(
     val isSaving by viewModel.isSaving.collectAsStateWithLifecycle()
     val isReadyToSave by viewModel.isReadyToSave.collectAsStateWithLifecycle()
 
-    val sheetTitle = if (viewModel.isEditMode) "Redigera barn" else "Nytt barn"
-    val saveLabel = if (viewModel.isEditMode) "Spara" else "Lägg till"
+    val sheetTitle = if (viewModel.isEditMode) {
+        stringResource(R.string.kid_form_title_edit)
+    } else {
+        stringResource(R.string.kid_form_title_add)
+    }
+    val saveLabel = if (viewModel.isEditMode) {
+        stringResource(R.string.kid_form_save)
+    } else {
+        stringResource(R.string.kid_form_add)
+    }
+    val nameErrorText = when (nameError) {
+        KidFormFieldError.NameEmpty -> stringResource(R.string.kid_name_error_empty)
+        KidFormFieldError.NameTooLong -> stringResource(R.string.kid_name_error_too_long)
+        KidFormFieldError.LoadFailed -> stringResource(R.string.kid_load_error)
+        null -> null
+    }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -57,16 +73,16 @@ fun KidFormBottomSheet(
             OutlinedTextField(
                 value = name,
                 onValueChange = viewModel::updateName,
-                label = { Text("Namn") },
-                placeholder = { Text("Barnets namn") },
+                label = { Text(stringResource(R.string.kid_form_name_label)) },
+                placeholder = { Text(stringResource(R.string.kid_form_name_placeholder)) },
                 singleLine = true,
-                isError = nameError != null,
-                supportingText = nameError?.let { error -> { Text(error) } },
+                isError = nameErrorText != null,
+                supportingText = nameErrorText?.let { error -> { Text(error) } },
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Färg", style = androidx.compose.material3.MaterialTheme.typography.bodyLarge)
+            Text(text = stringResource(R.string.kid_form_color_label), style = androidx.compose.material3.MaterialTheme.typography.bodyLarge)
             Spacer(modifier = Modifier.height(8.dp))
             KidAvatar(
                 name = name,
@@ -84,7 +100,7 @@ fun KidFormBottomSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 TextButton(onClick = onDismiss) {
-                    Text("Avbryt")
+                    Text(stringResource(R.string.common_cancel))
                 }
                 Button(
                     onClick = viewModel::save,

@@ -17,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import se.simmarken.R
 import se.simmarken.ui.child.components.BadgeGrid
 import se.simmarken.ui.child.components.CatalogEmptyState
 import se.simmarken.ui.child.components.CatalogTabRow
@@ -45,7 +47,7 @@ fun ChildCatalogScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Tillbaka",
+                            contentDescription = stringResource(R.string.back_content_description),
                         )
                     }
                 },
@@ -60,7 +62,7 @@ fun ChildCatalogScreen(
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
-                    text = "Barnet hittades inte",
+                    text = stringResource(R.string.catalog_kid_not_found),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

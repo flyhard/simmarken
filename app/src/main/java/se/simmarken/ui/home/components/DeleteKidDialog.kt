@@ -5,6 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import se.simmarken.R
 
 @Composable
 fun DeleteKidDialog(
@@ -14,21 +16,21 @@ fun DeleteKidDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Ta bort $name?") },
+        title = { Text(stringResource(R.string.delete_kid_title, name)) },
         text = {
-            Text("All simmarke-framsteg för $name tas bort. Detta går inte att ångra.")
+            Text(stringResource(R.string.delete_kid_body, name))
         },
         confirmButton = {
             TextButton(onClick = onConfirm) {
                 Text(
-                    text = "Ta bort",
+                    text = stringResource(R.string.delete_kid_confirm),
                     color = MaterialTheme.colorScheme.error,
                 )
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Avbryt")
+                Text(stringResource(R.string.common_cancel))
             }
         },
     )
