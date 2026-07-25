@@ -3,7 +3,7 @@ status: complete
 phase: 02-catalog-seeding
 source: [02-VERIFICATION.md]
 started: 2026-07-22T20:10:00Z
-updated: 2026-07-22T21:18:00Z
+updated: 2026-07-25T06:53:00Z
 ---
 
 ## Current Test
@@ -14,9 +14,8 @@ updated: 2026-07-22T21:18:00Z
 
 ### 1. D-12 full badge accuracy review
 expected: Walk `docs/extraction/SIMIDROTT-CHECKLIST.md` and `docs/extraction/SLS-CHECKLIST.md` against official protocol PDFs and shop product pages; every badge requirement bullet matches `textSv` in seed JSON; mark `verified` columns
-result: issue
-reported: "Bronsmarket, guldfisken, hajen brons, hajen guld, hajen silver, järnmärket, silverfisken och silvermärket är fel"
-severity: major
+result: pass
+note: "Re-verified after badge images re-sourced from SSF Shopen (0662439)"
 
 ### 2. Image licensing legal review
 expected: Review `docs/SOURCES.md` promotional-use and shop-image statements; distribution basis acceptable for app store / internal release
@@ -33,8 +32,8 @@ result: pass
 ## Summary
 
 total: 4
-passed: 3
-issues: 1
+passed: 4
+issues: 0
 pending: 0
 skipped: 0
 blocked: 0
@@ -42,22 +41,17 @@ blocked: 0
 ## Gaps
 
 - truth: "Every Simidrott badge requirement bullet matches official sources and bundled badge images depict the correct pin for each code"
-  status: failed
+  status: resolved
   reason: "User reported: Bronsmarket, guldfisken, hajen brons, hajen guld, hajen silver, järnmärket, silverfisken och silvermärket är fel"
   severity: major
   test: 1
-  deferred: true
-  deferred_note: "User chose to delay artwork correction to a later phase"
-  root_cause: "extract-simidrott-badge-images.sh pdfimages index mapping (024–104) assigns wrong affisch embedded images to badge filenames — e.g. silvermarket.webp is Guldbojen, hajen_silver.webp is crawl swimmer, jarnmarket.webp is Baddaren character"
+  resolved_at: 2026-07-25
+  resolution: "Badge images re-sourced from SSF Shopen (0662439); user re-verified D-12 checklists — pass"
+  root_cause: "extract-simidrott-badge-images.sh pdfimages index mapping (024–104) assigns wrong affisch embedded images to badge filenames"
   artifacts:
-    - path: "scripts/extract-simidrott-badge-images.sh"
-      issue: "Incorrect MAPPING array indices for 8+ badges"
     - path: "app/src/main/assets/badges/simidrott/"
-      issue: "Wrong WebP assets bundled for bronsmarket, guldfisken, hajen-*, jarnmarket, silverfisken, silvermarket"
-  missing:
-    - "Re-map pdfimages indices against affisch layout and re-extract WebP assets"
-    - "Visual spot-check all 15 Simidrott pins against official affisch"
-  debug_session: ""
+      issue: "Fixed via shop-sourced WebP assets (0662439)"
+  missing: []
 
 - truth: "All seed instrumented tests pass on emulator/device"
   status: resolved

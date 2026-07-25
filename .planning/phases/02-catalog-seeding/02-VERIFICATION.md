@@ -1,19 +1,23 @@
 ---
 phase: 02-catalog-seeding
 verified: 2026-07-22T20:05:00Z
-status: human_needed
+status: passed
 score: 9/9 must-haves verified
 overrides_applied: 0
 human_verification:
+
   - test: "Walk D-12 checklists against official sources for all 37 seeded badges"
     expected: "Every requirement bullet in simidrott.json and sls.json matches official PDF/shop text; mark verified columns in SIMIDROTT-CHECKLIST.md and SLS-CHECKLIST.md"
     why_human: "D-12 requires manual affisch/protocol review for every badge; only Baddaren, Hajen, Droppen, and Skräddaren have automated golden tests"
+
   - test: "Legal review of docs/SOURCES.md licensing statements"
     expected: "Promotional-use basis for Simidrott affisch images and SLS shop images is acceptable for app distribution"
     why_human: "VALIDATION.md defers image licensing to human legal review"
+
   - test: "Run instrumented seed tests on emulator/device"
     expected: "./gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.package=se.simmarken.data.seed exits 0"
     why_human: "No emulator connected during verification; androidTest APK compiles but runtime not executed"
+
   - test: "Install debug APK, launch on fresh install, confirm catalogs seeded"
     expected: "After first launch, Room contains simidrott and sls catalogs (inspect via Database Inspector or temporary debug query)"
     why_human: "Roadmap SC1 requires first-run population on device; AppContainer seeds asynchronously on IO dispatcher"
