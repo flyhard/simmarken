@@ -54,4 +54,39 @@
     <string name="uncheck_purchase_title">Remove purchased mark?</string>
     <string name="uncheck_purchase_body">The badge will no longer show as purchased. Checked requirements are kept.</string>
     <string name="uncheck_purchase_confirm">Remove mark</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language_section">Language</string>
+    <string name="settings_data_section">Data</string>
+    <string name="language_system_default">System default</string>
+    <string name="language_swedish">Svenska</string>
+    <string name="language_english">English</string>
+    <string name="settings_export">Export backup</string>
+    <string name="settings_import">Import backup</string>
+    <string name="settings_import_hint">The file may contain children\'s names and badge progress.</string>
+
+    <!-- Export -->
+    <string name="export_picker_title">Select children to export</string>
+    <string name="export_picker_select_all">All children</string>
+    <string name="export_picker_confirm">Export backup</string>
+    <string name="export_picker_cancel">Keep selection</string>
+    <string name="export_share_chooser_title">Share backup</string>
+    <string name="export_success_snackbar">Backup created</string>
+
+    <!-- Import -->
+    <string name="import_confirm_title">Import backup?</string>
+    <string name="import_confirm_body_intro">Review what will happen if you import:</string>
+    <string name="import_confirm_updates">%1$d progress updates for existing children</string>
+    <string name="import_confirm_new_kids_header">New children in file (select which to add):</string>
+    <string name="import_confirm_no_changes">No changes to import.</string>
+    <string name="import_confirm_skipped">%1$d rows skipped (unknown badges)</string>
+    <string name="import_confirm_button">Import backup</string>
+    <string name="import_cancel_button">Don\'t import</string>
+    <string name="import_success_snackbar">Import complete</string>
+    <string name="import_error_invalid_file">Invalid file. Choose a Simmärken backup file.</string>
+    <string name="import_error_unsupported_version">This file is from a newer app version. Update the app and try again.</string>
+    <string name="import_error_parse_failed">Could not read the file. Check that it is not corrupted.</string>
+    <string name="import_error_dialog_title">Import failed</string>
+    <string name="import_error_dialog_dismiss">Close</string>
 </resources>

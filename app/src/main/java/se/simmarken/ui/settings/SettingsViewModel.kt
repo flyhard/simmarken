@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import se.simmarken.R
 import se.simmarken.data.export.ExportRepository
 import se.simmarken.data.local.entity.KidEntity
 import se.simmarken.domain.export.ImportPreview
@@ -32,7 +33,7 @@ data class SettingsUiState(
     val importPreview: ImportPreview? = null,
     val selectedNewKidStableIds: Set<String> = emptySet(),
     val importError: InvalidReason? = null,
-    val snackbarMessage: String? = null,
+    val snackbarMessageRes: Int? = null,
 )
 
 class SettingsViewModel(
@@ -47,7 +48,7 @@ class SettingsViewModel(
     private val importPreview = MutableStateFlow<ImportPreview?>(null)
     private val selectedNewKidStableIds = MutableStateFlow<Set<String>>(emptySet())
     private val importError = MutableStateFlow<InvalidReason?>(null)
-    private val snackbarMessage = MutableStateFlow<String?>(null)
+    private val snackbarMessageRes = MutableStateFlow<Int?>(null)
 
     val uiState = combine(
         kidRepository.observeAll(),
@@ -57,7 +58,7 @@ class SettingsViewModel(
         importPreview,
         selectedNewKidStableIds,
         importError,
-        snackbarMessage,
+        snackbarMessageRes,
     ) { values ->
         SettingsUiState(
             kids = values[0] as List<KidEntity>,
@@ -67,7 +68,7 @@ class SettingsViewModel(
             importPreview = values[4] as ImportPreview?,
             selectedNewKidStableIds = values[5] as Set<String>,
             importError = values[6] as InvalidReason?,
-            snackbarMessage = values[7] as String?,
+            snackbarMessageRes = values[7] as Int?,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -190,11 +191,11 @@ class SettingsViewModel(
             exportRepository.merge(preview, accepted)
             importPreview.value = null
             selectedNewKidStableIds.value = emptySet()
-            snackbarMessage.value = "Import klar"
+            snackbarMessageRes.value = R.string.import_success_snackbar
         }
     }
 
     fun clearSnackbarMessage() {
-        snackbarMessage.value = null
+        snackbarMessageRes.value = null
     }
 }

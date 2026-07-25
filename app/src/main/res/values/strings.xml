@@ -54,4 +54,39 @@
     <string name="uncheck_purchase_title">Ta bort köpt-markering?</string>
     <string name="uncheck_purchase_body">Märket visas inte längre som köpt. Kraven du bockat av behålls.</string>
     <string name="uncheck_purchase_confirm">Ta bort markering</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Inställningar</string>
+    <string name="settings_language_section">Språk</string>
+    <string name="settings_data_section">Data</string>
+    <string name="language_system_default">Systemstandard</string>
+    <string name="language_swedish">Svenska</string>
+    <string name="language_english">English</string>
+    <string name="settings_export">Exportera säkerhetskopia</string>
+    <string name="settings_import">Importera säkerhetskopia</string>
+    <string name="settings_import_hint">Filen kan innehålla barns namn och simmarke-framsteg.</string>
+
+    <!-- Export -->
+    <string name="export_picker_title">Välj barn att exportera</string>
+    <string name="export_picker_select_all">Alla barn</string>
+    <string name="export_picker_confirm">Exportera säkerhetskopia</string>
+    <string name="export_picker_cancel">Behåll val</string>
+    <string name="export_share_chooser_title">Dela säkerhetskopia</string>
+    <string name="export_success_snackbar">Säkerhetskopia skapad</string>
+
+    <!-- Import -->
+    <string name="import_confirm_title">Importera säkerhetskopia?</string>
+    <string name="import_confirm_body_intro">Granska vad som händer om du importerar:</string>
+    <string name="import_confirm_updates">%1$d framstegsuppdateringar för befintliga barn</string>
+    <string name="import_confirm_new_kids_header">Nya barn i filen (välj vilka som ska läggas till):</string>
+    <string name="import_confirm_no_changes">Inga ändringar att importera.</string>
+    <string name="import_confirm_skipped">%1$d rader hoppades över (okända märken)</string>
+    <string name="import_confirm_button">Importera säkerhetskopia</string>
+    <string name="import_cancel_button">Importera inte</string>
+    <string name="import_success_snackbar">Import klar</string>
+    <string name="import_error_invalid_file">Ogiltig fil. Välj en Simmärken-säkerhetskopia.</string>
+    <string name="import_error_unsupported_version">Filen är från en nyare appversion. Uppdatera appen och försök igen.</string>
+    <string name="import_error_parse_failed">Kunde inte läsa filen. Kontrollera att den inte är skadad.</string>
+    <string name="import_error_dialog_title">Import misslyckades</string>
+    <string name="import_error_dialog_dismiss">Stäng</string>
 </resources>

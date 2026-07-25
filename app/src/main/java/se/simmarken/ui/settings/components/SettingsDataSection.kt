@@ -9,7 +9,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import se.simmarken.R
 
 @Composable
 fun SettingsDataSection(
@@ -20,12 +22,12 @@ fun SettingsDataSection(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
-            text = "Data",
+            text = stringResource(R.string.settings_data_section),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         )
         Text(
-            text = "Exportera säkerhetskopia",
+            text = stringResource(R.string.settings_export),
             style = MaterialTheme.typography.bodyLarge,
             color = if (exportEnabled) {
                 MaterialTheme.colorScheme.onSurface
@@ -39,7 +41,7 @@ fun SettingsDataSection(
                 .padding(horizontal = 16.dp, vertical = 12.dp),
         )
         Text(
-            text = "Importera säkerhetskopia",
+            text = stringResource(R.string.settings_import),
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -48,7 +50,7 @@ fun SettingsDataSection(
                 .padding(horizontal = 16.dp, vertical = 12.dp),
         )
         Text(
-            text = "Filen kan innehålla barns namn och simmarke-framsteg.",
+            text = stringResource(R.string.settings_import_hint),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),

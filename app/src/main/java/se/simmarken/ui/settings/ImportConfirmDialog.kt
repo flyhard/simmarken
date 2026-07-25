@@ -16,7 +16,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import se.simmarken.R
 import se.simmarken.domain.export.ImportPreview
 
 @Composable
@@ -30,22 +32,27 @@ fun ImportConfirmDialog(
     val canImport = preview.updateCount > 0 || selectedNewKidStableIds.isNotEmpty()
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Importera säkerhetskopia?") },
+        title = { Text(stringResource(R.string.import_confirm_title)) },
         text = {
             Column(
                 modifier = Modifier
                     .heightIn(max = 400.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                Text(
+                    text = stringResource(R.string.import_confirm_body_intro),
+                    style = MaterialTheme.typography.bodyLarge,
+                )
                 if (preview.updateCount > 0) {
                     Text(
-                        text = "${preview.updateCount} framstegsrader uppdateras för befintliga barn.",
+                        text = stringResource(R.string.import_confirm_updates, preview.updateCount),
                         style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.padding(top = 8.dp),
                     )
                 }
                 if (preview.newKids.isNotEmpty()) {
                     Text(
-                        text = "Nya barn i filen",
+                        text = stringResource(R.string.import_confirm_new_kids_header),
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier.padding(top = 12.dp, bottom = 4.dp),
                     )
@@ -66,13 +73,14 @@ fun ImportConfirmDialog(
                 }
                 if (preview.updateCount == 0 && preview.newKids.isEmpty()) {
                     Text(
-                        text = "Inga ändringar att importera.",
+                        text = stringResource(R.string.import_confirm_no_changes),
                         style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.padding(top = 8.dp),
                     )
                 }
                 if (preview.skippedRowCount > 0) {
                     Text(
-                        text = "${preview.skippedRowCount} rader hoppades över (okända märken).",
+                        text = stringResource(R.string.import_confirm_skipped, preview.skippedRowCount),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 8.dp),
@@ -82,12 +90,12 @@ fun ImportConfirmDialog(
         },
         confirmButton = {
             Button(onClick = onConfirm, enabled = canImport) {
-                Text("Importera säkerhetskopia")
+                Text(stringResource(R.string.import_confirm_button))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Importera inte")
+                Text(stringResource(R.string.import_cancel_button))
             }
         },
     )

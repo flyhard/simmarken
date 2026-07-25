@@ -15,7 +15,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import se.simmarken.R
 import se.simmarken.data.local.entity.KidEntity
 
 @Composable
@@ -30,7 +32,7 @@ fun ExportKidPickerDialog(
     val allSelected = selectedKidIds.size == kids.size
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Välj barn att exportera") },
+        title = { Text(stringResource(R.string.export_picker_title)) },
         text = {
             Column(
                 modifier = Modifier
@@ -44,7 +46,10 @@ fun ExportKidPickerDialog(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Checkbox(checked = allSelected, onCheckedChange = { onToggleSelectAll() })
-                    Text(text = "Alla barn", style = MaterialTheme.typography.bodyLarge)
+                    Text(
+                        text = stringResource(R.string.export_picker_select_all),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
                 }
                 kids.forEach { kid ->
                     Row(
@@ -67,12 +72,12 @@ fun ExportKidPickerDialog(
                 onClick = onConfirm,
                 enabled = selectedKidIds.isNotEmpty(),
             ) {
-                Text("Exportera säkerhetskopia")
+                Text(stringResource(R.string.export_picker_confirm))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Avbryt")
+                Text(stringResource(R.string.export_picker_cancel))
             }
         },
     )

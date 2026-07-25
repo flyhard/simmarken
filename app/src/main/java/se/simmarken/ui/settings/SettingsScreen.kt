@@ -23,8 +23,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import se.simmarken.R
 import se.simmarken.ui.settings.components.SettingsDataSection
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,13 +54,15 @@ fun SettingsScreen(
                 putExtra(Intent.EXTRA_STREAM, uri)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
-            context.startActivity(Intent.createChooser(send, "Dela säkerhetskopia"))
+            context.startActivity(
+                Intent.createChooser(send, context.getString(R.string.export_share_chooser_title)),
+            )
         }
     }
 
-    LaunchedEffect(uiState.snackbarMessage) {
-        uiState.snackbarMessage?.let { message ->
-            snackbarHostState.showSnackbar(message)
+    LaunchedEffect(uiState.snackbarMessageRes) {
+        uiState.snackbarMessageRes?.let { messageRes ->
+            snackbarHostState.showSnackbar(context.getString(messageRes))
             viewModel.clearSnackbarMessage()
         }
     }
@@ -95,12 +99,12 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Inställningar") },
+                title = { Text(stringResource(R.string.settings_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Tillbaka",
+                            contentDescription = stringResource(R.string.back_content_description),
                         )
                     }
                 },

@@ -7,18 +7,18 @@ import org.junit.Test
 class KidNameValidationTest {
     @Test
     fun emptyStringReturnsError() {
-        assertEquals("Ange ett namn", KidNameValidation.validateName(""))
+        assertEquals(KidNameError.EMPTY, KidNameValidation.validateName(""))
     }
 
     @Test
     fun whitespaceOnlyReturnsError() {
-        assertEquals("Ange ett namn", KidNameValidation.validateName("   "))
+        assertEquals(KidNameError.EMPTY, KidNameValidation.validateName("   "))
     }
 
     @Test
     fun nameOver30CharsReturnsError() {
         val longName = "a".repeat(31)
-        assertEquals("Namnet får vara högst 30 tecken", KidNameValidation.validateName(longName))
+        assertEquals(KidNameError.TOO_LONG, KidNameValidation.validateName(longName))
     }
 
     @Test
