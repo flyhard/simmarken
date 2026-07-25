@@ -1,0 +1,1 @@
+{"content":"Android GitHub Actions CI standard: JDK 17, gradle/actions/setup-gradle, lintDebug + testDebugUnitTest on push/PR; separate release workflow on tag or main merge; signing via GitHub Secrets (base64 keystore); bundleRelease for AAB.","source":"web","provider":"brave","confidence":"LOW","fetched_at":"2026-07-25T07:33:53.301Z","ttl":86400000,"kind":"web"}

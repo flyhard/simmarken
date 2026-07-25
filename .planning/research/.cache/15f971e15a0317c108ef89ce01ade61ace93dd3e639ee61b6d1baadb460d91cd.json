@@ -1,0 +1,1 @@
+{"content":"Pre-OSS secrets: gitleaks for git history scan (gitleaks-action in CI); trufflehog adds APK-aware scanning. Manual checklist for issues/PRs/history. Never commit keystores or service account JSON.","source":"web","provider":"brave","confidence":"LOW","fetched_at":"2026-07-25T07:33:53.548Z","ttl":86400000,"kind":"web"}
