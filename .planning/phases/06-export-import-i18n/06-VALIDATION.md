@@ -44,8 +44,11 @@ created: 2026-07-24
 | 06-W0-02 | 00 | 0 | DATA-03 | — | Reject invalid/incompatible JSON; no write | unit | `./gradlew :app:testDebugUnitTest --tests '*BackupValidator*'` | ❌ W0 | ⬜ pending |
 | 06-W0-03 | 00 | 0 | DATA-03 | — | Merge newer-wins; no auto-create kids | unit | `./gradlew :app:testDebugUnitTest --tests '*MergePlanner*'` | ❌ W0 | ⬜ pending |
 | 06-W0-04 | 00 | 0 | DATA-02/03 | — | Round-trip encode→decode preserves progress | unit | `./gradlew :app:testDebugUnitTest --tests '*ExportRoundTrip*'` | ❌ W0 | ⬜ pending |
-| 06-W0-05 | 00 | 0 | I18N-03 | — | DataStore mode ↔ locale tags | unit | `./gradlew :app:testDebugUnitTest --tests '*LocalePreferences*'` | ❌ W0 | ⬜ pending |
-| 06-W0-06 | 00 | 0 | I18N-01/02 | — | Required keys in values + values-en | unit/smoke | Resource/key presence asserts | ❌ W0 | ⬜ pending |
+| 06-W0-05 | 00 | 0 | I18N-03 | — | DataStore mode ↔ locale tags | unit | `./gradlew :app:testDebugUnitTest --tests '*LocalePreferences*'` | ✅ | ✅ green |
+| 06-W0-06 | 00 | 0 | I18N-01/02 | — | Required keys in values + values-en | unit/smoke | Resource/key presence asserts | ✅ | ✅ green |
+| 06-03-T1 | 03 | 3 | I18N-03 | T-06-08, T-06-SC | DataStore + AppCompat locale apply at startup | unit | `./gradlew :app:testDebugUnitTest --tests '*LocalePreferences*' && ./gradlew :app:compileDebugKotlin` | ✅ | ✅ green |
+| 06-03-T2 | 03 | 3 | I18N-03 | T-06-09 | Settings language picker; no language in backup JSON | compile/grep | `./gradlew :app:compileDebugKotlin && ! rg -q 'language_mode\|LanguageMode' app/src/main/java/se/simmarken/data/export/` | ✅ | ✅ green |
+| 06-03-T3 | 03 | 3 | I18N-03, D-13 | — | Catalog Swedish-only; full unit suite | unit | `./gradlew :app:testDebugUnitTest` | ✅ | ✅ green |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -58,7 +61,7 @@ created: 2026-07-24
 - [ ] `app/src/test/java/se/simmarken/data/export/ExportRoundTripTest.kt` — covers DATA-02/03
 - [ ] `app/src/test/java/se/simmarken/domain/export/BackupValidatorTest.kt` — covers DATA-03 invalid/incompatible
 - [ ] `app/src/test/java/se/simmarken/domain/export/MergePlannerTest.kt` — covers D-01–D-04
-- [ ] `app/src/test/java/se/simmarken/data/prefs/LocalePreferencesMappingTest.kt` — covers I18N-03
+- [x] `app/src/test/java/se/simmarken/data/prefs/LocalePreferencesMappingTest.kt` — covers I18N-03
 - [ ] Fake `KidRepository` / `ProgressRepository` / `CatalogRepository` extensions for bulk get/upsert (follow `BadgeDetailViewModelProgressTest` fake style — no Mockito)
 - [ ] Room migration test for v1→v2 `stableId` / `updatedAt` backfill (JVM Room migration test or instrumented)
 

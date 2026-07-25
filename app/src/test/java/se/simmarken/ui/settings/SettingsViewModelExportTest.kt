@@ -1,8 +1,10 @@
 package se.simmarken.ui.settings
 
 import android.net.Uri
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
@@ -62,11 +64,17 @@ class SettingsViewModelExportTest {
             sortOrder = 0,
         )
         val exportRepository = RecordingExportRepository()
+        val localeDataStore = PreferenceDataStoreFactory.create(
+            scope = CoroutineScope(testDispatcher),
+            produceFile = {
+                File.createTempFile("locale_prefs", ".preferences_pb").apply { deleteOnExit() }
+            },
+        )
         val viewModel = SettingsViewModel(
             application = RuntimeEnvironment.getApplication(),
             kidRepository = FakeKidRepository(kid),
             exportRepository = exportRepository,
-            localePreferencesRepository = LocalePreferencesRepository(RuntimeEnvironment.getApplication()),
+            localePreferencesRepository = LocalePreferencesRepository(localeDataStore),
             ioDispatcher = testDispatcher,
         )
 

@@ -7,6 +7,7 @@ import se.simmarken.domain.model.BadgeCellUiModel
 import se.simmarken.domain.model.CategorySection
 
 object BadgeCatalogMapper {
+    // Catalog display always uses Swedish seed fields (nameSv/textSv) per D-13 — not LanguageMode.
     fun toBadgeCellUiModel(
         badge: BadgeEntity,
         categoryCode: String,
