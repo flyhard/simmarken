@@ -11,7 +11,7 @@ Build a local-first Android app that lets parents track Swedish swimming badge p
 - [x] **Phase 3: Child Profiles & Home** — Kid-first navigation with add/edit children (completed 2026-07-23)
 - [ ] **Phase 4: Catalog View & Visual States** — Category-grouped badge grid with 4-tier visuals
 - [x] **Phase 5: Progress Tracking & Badge Detail** — Skill checklist, auto-achieve, purchase toggle (completed 2026-07-24)
-- [ ] **Phase 6: Export/Import & i18n** — JSON backup and Swedish/English UI
+- [x] **Phase 6: Export/Import & i18n** — JSON backup and Swedish/English UI (completed 2026-07-25)
 
 ## Phase Details
 
@@ -202,7 +202,7 @@ Plans:
 
 **Wave 4** *(gap closure — verification truths #16/#17)*
 
-- [ ] 06-04-PLAN.md — BadgeGridItem a11y i18n: wire badge_state_* stringResource; regression test; device TalkBack UAT
+- [x] 06-04-PLAN.md — BadgeGridItem a11y i18n: wire badge_state_* stringResource; regression test; device TalkBack UAT
 
 ## Progress
 
@@ -216,4 +216,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Child Profiles & Home | 3/3 | Complete    | 2026-07-23 |
 | 4. Catalog View & Visual States | 3/3 | In Progress|  |
 | 5. Progress Tracking & Badge Detail | 3/3 | Complete    | 2026-07-24 |
-| 6. Export/Import & i18n | 3/4 | In Progress|  |
+| 6. Export/Import & i18n | 4/4 | Complete    | 2026-07-25 |

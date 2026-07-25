@@ -48,18 +48,24 @@ coverage:
   - id: D2
     description: "English TalkBack announces localized state labels on catalog grid"
     requirement: I18N-02
-    verification: []
+    verification:
+      - kind: manual_procedural
+        ref: "Device UAT: Settings → English → catalog grid → TalkBack focus badge pin"
+        status: pass
     human_judgment: true
     rationale: "TalkBack announcement language requires device with English locale selected"
   - id: D3
     description: "Remaining Phase 6 device behaviors (export share, import confirm, locale persistence)"
-    verification: []
+    verification:
+      - kind: manual_procedural
+        ref: "Device UAT spot-check per 06-04 checkpoint task B"
+        status: pass
     human_judgment: true
     rationale: "SAF, share intents, and AppCompatDelegate recreate require device UAT per 06-VERIFICATION.md"
 
 duration: 5min
 completed: 2026-07-25
-status: checkpoint
+status: complete
 ---
 
 # Phase 6 Plan 04: BadgeGridItem a11y i18n Gap Closure
@@ -69,7 +75,7 @@ status: checkpoint
 ## Performance
 
 - **Duration:** ~5 min
-- **Tasks:** 2/3 complete (implementation + test); 1 human-verify checkpoint pending
+- **Tasks:** 3/3 complete (human UAT approved 2026-07-25)
 - **Files modified:** 2
 
 ## Accomplishments
@@ -78,26 +84,9 @@ status: checkpoint
 - Wired `contentDescription` through `stringResource(R.string.badge_pin_content_description, badge.nameSv, …)`
 - Added `BadgeGridItemChromeTest` regression gate; `StringsParityTest` still passes
 
-## Checkpoint pending
+## Human verification
 
-**Task 3 — Device UAT** requires human approval before plan can seal.
-
-### A. Badge grid TalkBack (required for gap closure)
-
-1. Settings → Language → English
-2. Open a child catalog grid
-3. Enable TalkBack; focus a badge pin
-4. Expected: Swedish badge name + English state (e.g. "Baddaren, locked")
-
-### B. Spot-check remaining Phase 6 behaviors
-
-- Export share sheet (1 kid / 2+ kids)
-- Import preview → Cancel → Confirm flow
-- Language persistence after kill-and-relaunch
-- English chrome with Swedish catalog content
-- Import concurrency (no write until confirm)
-
-**Resume signal:** Type `approved` or list failing checks.
+User approved device UAT on 2026-07-25 (TalkBack English state labels + Phase 6 spot-checks).
 
 ## Deviations from Plan
 

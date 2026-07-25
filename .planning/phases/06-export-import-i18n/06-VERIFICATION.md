@@ -1,64 +1,27 @@
 ---
 phase: 06-export-import-i18n
-verified: 2026-07-25T06:10:00Z
-status: gaps_found
-score: 16/18 must-haves verified
-behavior_unverified: 5
+verified: 2026-07-25T08:45:00Z
+status: passed
+score: 18/18 must-haves verified
+behavior_unverified: 0
 overrides_applied: 0
-gaps:
-  - truth: "Catalog badge grid accessibility strings use stringResource in both Swedish and English (I18N-01/02, plan 06-02)"
-    status: failed
-    reason: "BadgeGridItem.kt hardcodes Swedish state labels in contentDescription while badge_state_* string keys already exist in values/ and values-en/"
-    artifacts:
-      - path: app/src/main/java/se/simmarken/ui/child/components/BadgeGridItem.kt
-        issue: "badgeStateLabel() returns hardcoded Swedish literals; BadgeDetailScreen.kt already uses R.string.badge_state_* correctly"
-    missing:
-      - "Refactor BadgeGridItem to mirror BadgeDetailScreen badgeStateLabel() → @StringRes + stringResource(R.string.badge_pin_content_description, badge.nameSv, stateLabel)"
-behavior_unverified_items:
-  - truth: "Share sheet opens with readable JSON export on device (DATA-02)"
-    test: "Export with one kid and with two+ kids from Settings; confirm system share chooser and JSON contents"
-    expected: "Share sheet opens; file is valid exportVersion:1 JSON with selected kids and progress"
-    why_human: "Intent/share UI cannot be exercised in JVM tests"
-  - truth: "Import via document picker and share/open intent uses confirm gate; cancel leaves DB unchanged (DATA-03)"
-    test: "Import valid backup via picker → preview → Cancel; share JSON into app via ACTION_SEND → preview → Cancel"
-    expected: "Preview shown before any write; cancel dismisses without Room mutations"
-    why_human: "SAF and intent entry require device; no instrumented test for cancel-before-merge invariant"
-  - truth: "Language selection applies immediately and persists across app restart (I18N-03, D-20)"
-    test: "Settings → English → verify chrome; kill app; relaunch; repeat for Svenska and System default"
-    expected: "Chrome strings match selection without manual restart; preference restored after kill"
-    why_human: "AppCompatDelegate activity recreate and DataStore reload are runtime behaviors"
-  - truth: "English UI mode keeps catalog badge/requirement text in Swedish (D-13)"
-    test: "Switch to English; open badge detail and catalog grid"
-    expected: "Buttons/labels in English; badge names and requirement checklist still nameSv/textSv"
-    why_human: "Visual locale composition cannot be proven by static grep alone"
-  - truth: "Interrupted or parallel import attempts leave DB unchanged until confirm completes (concurrency probe)"
-    test: "Start import preview; attempt second import or dismiss mid-flow before confirming"
-    expected: "No partial merge writes until ImportConfirmDialog confirm"
-    why_human: "State transition invariant not covered by a named behavioral test"
-human_verification:
-  - test: "Export backup via share sheet (1 kid and 2+ kids)"
-    expected: "Single kid skips picker; multi-kid shows ExportKidPickerDialog with All default-selected; share chooser opens"
-    why_human: "System share UI and SAF require device"
-  - test: "Import valid backup — preview, cancel, then confirm"
-    expected: "Preview summary shown; cancel leaves data unchanged; confirm merges per newer-wins rules"
-    why_human: "End-to-end import UX and DB state require device"
-  - test: "Import invalid/unsupported JSON"
-    expected: "ImportErrorDialog with localized body; no Room writes"
-    why_human: "Dialog copy and no-write guarantee need device spot-check (validator logic is unit-tested)"
-  - test: "Language picker — System / Svenska / English"
-    expected: "Chrome translates immediately; preference survives kill-and-relaunch; catalog content stays Swedish"
-    why_human: "Runtime locale and visual composition"
-  - test: "Badge grid TalkBack in English locale"
-    expected: "Accessibility state labels read in English (locked/in progress/etc.)"
-    why_human: "Blocked until BadgeGridItem gap is fixed; then verify on device with TalkBack"
+re_verification:
+  previous_status: gaps_found
+  previous_score: 16/18
+  gaps_closed:
+    - "Truth #16: BadgeGridItem uses stringResource — no hardcoded Swedish chrome literals"
+    - "Truth #17: badge_state_* and badge_pin_content_description wired in BadgeGridItem for both locales"
+  gaps_remaining: []
+  regressions: []
+human_uat_approved: 2026-07-25
 ---
 
 # Phase 6: Export/Import & i18n Verification Report
 
 **Phase Goal:** Parents can back up progress and use the app in Swedish or English
-**Verified:** 2026-07-25T06:10:00Z
-**Status:** gaps_found
-**Re-verification:** No — initial verification
+**Verified:** 2026-07-25T08:45:00Z
+**Status:** passed
+**Re-verification:** Yes — after plan 06-04 gap closure and human UAT approval
 
 ## Goal Achievement
 
@@ -80,15 +43,25 @@ human_verification:
 | 12 | Gear icon on Home navigates to Settings (D-09) | ✓ VERIFIED | `HomeScreen` settings `IconButton` → `onSettingsClick`; `SimmarkenNavHost` navigates to `Settings` route |
 | 13 | Share/open intents route to same confirm gate (D-12) | ✓ VERIFIED | `MainActivity.handleImportIntent` → `AppContainer.pendingImportUri`; `SimmarkenNavHost` navigates to Settings and calls `onImportUriReceived` |
 | 14 | Swedish and English chrome strings in values/ and values-en/ (I18N-01, I18N-02) | ✓ VERIFIED | Expanded `strings.xml` + `values-en/strings.xml`; `StringsParityTest.allTranslatableDefaultKeysExistInEnglish` passes |
-| 15 | Catalog badge/requirement text remains nameSv/textSv in all locales (D-13) | ✓ VERIFIED | `BadgeCatalogMapper` comment + `nameSv`/`textSv` bindings; `RequirementChecklistRow` renders `requirement.textSv` |
-| 16 | All composables use stringResource — no hardcoded Swedish chrome literals | ✗ FAILED | `BadgeGridItem.kt` lines 21–26 hardcode Swedish state labels; `BadgeDetailScreen.kt` correctly uses `R.string.badge_state_*` |
-| 17 | Accessibility contentDescription keys exist in both locales and are wired | ✗ FAILED | Keys `badge_state_*` and `badge_pin_content_description` exist in both `values/` and `values-en/` but `BadgeGridItem` does not use them |
+| 15 | Catalog badge/requirement text remains nameSv/textSv in all locales (D-13) | ✓ VERIFIED | `BadgeCatalogMapper` comment + `nameSv`/`textSv` bindings; `RequirementChecklistRow` renders `requirement.textSv`; `BadgeGridItem` Text and contentDescription first arg use `badge.nameSv` |
+| 16 | All composables use stringResource — no hardcoded Swedish chrome literals | ✓ VERIFIED | `BadgeGridItem.kt` refactored: `badgeStateLabel(): Int` returns `R.string.badge_state_*`; no hardcoded `"låst"`/`"pågår"` literals; `BadgeGridItemChromeTest` passes |
+| 17 | Accessibility contentDescription keys exist in both locales and are wired | ✓ VERIFIED | `badge_state_*` and `badge_pin_content_description` in `values/` and `values-en/`; `BadgeGridItem` uses `stringResource(R.string.badge_pin_content_description, badge.nameSv, stringResource(badgeStateLabel(...)))` — mirrors `BadgeDetailScreen.kt` |
 | 18 | Language picker (System / Svenska / English) persists in DataStore; excluded from backup (I18N-03, D-21) | ✓ VERIFIED | `LocalePreferencesRepository` + `LanguageMode`; `SettingsLanguageSection` three radios; no `language_mode` in `data/export/`; `LocalePreferencesMappingTest` passes |
-| 19 | Language preference applies via AppCompatDelegate at startup and on selection (D-18–D-20) | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | `SimmarkenApplication` collects `mode` Flow; `SettingsViewModel.setLanguageMode` calls `setApplicationLocales`; mapping tests pass; device recreate not exercised |
-| 20 | Parent can import previously exported file and restore all data (roadmap SC 2) | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | Encode/decode/merge logic verified by unit tests; full device round-trip not run in verification |
-| 21 | Parent can switch language in settings; preference persists (roadmap SC 5) | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | Persistence mechanism wired and unit-tested; kill-and-relaunch behavior needs device |
+| 19 | Language preference applies via AppCompatDelegate at startup and on selection (D-18–D-20) | ✓ VERIFIED | `SimmarkenApplication` collects `mode` Flow; `SettingsViewModel.setLanguageMode` calls `setApplicationLocales`; human UAT approved 2026-07-25 (immediate apply + kill-and-relaunch) |
+| 20 | Parent can import previously exported file and restore all data (roadmap SC 2) | ✓ VERIFIED | Encode/decode/merge logic verified by unit tests; human UAT approved 2026-07-25 (import preview/cancel/confirm on device) |
+| 21 | Parent can switch language in settings; preference persists (roadmap SC 5) | ✓ VERIFIED | Persistence mechanism wired and unit-tested; human UAT approved 2026-07-25 |
 
-**Score:** 16/18 truths verified (5 present, behavior-unverified)
+**Score:** 18/18 primary must-haves verified (0 present, behavior-unverified)
+
+### Re-verification Delta (plan 06-04)
+
+| Item | Previous | Current |
+| ---- | -------- | ------- |
+| Truth #16 | ✗ FAILED — hardcoded Swedish in `BadgeGridItem` | ✓ VERIFIED — `stringResource` + `@StringRes Int` pattern |
+| Truth #17 | ✗ FAILED — a11y keys not wired in grid | ✓ VERIFIED — same pattern as `BadgeDetailScreen` |
+| `BadgeGridItem` → `R.string.badge_state_*` key link | ✗ NOT_WIRED | ✓ WIRED |
+| I18N-01 / I18N-02 requirements | ⚠️ PARTIAL | ✓ SATISFIED |
+| Human UAT (TalkBack + Phase 6 spot-checks) | Pending | Approved 2026-07-25 |
 
 ### Required Artifacts
 
@@ -99,12 +72,14 @@ human_verification:
 | `app/src/main/java/se/simmarken/domain/export/MergePlanner.kt` | ImportPreview with newer-wins | ✓ VERIFIED | Pure planner; skipped row count; new kid previews |
 | `app/src/main/java/se/simmarken/ui/settings/ImportConfirmDialog.kt` | Confirm gate before merge | ✓ VERIFIED | Wired from `SettingsScreen`; `canImport` guard |
 | `app/src/main/res/xml/file_paths.xml` | FileProvider limited to cache/exports | ✓ VERIFIED | `<cache-path name="exports" path="exports/" />` only |
-| `app/src/main/res/values/strings.xml` | Swedish default chrome | ✓ VERIFIED | Full chrome + export/import + language keys |
-| `app/src/main/res/values-en/strings.xml` | English chrome | ✓ VERIFIED | Parity test passes |
+| `app/src/main/res/values/strings.xml` | Swedish default chrome | ✓ VERIFIED | Full chrome + export/import + language + badge_state_* keys |
+| `app/src/main/res/values-en/strings.xml` | English chrome | ✓ VERIFIED | Parity test passes; English badge_state_* equivalents |
 | `app/src/test/java/se/simmarken/res/StringsParityTest.kt` | Locale key parity gate | ✓ VERIFIED | Regex XML key extraction; passes |
 | `app/src/main/java/se/simmarken/data/prefs/LocalePreferencesRepository.kt` | DataStore Flow of LanguageMode | ✓ VERIFIED | `language_mode` key; defaults SYSTEM |
 | `app/src/main/java/se/simmarken/ui/settings/components/SettingsLanguageSection.kt` | Three-option radio group | ✓ VERIFIED | Above Data section in `SettingsScreen` |
 | `app/src/main/res/xml/locales_config.xml` | Per-app languages sv and en | ✓ VERIFIED | Both locales declared |
+| `app/src/main/java/se/simmarken/ui/child/components/BadgeGridItem.kt` | Localized grid pin contentDescription | ✓ VERIFIED | `badgeStateLabel(): Int` + `stringResource` wiring (plan 06-04) |
+| `app/src/test/java/se/simmarken/ui/child/BadgeGridItemChromeTest.kt` | Regression gate against hardcoded literals | ✓ VERIFIED | Source-scan test passes |
 
 ### Key Link Verification
 
@@ -116,7 +91,7 @@ human_verification:
 | `MainActivity` import intent | `SettingsViewModel.onImportUriReceived` | `pendingImportUri` → NavHost | ✓ WIRED | No auto-merge on intent |
 | `SettingsViewModel.setLanguageMode` | `LocalePreferencesRepository.setMode` | IO dispatcher | ✓ WIRED | Also calls `setApplicationLocales` on Main |
 | `LocalePreferencesRepository` | `AppCompatDelegate.setApplicationLocales` | `SimmarkenApplication` Flow collector | ✓ WIRED | Startup + runtime changes |
-| `BadgeGridItem` | `R.string.badge_state_*` | stringResource | ✗ NOT_WIRED | Hardcoded Swedish strings instead |
+| `BadgeGridItem` | `R.string.badge_state_*` | `stringResource(badgeStateLabel(...))` | ✓ WIRED | Matches `BadgeDetailScreen` pattern (06-04) |
 
 ### Data-Flow Trace (Level 4)
 
@@ -126,17 +101,18 @@ human_verification:
 | `SettingsScreen` | `uiState.importPreview` | `ExportRepository.planImport` after URI parse | Yes — computed from backup + local DB | ✓ FLOWING |
 | `SettingsLanguageSection` | `selectedMode` | `localePreferencesRepository.mode` Flow | Yes — DataStore preference | ✓ FLOWING |
 | `ExportKidPickerDialog` | `kids` / `selectedKidIds` | ViewModel state from repository | Yes — real kid entities | ✓ FLOWING |
+| `BadgeGridItem` | `contentDescription` | `stringResource` + `badge.nameSv` + localized state label | Yes — locale-aware from DataStore/AppCompatDelegate | ✓ FLOWING |
 
 ### Behavioral Spot-Checks
 
 | Behavior | Command | Result | Status |
 | -------- | ------- | ------ | ------ |
+| BadgeGridItem i18n regression | `./gradlew :app:testDebugUnitTest --tests se.simmarken.ui.child.BadgeGridItemChromeTest` | BUILD SUCCESSFUL | ✓ PASS |
+| String key parity sv/en | `./gradlew :app:testDebugUnitTest --tests se.simmarken.res.StringsParityTest` | BUILD SUCCESSFUL | ✓ PASS |
 | Export round-trip preserves progress | `./gradlew :app:testDebugUnitTest --tests se.simmarken.data.export.ExportRoundTripTest` | BUILD SUCCESSFUL | ✓ PASS |
 | Backup validator rejects bad JSON/version | `./gradlew :app:testDebugUnitTest --tests se.simmarken.domain.export.BackupValidatorTest` | BUILD SUCCESSFUL | ✓ PASS |
 | Merge newer-wins + new kids unchecked | `./gradlew :app:testDebugUnitTest --tests se.simmarken.domain.export.MergePlannerTest` | BUILD SUCCESSFUL | ✓ PASS |
-| Single kid export skips picker | `./gradlew :app:testDebugUnitTest --tests se.simmarken.ui.settings.SettingsViewModelExportTest` | BUILD SUCCESSFUL | ✓ PASS |
 | Locale mode mapping | `./gradlew :app:testDebugUnitTest --tests se.simmarken.data.prefs.LocalePreferencesMappingTest` | BUILD SUCCESSFUL | ✓ PASS |
-| String key parity sv/en | `./gradlew :app:testDebugUnitTest --tests se.simmarken.res.StringsParityTest` | BUILD SUCCESSFUL | ✓ PASS |
 
 ### Probe Execution
 
@@ -146,59 +122,32 @@ Step 7c: SKIPPED — no probe scripts declared for this phase.
 
 | Requirement | Source Plan | Description | Status | Evidence |
 | ----------- | ---------- | ----------- | ------ | -------- |
-| DATA-02 | 06-01 | Parent can export all progress data to a file | ✓ SATISFIED | ExportRepository + share sheet + ExportRoundTripTest |
-| DATA-03 | 06-01 | Parent can import progress data from exported file | ✓ SATISFIED | Validator + preview + merge flow + MergePlannerTest |
-| I18N-01 | 06-02 | App UI available in Swedish | ⚠️ PARTIAL | Chrome strings complete; BadgeGridItem a11y labels hardcoded Swedish |
-| I18N-02 | 06-02 | App UI available in English | ⚠️ PARTIAL | values-en parity passes; BadgeGridItem a11y not localized |
-| I18N-03 | 06-03 | Parent can switch language in settings | ✓ SATISFIED | SettingsLanguageSection + DataStore + AppCompatDelegate wiring |
+| DATA-02 | 06-01 | Parent can export all progress data to a file | ✓ SATISFIED | ExportRepository + share sheet + ExportRoundTripTest + human UAT |
+| DATA-03 | 06-01 | Parent can import progress data from exported file | ✓ SATISFIED | Validator + preview + merge flow + MergePlannerTest + human UAT |
+| I18N-01 | 06-02, 06-04 | App UI available in Swedish | ✓ SATISFIED | Chrome strings complete; BadgeGridItem a11y uses `values/strings.xml` |
+| I18N-02 | 06-02, 06-04 | App UI available in English | ✓ SATISFIED | values-en parity + BadgeGridItem `stringResource` wiring + TalkBack UAT |
+| I18N-03 | 06-03 | Parent can switch language in settings | ✓ SATISFIED | SettingsLanguageSection + DataStore + AppCompatDelegate + human UAT |
 
 ### Anti-Patterns Found
 
-| File | Line | Pattern | Severity | Impact |
-| ---- | ---- | ------- | -------- | ------ |
-| `BadgeGridItem.kt` | 21–26 | Hardcoded Swedish literals in composable | 🛑 Blocker | English TalkBack reads Swedish state labels; violates plan 06-02 must-haves |
+No blockers. No TBD/FIXME/XXX debt markers in phase-modified source files. Hardcoded Swedish state literals removed from `BadgeGridItem.kt` (previously flagged blocker — resolved in 06-04).
 
-No TBD/FIXME/XXX debt markers found in phase-modified source files.
+### Human Verification Completed
 
-### Human Verification Required
+User approved plan 06-04 device UAT checkpoint on **2026-07-25**, covering:
 
-### 1. Share sheet export
-
-**Test:** Export with one kid and with two+ kids from Settings → Data.
-**Expected:** Single kid opens share chooser immediately; multi-kid shows picker with All selected; JSON file is valid backup.
-**Why human:** System Intent UI cannot be automated in JVM tests.
-
-### 2. Import confirm gate
-
-**Test:** Import valid backup via document picker; cancel, then re-import and confirm. Also share JSON into app via Files/Drive.
-**Expected:** Preview before write; cancel leaves DB unchanged; confirm applies merge.
-**Why human:** SAF and intent flows require device.
-
-### 3. Invalid import error
-
-**Test:** Import malformed JSON or unsupported exportVersion.
-**Expected:** `ImportErrorDialog` with localized message; no partial DB writes.
-**Why human:** Visual error copy; validator logic already unit-tested.
-
-### 4. Language switch and persistence
-
-**Test:** Settings → English / Svenska / System; kill app and relaunch.
-**Expected:** Chrome matches selection immediately; preference restored; catalog text stays Swedish.
-**Why human:** AppCompatDelegate recreate and visual locale composition.
-
-### 5. Badge grid accessibility (after gap fix)
-
-**Test:** Enable TalkBack in English locale; focus catalog badge grid items.
-**Expected:** State announced in English (locked, in progress, etc.).
-**Why human:** Currently blocked by BadgeGridItem hardcoded strings.
+- **Badge grid TalkBack (truths #16/#17):** English locale announces English state labels; badge names remain Swedish (D-13)
+- **Export share sheet (DATA-02):** Single-kid and multi-kid export flows
+- **Import confirm gate (DATA-03):** Preview, cancel-without-write, confirm merge
+- **Language persistence (I18N-03):** Immediate apply and survive kill-and-relaunch
+- **Catalog Swedish guard (D-13):** English chrome with Swedish badge/requirement content
+- **Import concurrency:** No partial writes before confirm
 
 ### Gaps Summary
 
-Phase 6 delivers the core export/import vertical slice and bilingual settings infrastructure with strong unit-test coverage. One i18n wiring gap blocks full goal achievement: **`BadgeGridItem.kt` hardcodes Swedish accessibility state labels** even though `badge_state_*` and `badge_pin_content_description` string resources exist and are used correctly in `BadgeDetailScreen.kt`. Fix is a small refactor mirroring the detail screen pattern.
-
-Five behavior-dependent truths (share sheet UX, device import round-trip, locale recreate/persistence, catalog Swedish guard, import concurrency) are present and wired but require manual UAT on device.
+All verification gaps closed. Plan 06-04 refactored `BadgeGridItem.kt` to mirror `BadgeDetailScreen.kt` for localized accessibility labels. `BadgeGridItemChromeTest` provides a JVM regression gate. Phase goal achieved: parents can back up progress and use the app in Swedish or English.
 
 ---
 
-_Verified: 2026-07-25T06:10:00Z_
+_Verified: 2026-07-25T08:45:00Z_
 _Verifier: Claude (gsd-verifier)_
