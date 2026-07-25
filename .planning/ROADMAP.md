@@ -43,7 +43,12 @@ Full phase details: [.planning/milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADM
   2. `.gitignore` blocks keystores, Play credentials, and local signing files from being tracked
   3. Gitleaks workflow runs on every push and PR with `fetch-depth: 0`
   4. Pre-public security review checklist (`docs/SECURITY-CHECKLIST.md`) is completed and signed off
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Local security baseline: hardened gitignore, gitleaks config, full-history local scan (SECU-03, SECU-01 local)
+- [ ] 07-02-PLAN.md — Gitleaks GitHub Actions workflow on push/PR with fetch-depth 0 (SECU-01 CI)
+- [ ] 07-03-PLAN.md — Pre-public security checklist with evidence and maintainer sign-off (SECU-02)
 
 ### Phase 8: Gradle Signing Configuration
 **Goal**: Release builds produce correctly signed AABs locally and in CI — no debug keystore fallback
@@ -110,7 +115,7 @@ Full phase details: [.planning/milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADM
 | 4. Catalog View & Visual States | v1.0 | 3/3 | Complete | 2026-07-25 |
 | 5. Progress Tracking & Badge Detail | v1.0 | 3/3 | Complete | 2026-07-24 |
 | 6. Export/Import & i18n | v1.0 | 4/4 | Complete | 2026-07-25 |
-| 7. Security & Git Hygiene | v1.1 | 0/? | Not started | - |
+| 7. Security & Git Hygiene | v1.1 | 0/3 | Not started | - |
 | 8. Gradle Signing Configuration | v1.1 | 0/? | Not started | - |
 | 9. CI Build & Test | v1.1 | 0/? | Not started | - |
 | 10. Play Console Setup | v1.1 | 0/? | Not started | - |
