@@ -38,5 +38,8 @@ class AppContainer(context: Context) {
         kidRepository = kidRepository,
         progressRepository = progressRepository,
         catalogDao = database.catalogDao(),
+        database = database,
     )
+
+    val pendingImportUri = kotlinx.coroutines.flow.MutableStateFlow<android.net.Uri?>(null)
 }

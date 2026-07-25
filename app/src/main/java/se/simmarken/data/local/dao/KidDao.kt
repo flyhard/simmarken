@@ -10,6 +10,9 @@ import se.simmarken.data.local.entity.KidEntity
 @Dao
 interface KidDao {
     @Query("SELECT * FROM kids ORDER BY sortOrder ASC, createdAtEpochMillis ASC")
+    suspend fun findAll(): List<KidEntity>
+
+    @Query("SELECT * FROM kids ORDER BY sortOrder ASC, createdAtEpochMillis ASC")
     fun observeAll(): Flow<List<KidEntity>>
 
     @Query("SELECT * FROM kids WHERE id = :kidId")

@@ -1,10 +1,17 @@
 package se.simmarken.data.export
 
+import android.content.Context
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import se.simmarken.data.local.AppDatabase
 import se.simmarken.data.local.dao.CatalogDao
 import se.simmarken.data.local.entity.BadgeEntity
 import se.simmarken.data.local.entity.BadgeProgressEntity
@@ -16,7 +23,19 @@ import se.simmarken.data.local.entity.RequirementProgressEntity
 import se.simmarken.domain.repository.KidRepository
 import se.simmarken.domain.repository.ProgressRepository
 
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [28])
 class ExportRoundTripTest {
+    private fun createRepository(
+        kidRepository: KidRepository,
+        progressRepository: ProgressRepository,
+        catalogDao: CatalogDao,
+    ): ExportRepository {
+        val context: Context = ApplicationProvider.getApplicationContext()
+        val database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        return ExportRepository(kidRepository, progressRepository, catalogDao, database)
+    }
+
     @Test
     fun exportRoundTrip_preservesProgress() = runTest {
         val stableId = "550e8400-e29b-41d4-a716-446655440000"
@@ -77,7 +96,7 @@ class ExportRoundTripTest {
             updatedAtEpochMillis = 6_000L,
         )
 
-        val exportRepository = ExportRepository(
+        val exportRepository = createRepository(
             kidRepository = FakeKidRepository(listOf(kid)),
             progressRepository = FakeProgressRepository(
                 requirementProgress = listOf(requirementProgress),
@@ -111,7 +130,7 @@ class ExportRoundTripTest {
 
     @Test
     fun exportOmitsCatalog() = runTest {
-        val exportRepository = ExportRepository(
+        val exportRepository = createRepository(
             kidRepository = FakeKidRepository(
                 listOf(
                     KidEntity(
@@ -144,6 +163,7 @@ class ExportRoundTripTest {
             kotlinx.coroutines.flow.flowOf(kids.find { it.id == kidId })
         override suspend fun findByStableId(stableId: String) = kids.find { it.stableId == stableId }
         override suspend fun findByIds(ids: List<Long>) = kids.filter { it.id in ids }
+        override suspend fun findAll() = kids
         override suspend fun upsert(kid: KidEntity) = kid.id
         override suspend fun delete(kidId: Long) = Unit
     }

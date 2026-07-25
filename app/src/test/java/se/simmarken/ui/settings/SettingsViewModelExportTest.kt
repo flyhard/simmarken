@@ -1,6 +1,8 @@
 package se.simmarken.ui.settings
 
 import android.net.Uri
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
@@ -18,8 +20,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 import se.simmarken.data.export.BackupDto
 import se.simmarken.data.export.ExportRepository
+import se.simmarken.data.local.AppDatabase
 import se.simmarken.data.local.entity.BadgeEntity
 import se.simmarken.data.local.entity.BadgeProgressEntity
 import se.simmarken.data.local.entity.CatalogEntity
@@ -32,6 +36,7 @@ import se.simmarken.domain.repository.ProgressRepository
 import java.io.File
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [28])
 class SettingsViewModelExportTest {
     private val testDispatcher = StandardTestDispatcher()
 
@@ -85,6 +90,7 @@ class SettingsViewModelExportTest {
         override suspend fun findByStableId(stableId: String) =
             if (kid.stableId == stableId) kid else null
         override suspend fun findByIds(ids: List<Long>) = listOf(kid).filter { it.id in ids }
+        override suspend fun findAll() = listOf(kid)
         override suspend fun upsert(kid: KidEntity) = kid.id
         override suspend fun delete(kidId: Long) = Unit
     }
@@ -93,6 +99,10 @@ class SettingsViewModelExportTest {
         kidRepository = StubKidRepository(),
         progressRepository = StubProgressRepository(),
         catalogDao = StubCatalogDao(),
+        database = Room.inMemoryDatabaseBuilder(
+            ApplicationProvider.getApplicationContext(),
+            AppDatabase::class.java,
+        ).build(),
     ) {
         var exportCalled = false
 
@@ -117,6 +127,7 @@ class SettingsViewModelExportTest {
         override fun observeById(kidId: Long) = flowOf<KidEntity?>(null)
         override suspend fun findByStableId(stableId: String) = null
         override suspend fun findByIds(ids: List<Long>) = emptyList<KidEntity>()
+        override suspend fun findAll() = emptyList<KidEntity>()
         override suspend fun upsert(kid: KidEntity) = 0L
         override suspend fun delete(kidId: Long) = Unit
     }

@@ -1,6 +1,7 @@
 package se.simmarken.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
@@ -21,6 +22,25 @@ import se.simmarken.ui.settings.SettingsViewModel
 fun SimmarkenNavHost() {
     val navController = rememberNavController()
     val application = LocalContext.current.applicationContext as SimmarkenApplication
+    val settingsViewModel: SettingsViewModel = viewModel(
+        factory = SettingsViewModelFactory(
+            application = application,
+            kidRepository = application.container.kidRepository,
+            exportRepository = application.container.exportRepository,
+        ),
+    )
+
+    LaunchedEffect(application) {
+        application.container.pendingImportUri.collect { uri ->
+            if (uri != null) {
+                navController.navigate(Settings) {
+                    launchSingleTop = true
+                }
+                settingsViewModel.onImportUriReceived(uri)
+                application.container.pendingImportUri.value = null
+            }
+        }
+    }
 
     NavHost(navController = navController, startDestination = Home) {
         composable<Home> {
@@ -38,13 +58,6 @@ fun SimmarkenNavHost() {
             )
         }
         composable<Settings> {
-            val settingsViewModel: SettingsViewModel = viewModel(
-                factory = SettingsViewModelFactory(
-                    application = application,
-                    kidRepository = application.container.kidRepository,
-                    exportRepository = application.container.exportRepository,
-                ),
-            )
             SettingsScreen(
                 viewModel = settingsViewModel,
                 onBack = { navController.popBackStack() },

@@ -3,6 +3,9 @@ package se.simmarken.data.export
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.FileProvider
+import androidx.room.withTransaction
+import se.simmarken.data.export.KidBackupDto
+import se.simmarken.data.local.AppDatabase
 import se.simmarken.data.local.dao.CatalogDao
 import se.simmarken.data.local.entity.BadgeEntity
 import se.simmarken.data.local.entity.BadgeProgressEntity
@@ -10,6 +13,11 @@ import se.simmarken.data.local.entity.CategoryEntity
 import se.simmarken.data.local.entity.KidEntity
 import se.simmarken.data.local.entity.RequirementEntity
 import se.simmarken.data.local.entity.RequirementProgressEntity
+import se.simmarken.domain.export.BackupValidator
+import se.simmarken.domain.export.CatalogCodeResolver
+import se.simmarken.domain.export.ImportPreview
+import se.simmarken.domain.export.MergePlanner
+import se.simmarken.domain.export.ValidationResult
 import se.simmarken.domain.repository.KidRepository
 import se.simmarken.domain.repository.ProgressRepository
 import java.io.File
@@ -20,7 +28,103 @@ open class ExportRepository(
     private val kidRepository: KidRepository,
     private val progressRepository: ProgressRepository,
     private val catalogDao: CatalogDao,
+    private val database: AppDatabase,
 ) {
+    private val catalogCodeResolver = object : CatalogCodeResolver {
+        override suspend fun resolveRequirement(
+            catalogCode: String,
+            badgeCode: String,
+            requirementCode: String,
+        ): Long? {
+            val catalog = catalogDao.findCatalogByCode(catalogCode) ?: return null
+            val badge = catalogDao.findBadgeByCatalogAndCode(catalog.id, badgeCode) ?: return null
+            return catalogDao.findRequirementByBadgeAndCode(badge.id, requirementCode)?.id
+        }
+
+        override suspend fun resolveBadge(catalogCode: String, badgeCode: String): Long? {
+            val catalog = catalogDao.findCatalogByCode(catalogCode) ?: return null
+            return catalogDao.findBadgeByCatalogAndCode(catalog.id, badgeCode)?.id
+        }
+    }
+
+    fun parseBackup(bytes: ByteArray): ValidationResult = BackupValidator.validate(bytes)
+
+    suspend fun planImport(backup: BackupDto): ImportPreview {
+        val localKids = kidRepository.findAll()
+        val kidIds = localKids.map { it.id }
+        val requirementProgress = if (kidIds.isEmpty()) {
+            emptyList()
+        } else {
+            progressRepository.getRequirementProgressForKids(kidIds)
+        }
+        val badgeProgress = if (kidIds.isEmpty()) {
+            emptyList()
+        } else {
+            progressRepository.getBadgeProgressForKids(kidIds)
+        }
+        return MergePlanner.plan(
+            backup = backup,
+            localKids = localKids,
+            localRequirementProgress = requirementProgress,
+            localBadgeProgress = badgeProgress,
+            catalogResolver = catalogCodeResolver,
+        )
+    }
+
+    suspend fun merge(preview: ImportPreview, acceptedNewKidStableIds: Set<String>) {
+        database.withTransaction {
+            val requirementProgressDao = database.requirementProgressDao()
+            val badgeProgressDao = database.badgeProgressDao()
+            val kidDao = database.kidDao()
+
+            preview.mergePayload.requirementUpserts.forEach { requirementProgressDao.upsert(it) }
+            preview.mergePayload.badgeUpserts.forEach { badgeProgressDao.upsert(it) }
+
+            val acceptedNewKids = preview.mergePayload.newKidBackups
+                .filter { it.stableId in acceptedNewKidStableIds }
+            for (kidBackup in acceptedNewKids) {
+                val kidId = kidDao.upsert(
+                    KidEntity(
+                        stableId = kidBackup.stableId,
+                        name = kidBackup.name,
+                        avatarColorArgb = kidBackup.avatarColorArgb,
+                        createdAtEpochMillis = kidBackup.createdAtEpochMillis,
+                        sortOrder = kidBackup.sortOrder,
+                    ),
+                )
+                for (remote in kidBackup.requirementProgress) {
+                    val requirementId = catalogCodeResolver.resolveRequirement(
+                        remote.catalogCode,
+                        remote.badgeCode,
+                        remote.requirementCode,
+                    ) ?: continue
+                    requirementProgressDao.upsert(
+                        RequirementProgressEntity(
+                            kidId = kidId,
+                            requirementId = requirementId,
+                            isAchieved = remote.isAchieved,
+                            achievedAtEpochMillis = remote.achievedAtEpochMillis,
+                            updatedAtEpochMillis = remote.updatedAtEpochMillis,
+                        ),
+                    )
+                }
+                for (remote in kidBackup.badgeProgress) {
+                    val badgeId = catalogCodeResolver.resolveBadge(remote.catalogCode, remote.badgeCode)
+                        ?: continue
+                    badgeProgressDao.upsert(
+                        BadgeProgressEntity(
+                            kidId = kidId,
+                            badgeId = badgeId,
+                            isGotten = remote.isGotten,
+                            achievedAtEpochMillis = remote.achievedAtEpochMillis,
+                            gottenAtEpochMillis = remote.gottenAtEpochMillis,
+                            updatedAtEpochMillis = remote.updatedAtEpochMillis,
+                        ),
+                    )
+                }
+            }
+        }
+    }
     open suspend fun buildBackup(selectedKidIds: List<Long>): BackupDto {
         val kids = kidRepository.findByIds(selectedKidIds)
             .sortedWith(compareBy<KidEntity> { it.sortOrder }.thenBy { it.name })
