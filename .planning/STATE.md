@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Release & Open Source
 status: planning
-last_updated: "2026-07-25T07:32:34.470Z"
+last_updated: "2026-07-25"
 last_activity: 2026-07-25
 progress:
-  total_phases: 0
+  total_phases: 6
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -20,96 +20,52 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-25)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Planning next milestone
+**Current focus:** Phase 7 — Security & Git Hygiene
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 7 of 12 (Security & Git Hygiene)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-07-25 — Milestone v1.1 started
+Status: Ready to plan
+Last activity: 2026-07-25 — v1.1 roadmap created (Phases 7–12)
+
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 21
+- Total plans completed: 21 (v1.0)
 - Average duration: —
 - Total execution time: —
 
-**By Phase:**
+**By Phase (v1.0):**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 02 | 5 | - | - |
-| 3 | 3 | - | - |
-| 05 | 3 | - | - |
-| 06 | 4 | - | - |
-| 04 | 3 | - | - |
-| 01 | 3 | - | - |
+| 01 | 3 | 3 | — |
+| 02 | 5 | 5 | — |
+| 03 | 3 | 3 | — |
+| 04 | 3 | 3 | — |
+| 05 | 3 | 3 | — |
+| 06 | 4 | 4 | — |
 
 **Recent Trend:**
 
-- Last 5 plans: —
+- Last 5 plans: v1.0 Phase 6 plans (export/import, i18n)
 - Trend: —
-
-| Phase 02-catalog-seeding P01 | 22min | 3 tasks | 8 files |
-| Phase 02-catalog-seeding P02 | 18min | 3 tasks | 5 files |
-| Phase 02-catalog-seeding P04 | 25 | 3 tasks | 37 files |
-| Phase 02-catalog-seeding P03 | 25 | 3 tasks | 12 files |
-**Per-Plan Metrics:**
-
-| Plan | Duration | Tasks | Files |
-|------|----------|-------|-------|
-| Phase 04 P01 | 25min | 3 tasks | 9 files |
-| Phase 04 P03 | 45min | 3 tasks | 15 files |
-| Phase 05 P01 | 35 | 3 tasks | 9 files |
-| Phase 05 P02 | 28 | 3 tasks | 7 files |
-| Phase 05 P03 | 18 | 3 tasks | 11 files |
-| Phase 06-export-import-i18n P01 | 90min | 3 tasks | 39 files |
-| Phase 06-export-import-i18n P02 | 25min | 3 tasks | 24 files |
-| Phase 06-export-import-i18n P03 | 35min | 3 tasks | 18 files |
 
 ## Accumulated Context
 
 ### Decisions
 
-Recent decisions affecting current work:
+Recent decisions affecting v1.1 work:
 
-- Kotlin + Compose + Room + MVVM stack confirmed
-- Both Svensk Simidrott and SLS catalogs in v1
-- JSON export/import for backup (no cloud)
-- Clean minimal UI, Swedish + English
-- [Phase ?]: Omitted guldmarket — affisch progression ends at Kandidaten without separate Guldmärket pin
-- [Phase ?]: Unit tests parse seed JSON with kotlinx-serialization on JVM
-- [Phase ?]: SLS requirements from official shop product pages (MEDIUM confidence per D-06)
-- [Phase ?]: GP article excluded as primary SLS requirement source
-- [Phase ?]: Droppen seeded with official inga kunskapskrav Hur text
-- [Phase ?]: Simidrott pins mapped from affisch pdfimages by progression order
-- [Phase ?]: SLS badge images from official shop product JSON at 512px
-- [Phase ?]: BadgePlaceholderColors tier fallback for simsättsmärken and Kandidaten
-- [Phase ?]: CatalogSeedLoader bypasses CatalogRepository and talks to CatalogDao directly
-- [Phase ?]: ID-preserving merge uses lookup-by-code before REPLACE upsert (D-15)
-- [Phase ?]: Room withTransaction wraps full catalog merge for FK integrity
-- [Phase ?]: BadgeVisualState derived at read time via BadgeStateCalculator — never persisted (D-29)
-- [Phase ?]: State precedence D-30: gotten → GOTTEN; zero-req or all achieved → ACHIEVED_TO_BUY; partial → IN_PROGRESS; none → LOCKED
-- [Phase ?]: Absent RequirementProgressEntity rows default to isAchieved=false in BadgeCatalogMapper (D-05)
-- [Phase ?]: compileSdk 36 required for coil-compose 3.5.0 AAR metadata
-- [Phase ?]: BadgePinVisual shared between grid and detail via BadgePinSize enum
-- [Phase ?]: BadgeDetailViewModel uses BadgeStateCalculator.compute only — no inline state logic
-- [Phase ?]: ioDispatcher constructor param enables JVM ViewModel tests while keeping Dispatchers.IO in production
-- [Phase 05]: Fixed pin header outside verticalScroll; checklist and purchase scroll together
-- [Phase 05]: PurchaseToggleRow disabled label uses 38% onSurface opacity per UI-SPEC
-- [Phase ?]: Home summary counts reuse BadgeCatalogMapper — same BadgeStateCalculator path as catalog grid
-- [Phase ?]: ChildCard hides pågår/att köpa lines when count is zero per D-14
-- [Phase ?]: Locked exportVersion:1 schema per schema-v1-research (D-08)
-- [Phase ?]: Newer-wins merge via per-row updatedAtEpochMillis (D-04)
-- [Phase ?]: New kids in import file default unchecked; parent opts in (D-02)
-- [Phase 06]: KidNameValidation returns KidNameError enum; composables resolve localized strings
-- [Phase 06]: StringsParityTest uses regex XML parsing for JVM locale key parity
-- [Phase 06]: Settings snackbar and InvalidReason map to @StringRes in UI layer (D-17)
-- [Phase ?]: LanguageMode persisted in DataStore; AppCompatDelegate applies at startup and on Settings selection (D-18–D-22)
-- [Phase ?]: Catalog mapper always uses nameSv/textSv regardless of UI locale (D-13)
+- v1.1 is infrastructure-only — no app feature changes
+- Security gates (SECU-01/02) must pass before public visibility (OSS-05)
+- GitHub Actions + Gitleaks + Gradle Play Publisher 4.0.0 (no Fastlane)
+- Play Store internal testing track only — no production auto-deploy
+- MIT for source code; badge assets need explicit carve-out per `docs/SOURCES.md`
 
 ### Pending Todos
 
@@ -117,7 +73,7 @@ None yet.
 
 ### Blockers/Concerns
 
-None — v1.0 MVP shipped.
+None — v1.0 MVP shipped; v1.1 roadmap defined.
 
 ## Deferred Items
 
@@ -125,13 +81,12 @@ None — v1.0 MVP shipped.
 |----------|------|--------|-------------|
 | v2 | Share progress via SMS/image | Deferred | init |
 | v2 | Custom swim club catalogs | Deferred | init |
+| v2 | Instrumented tests in CI (CI-04) | Deferred | v1.1 planning |
+| v2 | Branch protection (CI-05) | Deferred | v1.1 planning |
+| v2 | Dependabot (CI-06) | Deferred | v1.1 planning |
 
 ## Session Continuity
 
-Last session: 2026-07-25T06:07:17.408Z
-Stopped at: Completed 06-03-PLAN.md
+Last session: 2026-07-25
+Stopped at: v1.1 roadmap created
 Resume file: None
-
-## Operator Next Steps
-
-- Start the next milestone with /gsd-new-milestone

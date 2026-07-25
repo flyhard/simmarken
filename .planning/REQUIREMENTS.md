@@ -73,27 +73,27 @@ Deferred to future milestone. Tracked but not in v1.1 roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SECU-01 | — | Pending |
-| SECU-02 | — | Pending |
-| SECU-03 | — | Pending |
-| CI-01 | — | Pending |
-| CI-02 | — | Pending |
-| CI-03 | — | Pending |
-| RELE-01 | — | Pending |
-| RELE-02 | — | Pending |
-| RELE-03 | — | Pending |
-| RELE-04 | — | Pending |
-| OSS-01 | — | Pending |
-| OSS-02 | — | Pending |
-| OSS-03 | — | Pending |
-| OSS-04 | — | Pending |
-| OSS-05 | — | Pending |
+| SECU-01 | Phase 7 | Pending |
+| SECU-02 | Phase 7 | Pending |
+| SECU-03 | Phase 7 | Pending |
+| CI-01 | Phase 9 | Pending |
+| CI-02 | Phase 11 | Pending |
+| CI-03 | Phase 9 | Pending |
+| RELE-01 | Phase 10 | Pending |
+| RELE-02 | Phase 10 | Pending |
+| RELE-03 | Phase 11 | Pending |
+| RELE-04 | Phase 11 | Pending |
+| OSS-01 | Phase 12 | Pending |
+| OSS-02 | Phase 12 | Pending |
+| OSS-03 | Phase 12 | Pending |
+| OSS-04 | Phase 12 | Pending |
+| OSS-05 | Phase 12 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15 ⚠️
+- Mapped to phases: 15
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-07-25*
-*Last updated: 2026-07-25 after v1.1 milestone definition*
+*Last updated: 2026-07-25 after v1.1 roadmap creation*
