@@ -9,3 +9,12 @@
 .cxx
 app/build
 docs/extraction/pdfs/
+
+# Android signing & Play credentials (SECU-03)
+*.jks
+*.keystore
+keystore.properties
+**/play-credentials.json
+**/service-account*.json
+*.p12
+google-services.json

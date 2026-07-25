@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Android local SDK paths — not secrets (D-04)"
+paths = [
+  '''(?:^|/)local\.properties$''',
+]
