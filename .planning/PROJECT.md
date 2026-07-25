@@ -20,7 +20,18 @@ At the swim hall, a parent can open the app and immediately answer: "Did they pa
 - **Data:** JSON export/import with newer-wins merge for device migration
 - **i18n:** Swedish and English UI with runtime language switching
 
-## Next Milestone Goals
+## Current Milestone: v1.1 Release & Open Source
+
+**Goal:** Ship Simmärken publicly — safe to open-source on GitHub, with automated builds and Play Store internal testing.
+
+**Target features:**
+- Secrets scan (gitleaks/trufflehog) + manual review checklist before going public
+- GitHub Actions: build, test, sign release AAB
+- Play Store pipeline starting on internal/closed testing track
+- Open-source polish: README, MIT license, CONTRIBUTING.md, CODEOWNERS
+- v2 features (share, custom catalogs) deferred to a later milestone
+
+## Next Milestone Goals (deferred)
 
 - Share progress as formatted text or image (SHAR-01, SHAR-02)
 - Custom swim club badge catalogs (CATA-06)
@@ -41,7 +52,16 @@ At the swim hall, a parent can open the app and immediately answer: "Did they pa
 - ✓ Parent can export/import progress as JSON for device migration — v1.0 Phase 6
 - ✓ UI available in Swedish and English with settings language picker — v1.0 Phase 6
 
-### Active (v2 candidates)
+### Active (v1.1)
+
+- [ ] Automated secrets scan passes with zero findings (SECU-01)
+- [ ] Manual pre-public review checklist completed (SECU-02)
+- [ ] GitHub Actions builds and tests on every push/PR (CI-01)
+- [ ] Release AAB signed via CI secrets (CI-02)
+- [ ] Play Store internal/closed testing deployment automated (RELE-01)
+- [ ] Public GitHub repo with README, LICENSE, CONTRIBUTING, CODEOWNERS (OSS-01)
+
+### Active (v2 candidates — deferred)
 
 - [ ] Share progress as formatted text for grandparents (SHAR-01)
 - [ ] Share progress as image for grandparents (SHAR-02)
@@ -112,4 +132,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-25 after v1.0 milestone*
+*Last updated: 2026-07-25 after v1.1 milestone started*
