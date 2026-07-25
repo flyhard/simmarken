@@ -42,5 +42,5 @@ Child display `name` and UUID `stableId` are expected PII for parent-managed bac
 
 ## Sign-Off
 
-- [ ] All items verified
-- Signed: _________________ Date: _________
+- [x] All items verified
+- Signed: ues201 Date: 2026-07-25
