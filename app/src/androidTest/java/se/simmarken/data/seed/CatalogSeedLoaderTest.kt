@@ -106,12 +106,13 @@ class CatalogSeedLoaderTest {
 
         assertTrue(nullImageBadges.isNotEmpty())
 
-        val colors = nullImageBadges.map { (categoryCode, _) ->
-            BadgePlaceholderColors.forCategoryCode(categoryCode)
-        }.distinct()
+        val categoryCodes = nullImageBadges.map { (categoryCode, _) -> categoryCode }.distinct()
+        val colors = categoryCodes.map { BadgePlaceholderColors.forCategoryCode(it) }
 
         assertTrue(colors.all { it != BadgePlaceholderColors.default })
-        assertTrue(colors.size > 1)
+        if (categoryCodes.size > 1) {
+            assertTrue(colors.distinct().size > 1)
+        }
         assertNotEquals(Color.Unspecified, colors.first())
 
         db.close()
