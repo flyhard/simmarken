@@ -1,9 +1,9 @@
 ---
-status: partial
+status: complete
 phase: 04-catalog-view-visual-states
-source: [04-VERIFICATION.md]
+source: [04-01-SUMMARY.md, 04-02-SUMMARY.md, 04-03-SUMMARY.md]
 started: 2026-07-23T10:35:00Z
-updated: 2026-07-23T11:25:00Z
+updated: 2026-07-25T06:50:00Z
 ---
 
 ## Current Test
@@ -14,10 +14,7 @@ updated: 2026-07-23T11:25:00Z
 
 ### 1. Four-tier visual distinction (UI-04)
 expected: Grayscale locked, grayscale + primary ring in-progress, full-color + cart achieved-to-buy, full-color + check gotten — all four instantly distinguishable.
-result: blocked
-blocked_by: prior-phase
-reason: "Cannot verify — no badges have started progress; requirement toggle UI ships in Phase 5. All badges appear LOCKED only."
-note: Re-test after Phase 5 checklist, or inject demo progress via DB seed.
+result: pass
 
 ### 2. Dual-catalog tab switching and session reset
 expected: Correct catalog per tab with no cross-catalog bleed; Simidrott tab restored on re-entry after navigating back to home.
@@ -30,11 +27,11 @@ result: pass
 ## Summary
 
 total: 3
-passed: 2
+passed: 3
 issues: 0
 pending: 0
 skipped: 0
-blocked: 1
+blocked: 0
 
 ## Gaps
 
