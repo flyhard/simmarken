@@ -27,6 +27,7 @@ fun SimmarkenNavHost() {
             application = application,
             kidRepository = application.container.kidRepository,
             exportRepository = application.container.exportRepository,
+            localePreferencesRepository = application.container.localePreferencesRepository,
         ),
     )
 

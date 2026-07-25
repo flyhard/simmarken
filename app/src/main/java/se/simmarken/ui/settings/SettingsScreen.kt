@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -11,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import se.simmarken.R
 import se.simmarken.ui.settings.components.SettingsDataSection
+import se.simmarken.ui.settings.components.SettingsLanguageSection
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -118,6 +122,13 @@ fun SettingsScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(top = 8.dp, bottom = 24.dp),
         ) {
+            SettingsLanguageSection(
+                selectedMode = uiState.languageMode,
+                onLanguageSelected = viewModel::setLanguageMode,
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            HorizontalDivider()
+            Spacer(modifier = Modifier.height(24.dp))
             SettingsDataSection(
                 exportEnabled = uiState.kids.isNotEmpty(),
                 onExportClick = viewModel::onExportClicked,

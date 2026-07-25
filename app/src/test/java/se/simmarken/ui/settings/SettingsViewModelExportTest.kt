@@ -24,6 +24,7 @@ import org.robolectric.annotation.Config
 import se.simmarken.data.export.BackupDto
 import se.simmarken.data.export.ExportRepository
 import se.simmarken.data.local.AppDatabase
+import se.simmarken.data.prefs.LocalePreferencesRepository
 import se.simmarken.data.local.entity.BadgeEntity
 import se.simmarken.data.local.entity.BadgeProgressEntity
 import se.simmarken.data.local.entity.CatalogEntity
@@ -65,6 +66,7 @@ class SettingsViewModelExportTest {
             application = RuntimeEnvironment.getApplication(),
             kidRepository = FakeKidRepository(kid),
             exportRepository = exportRepository,
+            localePreferencesRepository = LocalePreferencesRepository(RuntimeEnvironment.getApplication()),
             ioDispatcher = testDispatcher,
         )
 

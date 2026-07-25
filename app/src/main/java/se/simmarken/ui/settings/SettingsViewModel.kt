@@ -2,6 +2,7 @@ package se.simmarken.ui.settings
 
 import android.app.Application
 import android.net.Uri
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,9 +14,13 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import se.simmarken.R
 import se.simmarken.data.export.ExportRepository
 import se.simmarken.data.local.entity.KidEntity
+import se.simmarken.data.prefs.LanguageMode
+import se.simmarken.data.prefs.LocalePreferencesRepository
+import se.simmarken.data.prefs.mapModeToLocaleList
 import se.simmarken.domain.export.ImportPreview
 import se.simmarken.domain.export.InvalidReason
 import se.simmarken.domain.repository.KidRepository
@@ -26,6 +31,7 @@ data class ExportKidPickerState(
 )
 
 data class SettingsUiState(
+    val languageMode: LanguageMode = LanguageMode.SYSTEM,
     val kids: List<KidEntity> = emptyList(),
     val isExporting: Boolean = false,
     val showExportKidPicker: Boolean = false,
@@ -40,6 +46,7 @@ class SettingsViewModel(
     application: Application,
     private val kidRepository: KidRepository,
     private val exportRepository: ExportRepository,
+    private val localePreferencesRepository: LocalePreferencesRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : AndroidViewModel(application) {
     private val isExporting = MutableStateFlow(false)
@@ -52,6 +59,7 @@ class SettingsViewModel(
 
     val uiState = combine(
         kidRepository.observeAll(),
+        localePreferencesRepository.mode,
         isExporting,
         showExportKidPicker,
         exportKidPickerState,
@@ -62,13 +70,14 @@ class SettingsViewModel(
     ) { values ->
         SettingsUiState(
             kids = values[0] as List<KidEntity>,
-            isExporting = values[1] as Boolean,
-            showExportKidPicker = values[2] as Boolean,
-            exportKidPickerState = values[3] as ExportKidPickerState?,
-            importPreview = values[4] as ImportPreview?,
-            selectedNewKidStableIds = values[5] as Set<String>,
-            importError = values[6] as InvalidReason?,
-            snackbarMessageRes = values[7] as Int?,
+            languageMode = values[1] as LanguageMode,
+            isExporting = values[2] as Boolean,
+            showExportKidPicker = values[3] as Boolean,
+            exportKidPickerState = values[4] as ExportKidPickerState?,
+            importPreview = values[5] as ImportPreview?,
+            selectedNewKidStableIds = values[6] as Set<String>,
+            importError = values[7] as InvalidReason?,
+            snackbarMessageRes = values[8] as Int?,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -197,5 +206,14 @@ class SettingsViewModel(
 
     fun clearSnackbarMessage() {
         snackbarMessageRes.value = null
+    }
+
+    fun setLanguageMode(mode: LanguageMode) {
+        viewModelScope.launch(ioDispatcher) {
+            localePreferencesRepository.setMode(mode)
+            withContext(Dispatchers.Main.immediate) {
+                AppCompatDelegate.setApplicationLocales(mapModeToLocaleList(mode))
+            }
+        }
     }
 }
