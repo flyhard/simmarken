@@ -2,43 +2,41 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 4
-current_phase_name: Catalog View & Visual States
-status: planning
+status: Awaiting next milestone
 stopped_at: Completed 06-03-PLAN.md
-last_updated: "2026-07-25T06:45:14.863Z"
+last_updated: "2026-07-25T07:18:02.285Z"
 last_activity: 2026-07-25
-last_activity_desc: Phase 06 complete, transitioned to Phase 4
+last_activity_desc: Milestone v1.0 completed and archived
 progress:
   total_phases: 6
   completed_phases: 6
   total_plans: 21
   completed_plans: 21
+current_phase: 02
+current_phase_name: Catalog Seeding
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-07-22)
+See: .planning/PROJECT.md (updated 2026-07-25)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Phase 06 — export-import-i18n
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 4 — Catalog View & Visual States
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-07-25 — Phase 06 complete, transitioned to Phase 4
-
-Progress: [██████████] 100% (1 plan remaining in phase 6)
+Phase: Milestone v1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-07-25 — Milestone v1.0 completed and archived
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 15
+- Total plans completed: 21
 - Average duration: —
 - Total execution time: —
 
@@ -50,6 +48,8 @@ Progress: [██████████] 100% (1 plan remaining in phase 6)
 | 3 | 3 | - | - |
 | 05 | 3 | - | - |
 | 06 | 4 | - | - |
+| 04 | 3 | - | - |
+| 01 | 3 | - | - |
 
 **Recent Trend:**
 
@@ -120,8 +120,7 @@ None yet.
 
 ### Blockers/Concerns
 
-- Badge image licensing needs verification during Phase 2
-- SLS catalog data less documented than Simidrott
+None — v1.0 MVP shipped.
 
 ## Deferred Items
 
@@ -135,3 +134,7 @@ None yet.
 Last session: 2026-07-25T06:07:17.408Z
 Stopped at: Completed 06-03-PLAN.md
 Resume file: None
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone
