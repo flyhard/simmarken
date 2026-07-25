@@ -43,8 +43,8 @@
 
 ### Internationalization
 
-- [ ] **I18N-01**: App UI is available in Swedish
-- [ ] **I18N-02**: App UI is available in English
+- [x] **I18N-01**: App UI is available in Swedish
+- [x] **I18N-02**: App UI is available in English
 - [ ] **I18N-03**: Parent can switch language in app settings
 
 ## v2 Requirements
@@ -92,8 +92,8 @@
 | PROG-05 | Phase 5 | Complete |
 | DATA-02 | Phase 6 | Complete |
 | DATA-03 | Phase 6 | Complete |
-| I18N-01 | Phase 6 | Pending |
-| I18N-02 | Phase 6 | Pending |
+| I18N-01 | Phase 6 | Complete |
+| I18N-02 | Phase 6 | Complete |
 | I18N-03 | Phase 6 | Pending |
 
 **Coverage:**

@@ -184,7 +184,7 @@ Plans:
   4. All UI strings available in Swedish and English
   5. Parent can switch language in settings; preference persists
 
-**Plans**: 1/3 plans executed
+**Plans**: 2/3 plans executed
 
 Plans:
 
@@ -194,7 +194,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 06-02-PLAN.md — Swedish/English string resources for all chrome and progress UI (I18N-01/02)
+- [x] 06-02-PLAN.md — Swedish/English string resources for all chrome and progress UI (I18N-01/02)
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
