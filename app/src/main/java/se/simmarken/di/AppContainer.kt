@@ -10,6 +10,7 @@ import se.simmarken.data.local.AppDatabase
 import se.simmarken.data.local.MIGRATION_1_2
 import se.simmarken.data.seed.CatalogSeedLoader
 import se.simmarken.data.export.ExportRepository
+import se.simmarken.data.prefs.LocalePreferencesRepository
 import se.simmarken.domain.repository.CatalogRepository
 import se.simmarken.domain.repository.CatalogRepositoryImpl
 import se.simmarken.domain.repository.KidRepository
@@ -40,6 +41,8 @@ class AppContainer(context: Context) {
         catalogDao = database.catalogDao(),
         database = database,
     )
+    val localePreferencesRepository: LocalePreferencesRepository =
+        LocalePreferencesRepository(appContext)
 
     val pendingImportUri = kotlinx.coroutines.flow.MutableStateFlow<android.net.Uri?>(null)
 }

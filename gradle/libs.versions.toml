@@ -16,6 +16,8 @@ espresso = "3.6.1"
 androidxTest = "1.6.1"
 coil = "3.5.0"
 robolectric = "4.14.1"
+datastore = "1.2.1"
+appcompat = "1.7.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +43,8 @@ androidx-test-runner = { group = "androidx.test", name = "runner", version.ref =
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTest" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
