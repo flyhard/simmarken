@@ -402,17 +402,17 @@ data class KidBackupDto(
 
 **Note:** Claims verified in this session (local gitleaks scan, git history audit, file inventory) are tagged in body text; assumptions above need no user confirmation unless remote hosting differs from GitHub personal account.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **GitHub remote URL and visibility**
+1. **GitHub remote URL and visibility** — **RESOLVED**
    - What we know: No `git remote` configured on research machine; workflow is greenfield.
    - What's unclear: Exact GitHub repo name and personal vs org account (affects GITLEAKS_LICENSE).
-   - Recommendation: Planner adds verification task "push branch, confirm Gitleaks workflow runs green on GitHub." If org account, add `GITLEAKS_LICENSE` secret before first run.
+   - Resolution: Plan 07-02 Task 2 pushes branch, runs `gh run watch --workflow=gitleaks.yml`, and captures green workflow run URL for checklist evidence. Personal account assumed per D-12/RESEARCH A1 (no GITLEAKS_LICENSE).
 
-2. **Whether any findings appear under default rules in CI**
+2. **Whether any findings appear under default rules in CI** — **RESOLVED**
    - What we know: Local 8.30.1 scan clean with no custom config.
    - What's unclear: CI action may pin a different Gitleaks version.
-   - Recommendation: After adding `.gitleaks.toml`, run local scan with `--config .gitleaks.toml` before pushing.
+   - Resolution: Plan 07-01 tracer task runs `gitleaks detect --source . --config .gitleaks.toml --verbose` before Plan 02 push; any non-allowlisted finding blocks CI work per D-01/D-09.
 
 ## Environment Availability
 
