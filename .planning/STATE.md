@@ -2,18 +2,18 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 6
-current_phase_name: Export/Import & i18n
-status: planning
-stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-07-24T15:22:35.698Z"
-last_activity: 2026-07-24
-last_activity_desc: Phase 6 RESEARCH.md complete
+current_phase: 06
+current_phase_name: export-import-i18n
+status: executing
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-07-25T05:56:41.003Z"
+last_activity: 2026-07-25
+last_activity_desc: Phase 06 execution resumed (wave continue)
 progress:
   total_phases: 6
   completed_phases: 5
-  total_plans: 17
-  completed_plans: 17
+  total_plans: 20
+  completed_plans: 18
 ---
 
 # Project State
@@ -23,16 +23,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-22)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Phase 6 — Export/Import & i18n
+**Current focus:** Phase 06 — export-import-i18n
 
 ## Current Position
 
-Phase: 6 — Export/Import & i18n
-Plan: Not started
-Status: Research complete — ready to plan
-Last activity: 2026-07-24 — Phase 6 RESEARCH.md complete
+Phase: 06 (export-import-i18n) — EXECUTING
+Plan: 2 of 3
+Status: Ready to execute
+Last activity: 2026-07-25 — Phase 06 execution resumed (wave continue)
 
-Progress: [██████████] 100% (research done; plans pending)
+Progress: [█████████░] 90% (research done; plans pending)
 
 ## Performance Metrics
 
@@ -68,6 +68,7 @@ Progress: [██████████] 100% (research done; plans pending)
 | Phase 05 P01 | 35 | 3 tasks | 9 files |
 | Phase 05 P02 | 28 | 3 tasks | 7 files |
 | Phase 05 P03 | 18 | 3 tasks | 11 files |
+| Phase 06-export-import-i18n P01 | 90min | 3 tasks | 39 files |
 
 ## Accumulated Context
 
@@ -101,6 +102,9 @@ Recent decisions affecting current work:
 - [Phase 05]: PurchaseToggleRow disabled label uses 38% onSurface opacity per UI-SPEC
 - [Phase ?]: Home summary counts reuse BadgeCatalogMapper — same BadgeStateCalculator path as catalog grid
 - [Phase ?]: ChildCard hides pågår/att köpa lines when count is zero per D-14
+- [Phase ?]: Locked exportVersion:1 schema per schema-v1-research (D-08)
+- [Phase ?]: Newer-wins merge via per-row updatedAtEpochMillis (D-04)
+- [Phase ?]: New kids in import file default unchecked; parent opts in (D-02)
 
 ### Pending Todos
 
@@ -120,6 +124,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-24T15:22:35.683Z
-Stopped at: Phase 6 UI-SPEC approved
-Resume file: /Users/ues201/Projects/simmmärken/.planning/phases/06-export-import-i18n/06-UI-SPEC.md
+Last session: 2026-07-25T05:56:40.993Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: None

@@ -184,13 +184,13 @@ Plans:
   4. All UI strings available in Swedish and English
   5. Parent can switch language in settings; preference persists
 
-**Plans**: 3 plans
+**Plans**: 1/3 plans executed
 
 Plans:
 
 **Wave 1**
 
-- [ ] 06-01-PLAN.md — Export/import tracer: Room v2 stableId, versioned JSON, share sheet, merge-with-confirm, intents
+- [x] 06-01-PLAN.md — Export/import tracer: Room v2 stableId, versioned JSON, share sheet, merge-with-confirm, intents
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -212,4 +212,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Child Profiles & Home | 3/3 | Complete    | 2026-07-23 |
 | 4. Catalog View & Visual States | 3/3 | In Progress|  |
 | 5. Progress Tracking & Badge Detail | 3/3 | Complete    | 2026-07-24 |
-| 6. Export/Import & i18n | 0/3 | Not started | - |
+| 6. Export/Import & i18n | 1/3 | In Progress|  |

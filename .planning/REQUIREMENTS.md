@@ -38,8 +38,8 @@
 ### Data & Offline
 
 - [ ] **DATA-01**: All data persists locally via Room with no network dependency
-- [ ] **DATA-02**: Parent can export all progress data to a file
-- [ ] **DATA-03**: Parent can import progress data from an exported file
+- [x] **DATA-02**: Parent can export all progress data to a file
+- [x] **DATA-03**: Parent can import progress data from an exported file
 
 ### Internationalization
 
@@ -90,8 +90,8 @@
 | PROG-02 | Phase 5 | Complete |
 | PROG-03 | Phase 5 | Complete |
 | PROG-05 | Phase 5 | Complete |
-| DATA-02 | Phase 6 | Pending |
-| DATA-03 | Phase 6 | Pending |
+| DATA-02 | Phase 6 | Complete |
+| DATA-03 | Phase 6 | Complete |
 | I18N-01 | Phase 6 | Pending |
 | I18N-02 | Phase 6 | Pending |
 | I18N-03 | Phase 6 | Pending |
