@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Simmärken</string>
+
+    <!-- Home -->
+    <string name="home_title">Simmärken</string>
+    <string name="home_add_child">Lägg till barn</string>
+    <string name="home_empty_heading">Lägg till ditt första barn</string>
+    <string name="home_empty_body">Tryck på + för att skapa en profil och börja följa simmärken.</string>
+    <string name="home_settings_content_description">Inställningar</string>
+    <string name="child_in_progress">%1$d pågår</string>
+    <string name="child_to_buy">%1$d att köpa</string>
+    <string name="back_content_description">Tillbaka</string>
 </resources>

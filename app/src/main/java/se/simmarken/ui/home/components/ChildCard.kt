@@ -23,8 +23,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import se.simmarken.R
 
 @Composable
 fun ChildCard(
@@ -74,7 +76,7 @@ fun ChildCard(
                     )
                     if (inProgressCount > 0) {
                         Text(
-                            text = "$inProgressCount pågår",
+                            text = stringResource(R.string.child_in_progress, inProgressCount),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(top = 4.dp),
@@ -84,7 +86,7 @@ fun ChildCard(
                     }
                     if (toBuyCount > 0) {
                         Text(
-                            text = "$toBuyCount att köpa",
+                            text = stringResource(R.string.child_to_buy, toBuyCount),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(top = 4.dp),

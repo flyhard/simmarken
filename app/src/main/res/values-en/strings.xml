@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Simmärken</string>
+
+    <!-- Home -->
+    <string name="home_title">Simmärken</string>
+    <string name="home_add_child">Add child</string>
+    <string name="home_empty_heading">Add your first child</string>
+    <string name="home_empty_body">Tap + to create a profile and start tracking badges.</string>
+    <string name="home_settings_content_description">Settings</string>
+    <string name="child_in_progress">%1$d in progress</string>
+    <string name="child_to_buy">%1$d to buy</string>
+    <string name="back_content_description">Back</string>
+</resources>
