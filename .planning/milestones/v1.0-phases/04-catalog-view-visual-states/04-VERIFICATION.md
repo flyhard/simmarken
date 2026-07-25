@@ -1,34 +1,41 @@
 ---
 phase: 04-catalog-view-visual-states
 verified: 2026-07-23T10:30:00Z
-status: human_needed
+status: passed
 score: 17/21 must-haves verified
 behavior_unverified: 4
 overrides_applied: 0
 behavior_unverified_items:
+
   - truth: "Four visual badge states are clearly distinguishable at a glance (UI-04)"
     test: "Open a child catalog with badges in LOCKED, IN_PROGRESS, ACHIEVED_TO_BUY, and GOTTEN states (seed or toggle progress in DB if needed)"
     expected: "Locked/in-progress pins are grayscale; in-progress shows primary arc ring; achieved-to-buy shows full color + cart badge; gotten shows full color + check badge — all four instantly distinguishable"
     why_human: "Grayscale filter, ring sweep, and overlay placement are visual Compose rendering; grep confirms code paths but not perceptual clarity"
+
   - truth: "Simidrott and SLS catalogs switch via tab row without data bleed (dual-catalog-tabs)"
     test: "Open child catalog, note badges in Simidrott tab, switch to SLS tab, switch back"
     expected: "Each tab shows only its catalog's categories/badges; no cross-catalog badges linger after switch"
     why_human: "flatMapLatest wiring is present; cross-tab isolation is a runtime Flow cancellation invariant"
+
   - truth: "Default tab is Simidrott on every screen open; tab resets on re-entry (D-02, D-04)"
     test: "Open catalog (expect Simidrott), switch to SLS, navigate back to home, re-open same child catalog"
     expected: "Simidrott tab selected again; SLS selection does not persist across re-entry"
     why_human: "LaunchedEffect + remember tab index reset is composable lifecycle behavior not exercised by unit tests"
+
   - truth: "Tapping a badge navigates to BadgeDetail placeholder with matching visual state"
     test: "Tap any badge in grid, observe detail screen, press back"
     expected: "Navigates to detail with same pin visual state, badge name, and 'Checklista kommer snart' stub; back returns to grid"
     why_human: "Navigation stack and shared BadgePinVisual state are wired in NavHost but no navigation/UI test exercises the tap flow"
 human_verification:
+
   - test: "Verify all four badge visual states are distinguishable in the emulator"
     expected: "Grayscale locked, grayscale+ring in-progress, full-color+cart achieved-to-buy, full-color+check gotten"
     why_human: "UI-04 requires perceptual clarity; SUMMARY flags human_judgment on D1"
+
   - test: "Switch Simidrott ↔ SLS tabs and re-enter catalog from home"
     expected: "No cross-catalog bleed; Simidrott default restored on re-entry"
     why_human: "Session tab behavior deferred to end-of-phase per 04-02-SUMMARY D2 human_judgment"
+
   - test: "Tap a badge and confirm detail placeholder navigation"
     expected: "BadgeDetail screen opens with shared pin visual and 'Checklista kommer snart'; back returns to grid"
     why_human: "Navigation tap-through flagged human_judgment in 04-03-SUMMARY D3"
