@@ -14,6 +14,8 @@ import se.simmarken.ui.child.ChildCatalogScreen
 import se.simmarken.ui.child.ChildCatalogViewModel
 import se.simmarken.ui.home.HomeScreen
 import se.simmarken.ui.home.HomeViewModel
+import se.simmarken.ui.settings.SettingsScreen
+import se.simmarken.ui.settings.SettingsViewModel
 
 @Composable
 fun SimmarkenNavHost() {
@@ -29,7 +31,24 @@ fun SimmarkenNavHost() {
                     progressRepository = application.container.progressRepository,
                 ),
             )
-            HomeScreen(viewModel = viewModel, navController = navController)
+            HomeScreen(
+                viewModel = viewModel,
+                navController = navController,
+                onSettingsClick = { navController.navigate(Settings) },
+            )
+        }
+        composable<Settings> {
+            val settingsViewModel: SettingsViewModel = viewModel(
+                factory = SettingsViewModelFactory(
+                    application = application,
+                    kidRepository = application.container.kidRepository,
+                    exportRepository = application.container.exportRepository,
+                ),
+            )
+            SettingsScreen(
+                viewModel = settingsViewModel,
+                onBack = { navController.popBackStack() },
+            )
         }
         composable<ChildCatalog> { backStackEntry ->
             val route = backStackEntry.toRoute<ChildCatalog>()

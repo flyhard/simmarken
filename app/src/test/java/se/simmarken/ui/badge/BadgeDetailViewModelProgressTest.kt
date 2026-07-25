@@ -494,5 +494,11 @@ class BadgeDetailViewModelProgressTest {
             badgeProgress?.let { upsertBadgeProgress(it) }
             upsertRequirementProgress(requirementProgress)
         }
+
+        override suspend fun getRequirementProgressForKids(kidIds: List<Long>): List<RequirementProgressEntity> =
+            requirementProgress.value.filter { it.kidId in kidIds }
+
+        override suspend fun getBadgeProgressForKids(kidIds: List<Long>): List<BadgeProgressEntity> =
+            badgeProgress.value.filter { it.kidId in kidIds }
     }
 }

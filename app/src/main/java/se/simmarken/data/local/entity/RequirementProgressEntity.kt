@@ -31,4 +31,5 @@ data class RequirementProgressEntity(
     val requirementId: Long,
     val isAchieved: Boolean,
     val achievedAtEpochMillis: Long?,
+    val updatedAtEpochMillis: Long = 0L,
 )

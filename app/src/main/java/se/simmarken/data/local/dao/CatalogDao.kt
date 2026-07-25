@@ -75,6 +75,24 @@ interface CatalogDao {
     @Query("SELECT * FROM badges WHERE categoryId = :categoryId ORDER BY sortOrder, nameSv")
     suspend fun listBadgesForCategory(categoryId: Long): List<BadgeEntity>
 
+    @Query("SELECT * FROM catalogs")
+    suspend fun listCatalogs(): List<CatalogEntity>
+
+    @Query("SELECT * FROM categories")
+    suspend fun listCategories(): List<CategoryEntity>
+
+    @Query("SELECT * FROM badges")
+    suspend fun listBadges(): List<BadgeEntity>
+
+    @Query("SELECT * FROM requirements")
+    suspend fun listRequirements(): List<RequirementEntity>
+
+    @Query("SELECT * FROM requirements WHERE id = :requirementId LIMIT 1")
+    suspend fun findRequirementById(requirementId: Long): RequirementEntity?
+
+    @Query("SELECT * FROM badges WHERE id = :badgeId LIMIT 1")
+    suspend fun findBadgeById(badgeId: Long): BadgeEntity?
+
     @Query("SELECT COUNT(*) FROM catalogs")
     suspend fun countCatalogs(): Int
 

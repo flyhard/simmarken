@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 object Home
 
 @Serializable
+object Settings
+
+@Serializable
 data class ChildCatalog(val kidId: Long)
 
 @Serializable

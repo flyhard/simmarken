@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.UUID
 import se.simmarken.data.local.entity.KidEntity
 import se.simmarken.domain.repository.KidRepository
 import se.simmarken.domain.validation.KidNameValidation
@@ -98,6 +99,7 @@ class KidFormViewModel(
                     val sortOrder = (kids.maxOfOrNull { it.sortOrder } ?: -1) + 1
                     kidRepository.upsert(
                         KidEntity(
+                            stableId = UUID.randomUUID().toString(),
                             name = _name.value.trim(),
                             avatarColorArgb = _selectedColorArgb.value,
                             sortOrder = sortOrder,

@@ -49,6 +49,7 @@ class CatalogSeedMergeTest {
 
         val kidId = db.kidDao().upsert(
             KidEntity(
+                stableId = "stable-ella",
                 name = "Ella",
                 avatarColorArgb = 0xFF2196F3.toInt(),
                 createdAtEpochMillis = 1L,

@@ -12,6 +12,9 @@ interface BadgeProgressDao {
     @Query("SELECT * FROM badge_progress WHERE kidId = :kidId")
     fun observeForKid(kidId: Long): Flow<List<BadgeProgressEntity>>
 
+    @Query("SELECT * FROM badge_progress WHERE kidId IN (:kidIds)")
+    suspend fun findForKids(kidIds: List<Long>): List<BadgeProgressEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(progress: BadgeProgressEntity)
 }

@@ -12,6 +12,9 @@ interface RequirementProgressDao {
     @Query("SELECT * FROM requirement_progress WHERE kidId = :kidId")
     fun observeForKid(kidId: Long): Flow<List<RequirementProgressEntity>>
 
+    @Query("SELECT * FROM requirement_progress WHERE kidId IN (:kidIds)")
+    suspend fun findForKids(kidIds: List<Long>): List<RequirementProgressEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(progress: RequirementProgressEntity)
 }

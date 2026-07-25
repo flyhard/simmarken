@@ -24,4 +24,10 @@ class ProgressRepositoryImpl(
         requirementProgress: RequirementProgressEntity,
         badgeProgress: BadgeProgressEntity?,
     ) = database.applyRequirementToggle(requirementProgress, badgeProgress)
+
+    override suspend fun getRequirementProgressForKids(kidIds: List<Long>) =
+        requirementProgressDao.findForKids(kidIds)
+
+    override suspend fun getBadgeProgressForKids(kidIds: List<Long>) =
+        badgeProgressDao.findForKids(kidIds)
 }

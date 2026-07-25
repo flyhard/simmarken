@@ -19,4 +19,7 @@ interface ProgressRepository {
         requirementProgress: RequirementProgressEntity,
         badgeProgress: BadgeProgressEntity?,
     )
+
+    suspend fun getRequirementProgressForKids(kidIds: List<Long>): List<RequirementProgressEntity>
+    suspend fun getBadgeProgressForKids(kidIds: List<Long>): List<BadgeProgressEntity>
 }

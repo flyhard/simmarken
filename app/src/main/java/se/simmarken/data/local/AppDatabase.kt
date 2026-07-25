@@ -26,7 +26,7 @@ import se.simmarken.data.local.entity.RequirementProgressEntity
         RequirementProgressEntity::class,
         BadgeProgressEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true,
 )
 @TypeConverters(Converters::class)

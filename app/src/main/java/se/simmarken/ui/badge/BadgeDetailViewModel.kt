@@ -125,6 +125,7 @@ class BadgeDetailViewModel(
                     badgeProgress = badgeProgress.copy(
                         isGotten = false,
                         gottenAtEpochMillis = null,
+                        updatedAtEpochMillis = System.currentTimeMillis(),
                     )
                     badgeProgressDirty = true
                 }
@@ -144,6 +145,7 @@ class BadgeDetailViewModel(
                             existing = badgeProgress.achievedAtEpochMillis,
                             proposed = System.currentTimeMillis(),
                         ),
+                        updatedAtEpochMillis = System.currentTimeMillis(),
                     )
                     badgeProgressDirty = true
                 }
@@ -153,6 +155,7 @@ class BadgeDetailViewModel(
                     requirementId = requirementId,
                     isAchieved = flipped,
                     achievedAtEpochMillis = if (flipped) System.currentTimeMillis() else null,
+                    updatedAtEpochMillis = System.currentTimeMillis(),
                 )
                 progressRepository.applyRequirementToggle(
                     requirementProgress = requirementProgress,
@@ -194,6 +197,7 @@ class BadgeDetailViewModel(
                 base.copy(
                     isGotten = true,
                     gottenAtEpochMillis = System.currentTimeMillis(),
+                    updatedAtEpochMillis = System.currentTimeMillis(),
                 ),
             )
         }
@@ -218,6 +222,7 @@ class BadgeDetailViewModel(
                 existing.copy(
                     isGotten = false,
                     gottenAtEpochMillis = null,
+                    updatedAtEpochMillis = System.currentTimeMillis(),
                 ),
             )
         }

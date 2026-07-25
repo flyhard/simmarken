@@ -33,6 +33,7 @@ class KidDaoTest {
         val db = buildDatabase()
         db.kidDao().upsert(
             KidEntity(
+                stableId = "stable-adam",
                 name = "Adam",
                 avatarColorArgb = 0xFF1E88E5.toInt(),
                 createdAtEpochMillis = 100L,
@@ -41,6 +42,7 @@ class KidDaoTest {
         )
         db.kidDao().upsert(
             KidEntity(
+                stableId = "stable-ella",
                 name = "Ella",
                 avatarColorArgb = 0xFF43A047.toInt(),
                 createdAtEpochMillis = 200L,
@@ -61,6 +63,7 @@ class KidDaoTest {
         val db = buildDatabase()
         val id = db.kidDao().upsert(
             KidEntity(
+                stableId = "stable-adam",
                 name = "Adam",
                 avatarColorArgb = 0xFF1E88E5.toInt(),
                 createdAtEpochMillis = 100L,
@@ -124,6 +127,7 @@ class KidDaoTest {
         )
         val kidId = db.kidDao().upsert(
             KidEntity(
+                stableId = "stable-ella",
                 name = "Ella",
                 avatarColorArgb = 0xFF2196F3.toInt(),
                 createdAtEpochMillis = 1L,

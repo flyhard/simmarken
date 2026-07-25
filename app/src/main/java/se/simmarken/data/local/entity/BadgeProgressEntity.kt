@@ -32,4 +32,5 @@ data class BadgeProgressEntity(
     val isGotten: Boolean = false,
     val achievedAtEpochMillis: Long? = null,
     val gottenAtEpochMillis: Long? = null,
+    val updatedAtEpochMillis: Long = 0L,
 )
