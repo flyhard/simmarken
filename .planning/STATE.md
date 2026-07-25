@@ -4,15 +4,15 @@ milestone: v1.0
 milestone_name: milestone
 current_phase: 06
 current_phase_name: export-import-i18n
-status: verifying
+status: executing
 stopped_at: Completed 06-03-PLAN.md
-last_updated: "2026-07-25T06:07:17.418Z"
+last_updated: "2026-07-25T06:35:29.895Z"
 last_activity: 2026-07-25
 last_activity_desc: Completed 06-02 chrome i18n migration
 progress:
   total_phases: 6
   completed_phases: 6
-  total_plans: 20
+  total_plans: 21
   completed_plans: 20
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-07-22)
 
 Phase: 06 (export-import-i18n) — EXECUTING
 Plan: 3 of 3
-Status: Phase complete — ready for verification
+Status: Ready to execute
 Last activity: 2026-07-25 — Completed 06-02 chrome i18n migration
 
 Progress: [██████████] 100% (1 plan remaining in phase 6)
