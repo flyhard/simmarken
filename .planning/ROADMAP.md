@@ -184,7 +184,7 @@ Plans:
   4. All UI strings available in Swedish and English
   5. Parent can switch language in settings; preference persists
 
-**Plans**: 2/3 plans executed
+**Plans**: 3/3 plans executed
 
 Plans:
 
@@ -198,7 +198,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 06-03-PLAN.md — Language picker, DataStore locale preference, AppCompatDelegate apply (I18N-03)
+- [x] 06-03-PLAN.md — Language picker, DataStore locale preference, AppCompatDelegate apply (I18N-03)
 
 ## Progress
 
@@ -212,4 +212,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Child Profiles & Home | 3/3 | Complete    | 2026-07-23 |
 | 4. Catalog View & Visual States | 3/3 | In Progress|  |
 | 5. Progress Tracking & Badge Detail | 3/3 | Complete    | 2026-07-24 |
-| 6. Export/Import & i18n | 1/3 | In Progress|  |
+| 6. Export/Import & i18n | 3/3 | In Progress|  |

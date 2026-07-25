@@ -4,16 +4,16 @@ milestone: v1.0
 milestone_name: milestone
 current_phase: 06
 current_phase_name: export-import-i18n
-status: executing
-stopped_at: Completed 06-02-PLAN.md
-last_updated: "2026-07-25T06:22:00.000Z"
+status: verifying
+stopped_at: Completed 06-03-PLAN.md
+last_updated: "2026-07-25T06:07:17.418Z"
 last_activity: 2026-07-25
 last_activity_desc: Completed 06-02 chrome i18n migration
 progress:
   total_phases: 6
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 20
-  completed_plans: 19
+  completed_plans: 20
 ---
 
 # Project State
@@ -29,10 +29,10 @@ See: .planning/PROJECT.md (updated 2026-07-22)
 
 Phase: 06 (export-import-i18n) — EXECUTING
 Plan: 3 of 3
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-07-25 — Completed 06-02 chrome i18n migration
 
-Progress: [██████████] 95% (1 plan remaining in phase 6)
+Progress: [██████████] 100% (1 plan remaining in phase 6)
 
 ## Performance Metrics
 
@@ -70,6 +70,7 @@ Progress: [██████████] 95% (1 plan remaining in phase 6)
 | Phase 05 P03 | 18 | 3 tasks | 11 files |
 | Phase 06-export-import-i18n P01 | 90min | 3 tasks | 39 files |
 | Phase 06-export-import-i18n P02 | 25min | 3 tasks | 24 files |
+| Phase 06-export-import-i18n P03 | 35min | 3 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -109,6 +110,8 @@ Recent decisions affecting current work:
 - [Phase 06]: KidNameValidation returns KidNameError enum; composables resolve localized strings
 - [Phase 06]: StringsParityTest uses regex XML parsing for JVM locale key parity
 - [Phase 06]: Settings snackbar and InvalidReason map to @StringRes in UI layer (D-17)
+- [Phase ?]: LanguageMode persisted in DataStore; AppCompatDelegate applies at startup and on Settings selection (D-18–D-22)
+- [Phase ?]: Catalog mapper always uses nameSv/textSv regardless of UI locale (D-13)
 
 ### Pending Todos
 
@@ -128,6 +131,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-25T06:22:00.000Z
-Stopped at: Completed 06-02-PLAN.md
+Last session: 2026-07-25T06:07:17.408Z
+Stopped at: Completed 06-03-PLAN.md
 Resume file: None
