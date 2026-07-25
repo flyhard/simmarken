@@ -1,9 +1,9 @@
 ---
-status: diagnosed
+status: complete
 phase: 01-android-foundation-database
 source: [01-VERIFICATION.md]
 started: 2026-07-22T18:55:00Z
-updated: 2026-07-25T07:15:00Z
+updated: 2026-07-25T07:16:00Z
 ---
 
 ## Current Test
@@ -26,15 +26,13 @@ result: pass
 
 ### 4. Run connected instrumented tests
 expected: `./gradlew :app:connectedDebugAndroidTest` exits 0
-result: issue
-reported: "CatalogSeedLoaderTest.nullImageBadgesHaveCategoryFallbackColor FAILED at line 114 — connectedDebugAndroidTest BUILD FAILED (1 failure in 14 tests)"
-severity: major
+result: pass
 
 ## Summary
 
 total: 4
-passed: 3
-issues: 1
+passed: 4
+issues: 0
 pending: 0
 skipped: 0
 blocked: 0
@@ -43,7 +41,7 @@ blocked: 0
 
 - gap_id: G-01-4
   truth: "./gradlew :app:connectedDebugAndroidTest exits 0"
-  status: failed
+  status: resolved
   reason: "User reported: CatalogSeedLoaderTest.nullImageBadgesHaveCategoryFallbackColor FAILED at line 114 — connectedDebugAndroidTest BUILD FAILED (1 failure in 14 tests)"
   severity: major
   test: 4
@@ -56,3 +54,5 @@ blocked: 0
   missing:
     - "Relax or scope test assertion: require distinct colors only when null-image badges span multiple categories"
   debug_session: ""
+  resolved_by: inline-fix-during-uat
+  resolved_at: 2026-07-25

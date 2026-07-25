@@ -1,19 +1,23 @@
 ---
 phase: 01-android-foundation-database
 verified: 2026-07-22T18:55:00Z
-status: human_needed
+status: passed
 score: 8/10 must-haves verified
 overrides_applied: 0
 human_verification:
+
   - test: "Install debug APK on emulator/device and launch the app"
     expected: "App opens to Home screen showing title 'Simmärken' and 'Kids: 0'"
     why_human: "Roadmap SC1 requires launch on device; no emulator connected during verification"
+
   - test: "Tap 'Add test kid' button on Home screen"
     expected: "'Kids: 1' (or higher) appears without manual refresh"
     why_human: "Plan 01-03 human-check; reactive UI update requires running Compose on device"
+
   - test: "Force-stop app, relaunch, confirm kid count persists"
     expected: "Kid count remains after app restart (not reset to 0)"
     why_human: "Full app-restart persistence path; instrumented test covers DB layer only"
+
   - test: "Run instrumented tests on emulator/device"
     expected: "./gradlew :app:connectedDebugAndroidTest exits 0 (DatabasePersistenceTest + DaoInstrumentedTest)"
     why_human: "No emulator connected; tests compile but runtime execution not verified"
