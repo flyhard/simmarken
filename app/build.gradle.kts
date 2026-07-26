@@ -1,3 +1,7 @@
+import java.util.Base64
+import java.util.Properties
+import org.gradle.api.GradleException
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +9,45 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+}
+
+data class ReleaseSigningCredentials(
+    val storeFile: java.io.File,
+    val storePassword: String,
+    val keyAlias: String,
+    val keyPassword: String,
+)
+
+fun Project.resolveReleaseSigningCredentials(): ReleaseSigningCredentials? {
+    val propsFile = rootProject.file("keystore.properties")
+    if (propsFile.exists()) {
+        val props = Properties().apply { propsFile.inputStream().use { load(it) } }
+        val storeFilePath = props.getProperty("storeFile") ?: return null
+        val storeFile = rootProject.file(storeFilePath)
+        val storePassword = props.getProperty("storePassword")
+        val keyAlias = props.getProperty("keyAlias")
+        val keyPassword = props.getProperty("keyPassword")
+        if (storeFile.exists() && !storePassword.isNullOrBlank() &&
+            !keyAlias.isNullOrBlank() && !keyPassword.isNullOrBlank()
+        ) {
+            return ReleaseSigningCredentials(storeFile, storePassword, keyAlias, keyPassword)
+        }
+        return null
+    }
+
+    val base64 = System.getenv("ANDROID_KEYSTORE_BASE64")?.trim().orEmpty()
+    val storePassword = System.getenv("KEYSTORE_PASSWORD")
+    val keyAlias = System.getenv("KEY_ALIAS")
+    val keyPassword = System.getenv("KEY_PASSWORD")
+    if (base64.isNotEmpty() && !storePassword.isNullOrBlank() &&
+        !keyAlias.isNullOrBlank() && !keyPassword.isNullOrBlank()
+    ) {
+        val decoded = layout.buildDirectory.file("signing/ci-upload.jks").get().asFile
+        decoded.parentFile.mkdirs()
+        decoded.writeBytes(Base64.getDecoder().decode(base64))
+        return ReleaseSigningCredentials(decoded, storePassword, keyAlias, keyPassword)
+    }
+    return null
 }
 
 android {
@@ -21,9 +64,23 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val releaseSigning = resolveReleaseSigningCredentials()
+
+    signingConfigs {
+        if (releaseSigning != null) {
+            create("release") {
+                storeFile = releaseSigning.storeFile
+                storePassword = releaseSigning.storePassword
+                keyAlias = releaseSigning.keyAlias
+                keyPassword = releaseSigning.keyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.findByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -57,6 +114,28 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}
+
+gradle.taskGraph.whenReady {
+    val isReleaseBuild = allTasks.any { task ->
+        val n = task.name
+        n == "bundleRelease" || n == "assembleRelease" ||
+            n.endsWith("BundleRelease") || n.endsWith("AssembleRelease")
+    }
+    if (isReleaseBuild) {
+        val cfg = android.signingConfigs.findByName("release")
+        val store = cfg?.storeFile
+        if (cfg == null || store == null || !store.exists()) {
+            throw GradleException(
+                """
+                Release signing is not configured.
+                Local: copy keystore.properties.example → keystore.properties and run scripts/generate-upload-keystore.sh
+                CI: set ANDROID_KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD
+                See keystore.properties.example for details.
+                """.trimIndent(),
+            )
         }
     }
 }
