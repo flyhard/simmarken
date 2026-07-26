@@ -5,15 +5,15 @@ milestone_name: Release & Open Source
 current_phase: 07
 current_phase_name: security-git-hygiene
 status: executing
-stopped_at: Completed 08-02-PLAN.md
-last_updated: "2026-07-26T08:44:59.344Z"
+stopped_at: Completed 08-01-PLAN.md
+last_updated: "2026-07-26T08:46:11.589Z"
 last_activity: 2026-07-25
 last_activity_desc: Phase 07 execution started
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 5
   percent: 17
 ---
 
@@ -29,11 +29,11 @@ See: .planning/PROJECT.md (updated 2026-07-25)
 ## Current Position
 
 Phase: 07 (security-git-hygiene) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-07-25 — Phase 07 execution started
 
-Progress: [███████░░░] 67%
+Progress: [████████░░] 83%
 
 ## Performance Metrics
 
@@ -64,6 +64,7 @@ Progress: [███████░░░] 67%
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 08-gradle-signing-configuration P02 | 5 | 3 tasks | 3 files |
+| Phase 08-gradle-signing-configuration P01 | 12min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,8 @@ Recent decisions affecting v1.1 work:
 - MIT for source code; badge assets need explicit carve-out per `docs/SOURCES.md`
 - [Phase ?]: Auto-selected proceed at keystore generation checkpoint (upload.jks absent)
 - [Phase ?]: Phase 8 captures SHA-256 locally; Play Console registration deferred to Phase 10 (D-16)
+- [Phase ?]: Inline signing logic in app/build.gradle.kts with Gradle-side CI base64 decode
+- [Phase ?]: Nullable release signingConfig via findByName — no debug keystore fallback (D-01)
 
 ### Pending Todos
 
@@ -99,6 +102,6 @@ None — v1.0 MVP shipped; v1.1 roadmap defined.
 
 ## Session Continuity
 
-Last session: 2026-07-26T08:44:59.335Z
-Stopped at: Completed 08-02-PLAN.md
+Last session: 2026-07-26T08:46:11.581Z
+Stopped at: Completed 08-01-PLAN.md
 Resume file: None

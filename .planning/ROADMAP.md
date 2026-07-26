@@ -73,12 +73,12 @@ Plans:
   3. CI signing reads credentials from environment variables with no secrets in source
   4. Upload keystore SHA-256 fingerprint is documented privately for Play Console registration
 
-**Plans**: 1/3 plans executed
+**Plans**: 2/3 plans executed
 
 Plans:
 **Wave 1** *(parallel — no file overlap)*
 
-- [ ] 08-01-PLAN.md — Gradle signing resolver, fail-hard guard, keystore.properties.example (CI-02, D-01–D-04, D-09–D-12)
+- [x] 08-01-PLAN.md — Gradle signing resolver, fail-hard guard, keystore.properties.example (CI-02, D-01–D-04, D-09–D-12)
 - [x] 08-02-PLAN.md — Keystore bootstrap script, fingerprint gitignore, SECURITY-CHECKLIST update (RELE-01, SECU-03, D-05–D-08, D-13–D-16)
 
 **Wave 2** *(blocked on Wave 1 completion)*
@@ -152,7 +152,7 @@ Plans:
 | 5. Progress Tracking & Badge Detail | v1.0 | 3/3 | Complete | 2026-07-24 |
 | 6. Export/Import & i18n | v1.0 | 4/4 | Complete | 2026-07-25 |
 | 7. Security & Git Hygiene | v1.1 | 3/3 | In Progress|  |
-| 8. Gradle Signing Configuration | v1.1 | 1/3 | In Progress|  |
+| 8. Gradle Signing Configuration | v1.1 | 2/3 | In Progress|  |
 | 9. CI Build & Test | v1.1 | 0/? | Not started | - |
 | 10. Play Console Setup | v1.1 | 0/? | Not started | - |
 | 11. Release Pipeline | v1.1 | 0/? | Not started | - |
