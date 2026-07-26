@@ -12,7 +12,7 @@ Release engineering and open-source publishing. No app feature changes — addit
 
 - [ ] **SECU-01**: Automated secrets scan (gitleaks) passes with zero findings on full git history
 - [ ] **SECU-02**: Manual pre-public security review checklist completed and signed off
-- [ ] **SECU-03**: `.gitignore` hardened for keystores, Play credentials, and local signing files
+- [x] **SECU-03**: `.gitignore` hardened for keystores, Play credentials, and local signing files
 
 ### CI/CD (CI)
 
@@ -22,7 +22,7 @@ Release engineering and open-source publishing. No app feature changes — addit
 
 ### Release & Play Store (RELE)
 
-- [ ] **RELE-01**: Upload keystore generated and Play App Signing enrolled in Play Console
+- [x] **RELE-01**: Upload keystore generated and Play App Signing enrolled in Play Console
 - [ ] **RELE-02**: Play Console app record created with `se.simmarken` application ID
 - [ ] **RELE-03**: Release pipeline uploads signed AAB to Play Store internal testing track
 - [ ] **RELE-04**: `versionCode` incremented before each Play upload (no duplicate rejection)
@@ -75,11 +75,11 @@ Deferred to future milestone. Tracked but not in v1.1 roadmap.
 |-------------|-------|--------|
 | SECU-01 | Phase 7 | Pending |
 | SECU-02 | Phase 7 | Pending |
-| SECU-03 | Phase 7 | Pending |
+| SECU-03 | Phase 7 | Complete |
 | CI-01 | Phase 9 | Pending |
 | CI-02 | Phase 11 | Pending |
 | CI-03 | Phase 9 | Pending |
-| RELE-01 | Phase 10 | Pending |
+| RELE-01 | Phase 10 | Complete |
 | RELE-02 | Phase 10 | Pending |
 | RELE-03 | Phase 11 | Pending |
 | RELE-04 | Phase 11 | Pending |
@@ -90,6 +90,7 @@ Deferred to future milestone. Tracked but not in v1.1 roadmap.
 | OSS-05 | Phase 12 | Pending |
 
 **Coverage:**
+
 - v1.1 requirements: 15 total
 - Mapped to phases: 15
 - Unmapped: 0 ✓
