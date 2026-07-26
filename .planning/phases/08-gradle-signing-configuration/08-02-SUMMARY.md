@@ -90,7 +90,7 @@ status: complete
 1. **Task 2: Keystore bootstrap script with fingerprint capture** - `cd3bae1` (feat)
 2. **Task 3: Extend gitignore and SECURITY-CHECKLIST** - `5d7ced4` (chore)
 
-**Plan metadata:** pending final docs commit
+**Plan metadata:** `b94465f` (docs: complete plan)
 
 ## Files Created/Modified
 
