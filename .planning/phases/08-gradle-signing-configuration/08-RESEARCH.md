@@ -447,17 +447,11 @@ base64 -i upload.jks | tr -d '\n'
 
 **Note:** All Google/Android guidance claims above are `[CITED: developer.android.com/...]` from official docs fetched this session. JDK `keytool` behavior is `[CITED: docs.oracle.com/...]`.
 
-## Open Questions
+## Open Questions — RESOLVED
 
-1. **Store/key password sameness**
-   - What we know: Google Studio wizard often uses same password for store and key; D-08 prompts interactively but doesn't mandate equality.
-   - What's unclear: Whether script should enforce matching passwords.
-   - Recommendation: Allow different passwords (keytool supports both); `keystore.properties` already has separate fields.
+1. **Store/key password sameness** — **RESOLVED:** Allow different passwords (keytool supports both); `keystore.properties` already has separate `storePassword` and `keyPassword` fields. Script does not enforce equality per D-08 interactive prompts.
 
-2. **Distinguished Name (DN) for upload certificate**
-   - What we know: `keytool` prompts for CN/OU/O/C if not passed via `-dname`.
-   - What's unclear: Whether to hardcode a DN in the script.
-   - Recommendation: Let `keytool` prompt interactively (D-08); DN is not displayed to users and doesn't affect Play upload.
+2. **Distinguished Name (DN) for upload certificate** — **RESOLVED:** Let `keytool` prompt interactively for DN fields (D-08); do not hardcode `-dname` in script. DN is not displayed to users and does not affect Play upload.
 
 ## Environment Availability
 
