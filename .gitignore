@@ -14,6 +14,7 @@ docs/extraction/pdfs/
 *.jks
 *.keystore
 keystore.properties
+keystore-fingerprint.md
 **/play-credentials.json
 **/service-account*.json
 *.p12
