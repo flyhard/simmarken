@@ -9,6 +9,7 @@ requires:
     provides: Gradle signing resolver, keystore bootstrap script, keystore.properties.example
 provides:
   - scripts/verify-release-signature.sh post-build AAB signature validation
+  - Human-confirmed signed release AAB end-to-end (RELE-01, SC-1/SC-4)
 affects: [phase-10-play-console, phase-11-release-pipeline]
 
 tech-stack:
@@ -24,12 +25,12 @@ key-files:
 
 key-decisions:
   - "Fingerprint mismatch prints MISMATCH but does not fail script when doc present (CI without local doc)"
-  - "Human end-to-end verification deferred — upload.jks and keystore.properties absent in executor environment"
+  - "Human end-to-end verification completed by maintainer — upload.jks, bundleRelease, verify script, fail-hard, debug, gitleaks all confirmed"
 
 patterns-established:
   - "verify-release-signature.sh: default AAB path, positional override, prerequisite tool checks"
 
-requirements-completed: []
+requirements-completed: [CI-02, RELE-01]
 
 coverage:
   - id: D1
@@ -43,36 +44,40 @@ coverage:
   - id: D2
     description: "Signed release AAB produced locally and verified end-to-end"
     requirement: RELE-01
-    verification: []
+    verification:
+      - kind: manual_procedural
+        ref: "Maintainer: generate-upload-keystore.sh, bundleRelease, verify-release-signature.sh, fail-hard, assembleDebug, gitleaks"
+        status: pass
     human_judgment: true
-    rationale: "Requires maintainer-local upload.jks, keystore.properties, and interactive keytool bootstrap — not present in CI/executor environment"
+    rationale: "Requires maintainer-local upload.jks, keystore.properties, and interactive keytool bootstrap — approved 2026-07-26"
 
-duration: 4min
+duration: 12min
 completed: 2026-07-26
-status: checkpoint-pending
+status: complete
 ---
 
 # Phase 8 Plan 03: Release Signature Verification Summary
 
-**Post-build AAB verification script with jarsigner/keytool checks; human end-to-end signing validation pending maintainer keystore setup**
+**Post-build AAB verification script plus maintainer-confirmed signed release bundle end-to-end**
 
 ## Performance
 
-- **Duration:** 4 min
+- **Duration:** 12 min
 - **Started:** 2026-07-26T08:44:55Z
-- **Completed:** 2026-07-26T08:49:00Z (task 1 only; checkpoint pending)
-- **Tasks:** 1/2 complete
+- **Completed:** 2026-07-26T19:17:00Z
+- **Tasks:** 2/2 complete
 - **Files modified:** 1
 
 ## Accomplishments
 
 - Created `scripts/verify-release-signature.sh` with jarsigner -verify, keytool -printcert, and optional fingerprint compare
 - Script passes `bash -n`, is executable, and follows repo bash conventions
-- Human checkpoint emitted: local `upload.jks` / `keystore.properties` not present — maintainer must bootstrap before signed AAB verification
+- Maintainer approved human checkpoint: local keystore setup, signed `bundleRelease`, verification script, fail-hard guard, debug build, and gitleaks all confirmed
 
 ## Task Commits
 
 1. **Task 1: Release signature verification script** - `23056e4` (feat)
+2. **Task 2: Human verify signed release AAB end-to-end** - user approved (no commit)
 
 ## Files Created/Modified
 
@@ -81,49 +86,33 @@ status: checkpoint-pending
 ## Decisions Made
 
 - Fingerprint MISMATCH is reported but non-fatal (supports CI without local fingerprint doc)
-- End-to-end signed bundleRelease verification requires maintainer action (keystore absent)
+- End-to-end signed bundleRelease verification completed by maintainer on 2026-07-26
 
 ## Deviations from Plan
 
-None for task 1 — script implemented as specified.
+None — plan executed exactly as written.
 
 ## Issues Encountered
 
-- `upload.jks`, `keystore.properties`, and `keystore-fingerprint.md` absent locally — cannot run `bundleRelease` or full verification in executor environment
+None after maintainer completed local keystore bootstrap and verification steps.
 
-## User Setup Required
+## Human Verification (Task 2)
 
-Maintainer must complete before approving checkpoint:
+**Approved:** 2026-07-26 — maintainer confirmed:
 
-```bash
-# 1. Generate upload keystore (interactive keytool prompts)
-./scripts/generate-upload-keystore.sh
-
-# 2. Configure signing credentials
-cp keystore.properties.example keystore.properties
-# Edit storePassword and keyPassword with values chosen during step 1
-
-# 3. Build signed release bundle
-./gradlew :app:bundleRelease
-
-# 4. Verify signature and fingerprint match
-./scripts/verify-release-signature.sh
-
-# 5. Confirm fail-hard (rename keystore.properties temporarily)
-./gradlew :app:bundleRelease   # must fail with keystore.properties.example message
-
-# 6. Confirm debug unaffected
-./gradlew :app:assembleDebug   # must succeed without keystore.properties
-
-# 7. Confirm no secrets staged
-gitleaks detect --source . --config .gitleaks.toml
-```
+1. `upload.jks` generated via `generate-upload-keystore.sh`
+2. `keystore.properties` configured from example
+3. `./gradlew :app:bundleRelease` produced signed `app-release.aab`
+4. `./scripts/verify-release-signature.sh` passed (jarsigner verify + SHA-256 match)
+5. Fail-hard guard confirmed (bundleRelease fails without keystore.properties)
+6. Debug build unaffected (`assembleDebug` succeeds without signing credentials)
+7. `gitleaks detect` — no secrets staged
 
 ## Next Phase Readiness
 
-- Verification script ready for use after first signed `bundleRelease`
-- Phase 8 cannot sign off until human checkpoint approved
-- Phase 10 can consume SHA-256 from `keystore-fingerprint.md` after maintainer bootstrap
+- Verification script ready for CI and release pipeline use
+- Phase 8 signing path validated end-to-end (SC-1/SC-4, RELE-01)
+- Phase 10 can consume SHA-256 from `keystore-fingerprint.md` for Play Console registration
 
 ## Self-Check: PASSED
 
@@ -132,4 +121,4 @@ gitleaks detect --source . --config .gitleaks.toml
 
 ---
 *Phase: 08-gradle-signing-configuration*
-*Checkpoint pending: 2026-07-26*
+*Completed: 2026-07-26*
