@@ -480,6 +480,11 @@ Phase 12 OSS-01 will document these same commands [VERIFIED: 09-CONTEXT.md].
 
 - Gradle fail-fast task ordering without `--parallel` — standard behavior, not re-verified in blocked shell run [ASSUMED]
 
+## Open Questions (RESOLVED)
+
+1. **Whether lint fixes belong in Phase 9 vs. baselining** — **RESOLVED:** Fix source in Phase 9 (Plan 09-01). Baselining would hide real Compose issues; CONTEXT expects infrastructure-only but green CI-01 requires passing lint.
+2. **Whether `platforms;android-36` alone suffices or `build-tools;36.0.0` must be pinned** — **RESOLVED:** Start with `platforms;android-36` only (matches `compileSdk = 36`). Add explicit build-tools pin only if CI fails without it.
+
 ## Metadata
 
 **Confidence breakdown:**
