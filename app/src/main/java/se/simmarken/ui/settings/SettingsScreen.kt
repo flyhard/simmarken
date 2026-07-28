@@ -42,6 +42,8 @@ fun SettingsScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
+    val shareChooserTitle = stringResource(R.string.export_share_chooser_title)
+    val snackbarMessage = uiState.snackbarMessageRes?.let { stringResource(it) }
 
     val importLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument(),
@@ -59,14 +61,14 @@ fun SettingsScreen(
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
             context.startActivity(
-                Intent.createChooser(send, context.getString(R.string.export_share_chooser_title)),
+                Intent.createChooser(send, shareChooserTitle),
             )
         }
     }
 
-    LaunchedEffect(uiState.snackbarMessageRes) {
-        uiState.snackbarMessageRes?.let { messageRes ->
-            snackbarHostState.showSnackbar(context.getString(messageRes))
+    LaunchedEffect(snackbarMessage) {
+        snackbarMessage?.let { message ->
+            snackbarHostState.showSnackbar(message)
             viewModel.clearSnackbarMessage()
         }
     }
