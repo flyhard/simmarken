@@ -4,17 +4,17 @@ milestone: v1.1
 milestone_name: Release & Open Source
 current_phase: 9
 current_phase_name: CI Build & Test
-status: planning
+status: phase-complete
 stopped_at: Completed 09-03-PLAN.md
-last_updated: "2026-07-28T06:45:38.845Z"
-last_activity: 2026-07-26
-last_activity_desc: Phase 8 complete, transitioned to Phase 9
+last_updated: "2026-07-28T06:46:00.000Z"
+last_activity: 2026-07-28
+last_activity_desc: Phase 9 complete — CI workflow green on GitHub
 progress:
   total_phases: 6
-  completed_phases: 3
-  total_plans: 9
-  completed_plans: 9
-  percent: 50
+  completed_phases: 4
+  total_plans: 12
+  completed_plans: 12
+  percent: 67
 ---
 
 # Project State
@@ -24,14 +24,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-25)
 
 **Core value:** At the swim hall, a parent can immediately answer: "Did they pass this badge, and did we buy the physical pin?"
-**Current focus:** Phase 07 — security-git-hygiene
+**Current focus:** Phase 10 — Play Console Setup
 
 ## Current Position
 
-Phase: 9 — CI Build & Test
-Plan: 3 plans created (0/3 executed)
-Status: Ready to execute
-Last activity: 2026-07-26 — Phase 8 complete, transitioned to Phase 9
+Phase: 9 — CI Build & Test (complete)
+Plan: 3/3 executed
+Status: Phase complete — ready for verification
+Last activity: 2026-07-28 — Phase 9 CI workflow green on GitHub
 
 Progress: [██████████] 100%
 
