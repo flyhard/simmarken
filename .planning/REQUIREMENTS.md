@@ -16,9 +16,9 @@ Release engineering and open-source publishing. No app feature changes — addit
 
 ### CI/CD (CI)
 
-- [ ] **CI-01**: GitHub Actions runs `lintDebug` and `testDebugUnitTest` on every push and pull request
+- [x] **CI-01**: GitHub Actions runs `lintDebug` and `testDebugUnitTest` on every push and pull request
 - [x] **CI-02**: Release workflow builds a signed release AAB using GitHub Secrets (no secrets in source)
-- [ ] **CI-03**: CI uses Gradle dependency caching to keep feedback loop under 10 minutes
+- [x] **CI-03**: CI uses Gradle dependency caching to keep feedback loop under 10 minutes
 
 ### Release & Play Store (RELE)
 
@@ -76,9 +76,9 @@ Deferred to future milestone. Tracked but not in v1.1 roadmap.
 | SECU-01 | Phase 7 | Pending |
 | SECU-02 | Phase 7 | Pending |
 | SECU-03 | Phase 7 | Complete |
-| CI-01 | Phase 9 | Pending |
+| CI-01 | Phase 9 | Complete |
 | CI-02 | Phase 11 | Complete |
-| CI-03 | Phase 9 | Pending |
+| CI-03 | Phase 9 | Complete |
 | RELE-01 | Phase 10 | Complete |
 | RELE-02 | Phase 10 | Pending |
 | RELE-03 | Phase 11 | Pending |

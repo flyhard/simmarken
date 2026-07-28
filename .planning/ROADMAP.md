@@ -26,7 +26,7 @@ Full phase details: [.planning/milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADM
 **Milestone Goal:** Ship Simmärken publicly — safe to open-source on GitHub, with automated builds and Play Store internal testing.
 
 - [ ] **Phase 7: Security & Git Hygiene** — Secrets scan, hardened gitignore, pre-public review checklist
-- [ ] **Phase 8: Gradle Signing Configuration** — Conditional release signing for local dev and CI
+- [x] **Phase 8: Gradle Signing Configuration** — Conditional release signing for local dev and CI (completed 2026-07-26)
 - [ ] **Phase 9: CI Build & Test** — Fast lint + unit test workflow on every push/PR
 - [ ] **Phase 10: Play Console Setup** — Manual Play Store bootstrap and credential setup
 - [ ] **Phase 11: Release Pipeline** — Signed AAB build and internal track upload automation
@@ -96,7 +96,20 @@ Plans:
   2. CI workflow completes in under 10 minutes with Gradle dependency caching enabled
   3. Failed lint or unit tests cause the workflow to fail (visible red check on PR)
 
-**Plans**: TBD
+**Plans**: 3/3 plans executed
+
+Plans:
+**Wave 1**
+
+- [x] 09-01-PLAN.md — Fix SettingsScreen Compose lint errors; local `lintDebug testDebugUnitTest` green (CI-01 prerequisite)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [x] 09-02-PLAN.md — Add `.github/workflows/ci.yml` with lint-and-test job, Gradle cache, locked CONTEXT decisions (CI-01, CI-03)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [x] 09-03-PLAN.md — Push to GitHub, confirm green CI run and cache behavior; maintainer checkpoint (CI-01, CI-03)
 
 ### Phase 10: Play Console Setup
 
@@ -152,8 +165,8 @@ Plans:
 | 5. Progress Tracking & Badge Detail | v1.0 | 3/3 | Complete | 2026-07-24 |
 | 6. Export/Import & i18n | v1.0 | 4/4 | Complete | 2026-07-25 |
 | 7. Security & Git Hygiene | v1.1 | 3/3 | In Progress|  |
-| 8. Gradle Signing Configuration | v1.1 | 3/3 | In Progress|  |
-| 9. CI Build & Test | v1.1 | 0/? | Not started | - |
+| 8. Gradle Signing Configuration | v1.1 | 3/3 | Complete    | 2026-07-26 |
+| 9. CI Build & Test | v1.1 | 3/3 | In Progress|  |
 | 10. Play Console Setup | v1.1 | 0/? | Not started | - |
 | 11. Release Pipeline | v1.1 | 0/? | Not started | - |
 | 12. Open Source Publish | v1.1 | 0/? | Not started | - |
