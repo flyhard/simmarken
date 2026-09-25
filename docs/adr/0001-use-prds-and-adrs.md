@@ -38,9 +38,9 @@ Work is tracked through PRD requirement checkboxes, GitHub issues and pull
 requests. There is no separate state file.
 
 We migrate the durable GSD content: milestone requirements become PRDs 0001–0003,
-and phase decisions become ADRs 0002–0014, each citing its original decision
+and phase decisions become ADRs 0002–0015, each citing its original decision
 IDs. The `.planning/` directory and the GSD Cursor rule are removed; they remain
-in git history (commit `b0138d3`).
+in git history (commit `dcf12df`).
 
 ## Alternatives considered
 

@@ -50,5 +50,5 @@ Before 2026-09 the project was planned with the GSD workflow in `.planning/`
 (milestones, phases, plans). The durable content — requirements, scope and
 decisions — was migrated into these PRDs and the ADRs. Per-plan execution logs,
 research notes and verification reports were not migrated; they remain available
-in git history, e.g. `git show b0138d3:.planning/ROADMAP.md` or
-`git ls-tree -r --name-only b0138d3 -- .planning`.
+in git history, e.g. `git show dcf12df:.planning/ROADMAP.md` or
+`git ls-tree -r --name-only dcf12df -- .planning`.

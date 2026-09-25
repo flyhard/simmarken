@@ -3,7 +3,7 @@
 - **Status:** In progress
 - **Owner:** Maintainer
 - **Created:** 2026-07-25
-- **Last updated:** 2026-09-25 (migrated from GSD `.planning/REQUIREMENTS.md`, `ROADMAP.md`, `STATE.md`)
+- **Last updated:** 2026-09-25 (migrated from GSD `.planning/REQUIREMENTS.md`, `ROADMAP.md`, `STATE.md` and phase 9–10 context)
 
 ## Problem
 
@@ -48,6 +48,8 @@ Status as of 2026-09-25. Checked = done with evidence.
 
 - [x] **CI-01** (must): GitHub Actions runs `lintDebug` and `testDebugUnitTest`
   on every push and pull request (`.github/workflows/ci.yml`).
+  - Evidence: PR-triggered run green in ~6 min (flyhard/simmmarken#1); a
+    deliberately failing unit test turned the check red, then was reverted.
 - [ ] **CI-02** (must): A release workflow builds a signed release AAB using
   GitHub Secrets (no secrets in source).
   - Done: Gradle reads signing credentials from environment variables and fails
@@ -63,16 +65,35 @@ Status as of 2026-09-25. Checked = done with evidence.
   - Done: `scripts/generate-upload-keystore.sh`; keystore and SHA-256 fingerprint
     exist locally (gitignored); end-to-end signed AAB verified with
     `scripts/verify-release-signature.sh`.
-  - Remaining: register the upload key / enrol Play App Signing.
+  - Remaining: enrol Play App Signing and register the upload key; the
+    upload-key certificate SHA-256 in Play Console must match the local
+    `keystore-fingerprint.md`.
 - [ ] **RELE-02** (must): Play Console app record exists for application ID
-  `se.simmarken`, and a GCP service account with Release Manager role has its
-  JSON key stored in GitHub Secrets.
+  `se.simmarken`, and a GCP service account with the Release Manager role has
+  its JSON key stored in the GitHub Secret `PLAY_SERVICE_ACCOUNT_JSON`
+  ([ADR-0015](../adr/0015-play-console-bootstrap.md)).
+  - At least one signed AAB (`versionCode` 1, `versionName` "1.0", built
+    locally and checked with `scripts/verify-release-signature.sh`) is accepted
+    on the internal testing track.
+  - Steps and evidence (dates, release IDs, screenshots) are recorded in a
+    committed runbook, `docs/PLAY-CONSOLE-SETUP.md`.
 - [ ] **RELE-03** (must): The release pipeline uploads the signed AAB to the Play
   internal testing track on tag or manual dispatch.
   - Keystore and service-account credentials are decoded to ephemeral runner
     paths outside the checkout and removed after the build.
 - [ ] **RELE-04** (must): `versionCode` is incremented before each Play upload —
   no duplicate-version rejection.
+- [ ] **RELE-05** (must): Minimum store presence required by Play for internal
+  testing.
+  - App name **Simmärken**, default store language Swedish (`sv-SE`).
+  - A privacy policy at a stable public HTTPS URL (e.g. GitHub Pages)
+    stating that the app works offline, collects no data, stores everything
+    locally and only exports JSON when the user asks. Consistent with
+    `docs/SECURITY-CHECKLIST.md`.
+  - IARC content rating questionnaire completed honestly (no ads, no data
+    collection, no in-app purchases); expected rating Everyone / PEGI 3.
+  - Internal testers: maintainer only; the runbook explains how to add family
+    testers later.
 
 ### Open source (OSS)
 
@@ -90,9 +111,11 @@ Status as of 2026-09-25. Checked = done with evidence.
 
 Remaining work, in dependency order:
 
-1. **Play Console setup** (RELE-01 remainder, RELE-02) — manual: developer
-   account, app record, Play App Signing with the existing upload key, service
-   account, first manual upload to internal testing if Play requires it.
+1. **Play Console setup** (RELE-01 remainder, RELE-02, RELE-05) — manual, per
+   [ADR-0015](../adr/0015-play-console-bootstrap.md): app record and store
+   listing, privacy policy, Play App Signing with the existing upload key,
+   first internal-testing release uploaded by hand, service account and
+   `PLAY_SERVICE_ACCOUNT_JSON`.
 2. **Release pipeline** (CI-02, RELE-03, RELE-04) — needs 1.
 3. **Open-source publish** (OSS-01 … OSS-04, then OSS-05 last) — re-run the
    full-history Gitleaks scan on `main` immediately before flipping visibility.
@@ -118,6 +141,19 @@ Remaining work, in dependency order:
   internal testing track with no manual signing steps.
 - Gitleaks is clean on `main` at the moment the repository is made public.
 
+## Known follow-ups
+
+Found in the CI milestone code review (2026-07-30) and not fixed yet:
+
+- **Stale share-chooser title after a language change**
+  (`ui/settings/SettingsScreen.kt`): `shareChooserTitle` is captured when the
+  `LaunchedEffect` starts, so after an in-session language switch the export
+  chooser can show the old language. Fix: read it via `rememberUpdatedState`.
+  Normally hidden because changing the locale recreates the activity.
+- **No CI job timeout** (`.github/workflows/ci.yml`): add
+  `timeout-minutes: 15` to `lint-and-test` so a hung step fails fast instead of
+  running up to the 6-hour default.
+
 ## Risks & open questions
 
 - **Upload key mismatch** between CI secrets and the key registered in Play
@@ -135,3 +171,4 @@ Remaining work, in dependency order:
 - [ADR-0012](../adr/0012-release-signing-configuration.md) Release signing configuration
 - [ADR-0013](../adr/0013-ci-on-github-actions.md) CI on GitHub Actions
 - [ADR-0014](../adr/0014-play-store-publishing-via-gradle-play-publisher.md) Play Store publishing via Gradle Play Publisher
+- [ADR-0015](../adr/0015-play-console-bootstrap.md) Play Console bootstrap

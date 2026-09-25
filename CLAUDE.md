@@ -18,8 +18,11 @@ format change, cross-module pattern — add an ADR in the same PR. Don't edit th
 decision of an accepted ADR; supersede it with a new one. Tick PRD requirements
 off when they land.
 
+Agent skills in `.agents/skills/` (e.g. `domain-modeling`, `grill-with-docs`) also
+write ADRs to `docs/adr/`; use the numbering and template described in its README.
+
 Older code comments cite GSD decision IDs such as `D-13`; each ADR's *Origin*
-section maps them. The old `.planning/` directory is only in git history (`b0138d3`).
+section maps them. The old `.planning/` directory is only in git history (`dcf12df`).
 
 ## Stack and constraints
 

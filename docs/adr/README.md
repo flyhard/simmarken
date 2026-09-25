@@ -22,6 +22,7 @@ order they were made. Product scope lives in [PRDs](../prd/README.md).
 | [0012](0012-release-signing-configuration.md) | Release signing configuration | Accepted |
 | [0013](0013-ci-on-github-actions.md) | CI on GitHub Actions | Accepted |
 | [0014](0014-play-store-publishing-via-gradle-play-publisher.md) | Play Store publishing via Gradle Play Publisher | Accepted (not yet implemented) |
+| [0015](0015-play-console-bootstrap.md) | Play Console bootstrap | Accepted (not yet implemented) |
 
 ## When to write an ADR
 
@@ -43,8 +44,8 @@ Statuses: `Proposed` → `Accepted` → (`Deprecated` | `Superseded by ADR-NNNN`
 
 ## History
 
-ADRs 0002–0014 were written retroactively on 2026-09-25 from the decisions
+ADRs 0002–0015 were written retroactively on 2026-09-25 from the decisions
 recorded during GSD phase discussions (`.planning/**/NN-CONTEXT.md`, decision IDs
 like "Phase 5 D-10"). Each ADR lists the original decision IDs under *Origin* so
 older commit messages and code comments that cite them (e.g. `D-13`) can be
-traced. The original files are in git history at commit `b0138d3`.
+traced. The original files are in git history at commit `dcf12df`.
