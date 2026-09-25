@@ -1,0 +1,12 @@
+---
+description: Project context and planning conventions
+alwaysApply: true
+---
+
+Read `CLAUDE.md` at the repository root for project context, constraints and
+local verification commands.
+
+Planning uses PRDs (`docs/prd/`) for product requirements and ADRs (`docs/adr/`)
+for architecture decisions. Reference requirement IDs (e.g. `PROG-03`) and ADR
+numbers in commits and PRs. Add an ADR for significant technical decisions; never
+rewrite an accepted ADR — supersede it.
