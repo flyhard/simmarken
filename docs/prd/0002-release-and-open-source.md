@@ -57,6 +57,11 @@ Status as of 2026-09-25. Checked = done with evidence.
   - Remaining: the release workflow itself.
 - [x] **CI-03** (must): CI uses Gradle dependency caching; feedback loop under
   10 minutes.
+- [x] **CI-07** (should): Claude Code cloud sessions can run the CI checks
+  (`./gradlew lintDebug testDebugUnitTest`) with no manual setup
+  ([ADR-0016](../adr/0016-android-sdk-in-cloud-agent-sessions.md)).
+  - Evidence: flyhard/simmmarken#11 — SessionStart hook installs the Android SDK;
+    the CI command passed in a cloud session.
 
 ### Release & Play Store (RELE)
 
@@ -168,3 +173,4 @@ Remaining work, in dependency order:
 - [ADR-0013](../adr/0013-ci-on-github-actions.md) CI on GitHub Actions
 - [ADR-0014](../adr/0014-play-store-publishing-via-gradle-play-publisher.md) Play Store publishing via Gradle Play Publisher
 - [ADR-0015](../adr/0015-play-console-bootstrap.md) Play Console bootstrap
+- [ADR-0016](../adr/0016-android-sdk-in-cloud-agent-sessions.md) Android SDK in Claude Code cloud sessions

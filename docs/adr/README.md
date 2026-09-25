@@ -23,6 +23,7 @@ order they were made. Product scope lives in [PRDs](../prd/README.md).
 | [0013](0013-ci-on-github-actions.md) | CI on GitHub Actions | Accepted |
 | [0014](0014-play-store-publishing-via-gradle-play-publisher.md) | Play Store publishing via Gradle Play Publisher | Accepted (not yet implemented) |
 | [0015](0015-play-console-bootstrap.md) | Play Console bootstrap | Accepted (not yet implemented) |
+| [0016](0016-android-sdk-in-cloud-agent-sessions.md) | Android SDK in Claude Code cloud sessions | Accepted |
 
 ## When to write an ADR
 

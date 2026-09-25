@@ -44,6 +44,10 @@ Kotlin, Jetpack Compose (Material 3), Room via KSP, MVVM + repositories, manual 
 ./gradlew connectedDebugAndroidTest         # Room/seed instrumented tests (emulator; not in CI)
 ```
 
+Claude Code cloud sessions get the Android SDK from the SessionStart hook
+(`.claude/hooks/session-start.sh`, ADR-0016). If it printed a
+`session-start: WARNING`, the SDK is missing and these commands will fail.
+
 ## Agent skills
 
 ### Issue tracker
