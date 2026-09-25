@@ -1,0 +1,26 @@
+Simmärken
+Copyright (c) 2026 Per Abich
+
+The source code in this repository is licensed under the MIT License (see
+LICENSE). The files listed below are NOT covered by that license. They belong to
+their respective owners and are included only to help parents identify official
+swimming badges.
+
+1. Svensk Simidrott (Svenska Simförbundet)
+   - Requirement text in app/src/main/assets/seed/simidrott.json
+   - Pin images in app/src/main/assets/badges/simidrott/
+   Source: official simmärkesmaterial and product photos from the Svensk
+   Simidrott shop. Svensk Simidrott allows this material to be used to market
+   and promote simmärken.
+
+2. Svenska Livräddningssällskapet (SLS)
+   - Requirement text in app/src/main/assets/seed/sls.json
+   - Pin images in app/src/main/assets/badges/sls/
+   Source: official product descriptions and photos from the SLS shop.
+
+Badge names, logos and designs remain trademarks or copyright of their owners.
+If you fork or redistribute this project, you must make sure your own use of
+these files is permitted. Rights holders who want content removed can open an
+issue.
+
+Source URLs, extraction dates and processing steps: docs/SOURCES.md

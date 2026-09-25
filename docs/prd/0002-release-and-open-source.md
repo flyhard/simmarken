@@ -77,6 +77,8 @@ Status as of 2026-09-25. Checked = done with evidence.
     on the internal testing track.
   - Steps and evidence (dates, release IDs, screenshots) are recorded in a
     committed runbook, `docs/PLAY-CONSOLE-SETUP.md`.
+  - Done: runbook written with evidence placeholders.
+  - Remaining: carry out the steps and fill in the evidence.
 - [ ] **RELE-03** (must): The release pipeline uploads the signed AAB to the Play
   internal testing track on tag or manual dispatch.
   - Keystore and service-account credentials are decoded to ephemeral runner
@@ -94,16 +96,23 @@ Status as of 2026-09-25. Checked = done with evidence.
     collection, no in-app purchases); expected rating Everyone / PEGI 3.
   - Internal testers: maintainer only; the runbook explains how to add family
     testers later.
+  - Done: policy text drafted in `docs/privacy-policy.md` (Swedish + English);
+    runbook `docs/PLAY-CONSOLE-SETUP.md` covers listing, IARC and data safety.
+  - Remaining: host the policy at a public URL and complete the Console steps.
 
 ### Open source (OSS)
 
-- [ ] **OSS-01** (must): README with project description, prerequisites, and
+- [x] **OSS-01** (must): README with project description, prerequisites, and
   build/test instructions that match the CI commands.
-- [ ] **OSS-02** (must): MIT `LICENSE` at the repo root, with a carve-out for
+  - Evidence: `README.md`.
+- [x] **OSS-02** (must): MIT `LICENSE` at the repo root, with a carve-out for
   badge assets (`NOTICE` or `docs/ASSETS.md`) consistent with `docs/SOURCES.md`.
-- [ ] **OSS-03** (must): `CONTRIBUTING.md` with PR expectations and local
+  - Evidence: `LICENSE`, `NOTICE`; `docs/SOURCES.md` *Project license* updated.
+- [x] **OSS-03** (must): `CONTRIBUTING.md` with PR expectations and local
   verification steps (including the PRD/ADR process).
-- [ ] **OSS-04** (must): `CODEOWNERS` routes all reviews to the maintainer.
+  - Evidence: `CONTRIBUTING.md`.
+- [x] **OSS-04** (must): `CODEOWNERS` routes all reviews to the maintainer.
+  - Evidence: `.github/CODEOWNERS` (`* @flyhard`).
 - [ ] **OSS-05** (must): Repository made public **only after** SECU-01 and
   SECU-02 pass on `main`. This is the final step of the milestone.
 
@@ -117,7 +126,7 @@ Remaining work, in dependency order:
    first internal-testing release uploaded by hand, service account and
    `PLAY_SERVICE_ACCOUNT_JSON`.
 2. **Release pipeline** (CI-02, RELE-03, RELE-04) — needs 1.
-3. **Open-source publish** (OSS-01 … OSS-04, then OSS-05 last) — re-run the
+3. **Open-source publish** (OSS-01 … OSS-04 done; OSS-05 last) — re-run the
    full-history Gitleaks scan on `main` immediately before flipping visibility.
 
 ## Out of scope

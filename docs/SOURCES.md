@@ -115,4 +115,4 @@ All 17 seeded SLS badges have non-null `imageAssetPath` values. Shop product ima
 
 ## Project license
 
-No separate `LICENSE` file at repository root. App distribution terms to be defined at project level; image use is limited to official promotional materials as described above.
+Source code is MIT-licensed (`LICENSE`). The seed requirement text and pin images listed above are **not** covered by the MIT License. See `NOTICE` for the carve-out. Image use is limited to official promotional materials as described above.
