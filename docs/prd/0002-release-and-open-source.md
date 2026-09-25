@@ -141,19 +141,6 @@ Remaining work, in dependency order:
   internal testing track with no manual signing steps.
 - Gitleaks is clean on `main` at the moment the repository is made public.
 
-## Known follow-ups
-
-Found in the CI milestone code review (2026-07-30) and not fixed yet:
-
-- **Stale share-chooser title after a language change**
-  (`ui/settings/SettingsScreen.kt`): `shareChooserTitle` is captured when the
-  `LaunchedEffect` starts, so after an in-session language switch the export
-  chooser can show the old language. Fix: read it via `rememberUpdatedState`.
-  Normally hidden because changing the locale recreates the activity.
-- **No CI job timeout** (`.github/workflows/ci.yml`): add
-  `timeout-minutes: 15` to `lint-and-test` so a hung step fails fast instead of
-  running up to the 6-hour default.
-
 ## Risks & open questions
 
 - **Upload key mismatch** between CI secrets and the key registered in Play

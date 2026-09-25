@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -42,7 +43,8 @@ fun SettingsScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
-    val shareChooserTitle = stringResource(R.string.export_share_chooser_title)
+    // Read through updated state so the long-lived collector below always uses the current locale.
+    val shareChooserTitle by rememberUpdatedState(stringResource(R.string.export_share_chooser_title))
     val snackbarMessage = uiState.snackbarMessageRes?.let { stringResource(it) }
 
     val importLauncher = rememberLauncherForActivityResult(
