@@ -105,6 +105,15 @@ Status as of 2026-09-25. Checked = done with evidence.
     runbook `docs/PLAY-CONSOLE-SETUP.md` covers listing, IARC and data safety.
   - Remaining: host the policy at a public URL and complete the Console steps.
 
+- [ ] **RELE-06** (must): Adaptive launcher icon (foreground, solid brand-colour
+  background, monochrome layer for themed icons, round variant) lands on `main`
+  before the first manual upload of `versionCode` 1 (RELE-02); store graphics
+  are derived from it.
+  - Done: swimming-badge vector in `res/drawable/ic_launcher_foreground.xml`,
+    adaptive icons in `res/mipmap-anydpi/`, all artwork inside the 66dp safe
+    zone (flyhard/simmmarken#5).
+  - Remaining: check the icon on a real launcher (light and themed-icon modes).
+
 ### Open source (OSS)
 
 - [x] **OSS-01** (must): README with project description, prerequisites, and

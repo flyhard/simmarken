@@ -1,9 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Adaptive-icon foreground and monochrome layer: a swimming badge (ring with a
+    star and two waves, ribbon tails below). White on transparent so the same
+    drawable works as the themed-icon mask. Everything stays within a 30dp radius
+    of the centre, inside the 33dp adaptive-icon safe zone.
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- Ribbon tails -->
     <path
-        android:fillColor="#2196F3"
-        android:pathData="M0,0h108v108h-108z" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M46,63L52,66L48,82L45,78.5L41,81ZM62,63L56,66L60,82L63,78.5L67,81Z" />
+    <!-- Badge ring -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,26a21,21 0,1 1,0 42a21,21 0,1 1,0,-42ZM54,30a17,17 0,1 0,0 34a17,17 0,1 0,0,-34Z" />
+    <!-- Star -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,32L55.23,35.3L58.76,35.45L56,37.65L56.94,41.05L54,39.1L51.06,41.05L52,37.65L49.24,35.45L52.77,35.3Z" />
+    <!-- Waves -->
+    <path
+        android:pathData="M42,46q3,-3 6,0t6,0t6,0t6,0M42,53q3,-3 6,0t6,0t6,0t6,0"
+        android:strokeWidth="3"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
 </vector>
