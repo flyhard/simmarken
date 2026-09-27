@@ -3,7 +3,7 @@
 - **Status:** In progress
 - **Owner:** Maintainer
 - **Created:** 2026-07-25
-- **Last updated:** 2026-09-25 (migrated from GSD `.planning/REQUIREMENTS.md`, `ROADMAP.md`, `STATE.md` and phase 9–10 context)
+- **Last updated:** 2026-09-27 (store graphics, #6; migrated from GSD `.planning/REQUIREMENTS.md`, `ROADMAP.md`, `STATE.md` and phase 9–10 context)
 
 ## Problem
 
@@ -101,9 +101,16 @@ Status as of 2026-09-25. Checked = done with evidence.
     collection, no in-app purchases); expected rating Everyone / PEGI 3.
   - Internal testers: maintainer only; the runbook explains how to add family
     testers later.
+  - Store graphics: 512×512 app icon and 1024×500 feature graphic generated
+    from the launcher icon, and at least 2 phone screenshots that meet Play's
+    size and ratio rules, taken with made-up child names only
+    ([ADR-0017](../adr/0017-store-graphics-from-launcher-icon.md)).
   - Done: policy text drafted in `docs/privacy-policy.md` (Swedish + English);
-    runbook `docs/PLAY-CONSOLE-SETUP.md` covers listing, IARC and data safety.
-  - Remaining: host the policy at a public URL and complete the Console steps.
+    runbook `docs/PLAY-CONSOLE-SETUP.md` covers listing, IARC and data safety;
+    `scripts/store-graphics.py` generates the icon and feature graphic and
+    checks screenshots (flyhard/simmmarken#6).
+  - Remaining: host the policy at a public URL, take the screenshots and
+    complete the Console steps.
 
 - [ ] **RELE-06** (must): Adaptive launcher icon (foreground, solid brand-colour
   background, monochrome layer for themed icons, round variant) lands on `main`
@@ -183,3 +190,4 @@ Remaining work, in dependency order:
 - [ADR-0014](../adr/0014-play-store-publishing-via-gradle-play-publisher.md) Play Store publishing via Gradle Play Publisher
 - [ADR-0015](../adr/0015-play-console-bootstrap.md) Play Console bootstrap
 - [ADR-0016](../adr/0016-android-sdk-in-cloud-agent-sessions.md) Android SDK in Claude Code cloud sessions
+- [ADR-0017](../adr/0017-store-graphics-from-launcher-icon.md) Store graphics generated from the launcher icon

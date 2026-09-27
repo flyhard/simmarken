@@ -19,3 +19,6 @@ keystore-fingerprint.md
 **/service-account*.json
 *.p12
 google-services.json
+
+# Python bytecode (scripts/)
+__pycache__/
