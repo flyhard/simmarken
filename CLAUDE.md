@@ -52,7 +52,7 @@ Claude Code cloud sessions get the Android SDK from the SessionStart hook
 
 ### Issue tracker
 
-Issues are tracked in GitHub Issues (flyhard/simmmarken) through the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues are tracked in GitHub Issues (flyhard/simmarken) through the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

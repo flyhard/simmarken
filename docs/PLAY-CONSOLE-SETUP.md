@@ -30,7 +30,7 @@ stable, public HTTPS URL.
 Options:
 
 - **GitHub Pages from `main` → `/docs`** (Settings → Pages). URL:
-  `https://flyhard.github.io/simmmarken/privacy-policy`. Pages on a *private*
+  `https://flyhard.github.io/simmarken/privacy-policy/`. Pages on a *private*
   repo needs a paid GitHub plan. On the free plan, this works only after the
   repository goes public (OSS-05).
 - A separate small public repository (for example `flyhard/simmarken-privacy`)
