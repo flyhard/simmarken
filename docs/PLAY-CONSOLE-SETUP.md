@@ -12,7 +12,7 @@ fingerprints, release IDs and dates are fine.
 
 | Step | Requirement | Done | Date |
 |------|-------------|------|------|
-| 1. Privacy policy hosted | RELE-05 | [ ] | |
+| 1. Privacy policy hosted | RELE-05 | [x] | 2026-09-28 |
 | 2. App record created | RELE-02 | [ ] | |
 | 3. Store listing and app content | RELE-05 | [ ] | |
 | 4. Play App Signing with existing upload key | RELE-01 | [ ] | |
@@ -41,7 +41,15 @@ Options:
 The URL is stored in Play Console. If the policy moves, update the Console too
 (ADR-0015).
 
-- Evidence: URL = `…`, confirmed reachable on `YYYY-MM-DD`
+- Evidence: URL = `https://flyhard.github.io/simmarken/privacy-policy/`.
+  Pages enabled from `main` → `/docs` on 2026-09-28 (flyhard/simmarken#19).
+  First deployment:
+  [pages build and deployment](https://github.com/flyhard/simmarken/actions/runs/36459968367)
+  from `a5be492`, green. The deployed artifact holds only
+  `privacy-policy/index.html` and `assets/css/style.css`; every other file under
+  `docs/` was excluded by `docs/_config.yml`. Live URL confirmed reachable on
+  2026-09-28: `privacy-policy/` returns 200 with both languages shown; the site
+  root, `adr/0001-use-prds-and-adrs.html` and `PLAY-CONSOLE-SETUP.html` return 404.
 
 ## 2. Create the app record
 
