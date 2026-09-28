@@ -110,9 +110,11 @@ Status as of 2026-09-25. Checked = done with evidence.
     `scripts/store-graphics.py` generates the icon and feature graphic and
     checks screenshots (flyhard/simmmarken#6); `docs/_config.yml` and the
     policy's permalink make GitHub Pages (`main` → `/docs`) serve it at
-    `/privacy-policy/` ([ADR-0018](../adr/0018-privacy-policy-on-github-pages.md)).
-  - Remaining: turn on Pages and confirm the live URL, take the screenshots and
-    complete the Console steps.
+    `/privacy-policy/` ([ADR-0018](../adr/0018-privacy-policy-on-github-pages.md));
+    Pages enabled and the policy deployed at
+    `https://flyhard.github.io/simmarken/privacy-policy/` on 2026-09-28
+    (flyhard/simmarken#19).
+  - Remaining: take the screenshots and complete the Console steps.
 
 - [ ] **RELE-06** (must): Adaptive launcher icon (foreground, solid brand-colour
   background, monochrome layer for themed icons, round variant) lands on `main`
