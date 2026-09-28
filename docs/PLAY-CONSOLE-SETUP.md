@@ -64,6 +64,38 @@ this record.
 - Full description: what the app does, both catalogs (Svensk Simidrott, SLS),
   works offline, no account.
 - App icon 512×512, feature graphic 1024×500, and at least 2 phone screenshots.
+  Don't draw these by hand; see [Store graphics](#store-graphics) below.
+
+### Store graphics
+
+`scripts/store-graphics.py` makes the icon and feature graphic from the app's
+adaptive launcher icon ([ADR-0017](adr/0017-store-graphics-from-launcher-icon.md)).
+It needs Python 3.9+ and `rsvg-convert` (macOS: `brew install librsvg`;
+Debian/Ubuntu: `sudo apt-get install librsvg2-bin`). The script checks for both
+before doing anything.
+
+```sh
+scripts/store-graphics.py generate
+# → build/store-graphics/play-icon.png        512×512, 32-bit PNG with alpha → "App icon"
+# → build/store-graphics/feature-graphic.png  1024×500, 24-bit PNG, no alpha  → "Feature graphic"
+```
+
+Re-run it after any launcher-icon change; the same icon always gives the same
+files. The output folder is git-ignored. Commit copies elsewhere only if you
+want a fixed reference.
+
+**Phone screenshots** are taken by hand (phone or emulator, 2–8 of them). The
+listing is public: **use made-up child names only**, never real ones, and no
+real photos. Put them in a folder and check them before uploading:
+
+```sh
+scripts/store-graphics.py check-screenshots ~/Desktop/simmarken-screenshots
+```
+
+It prints `ok` or `FAIL` with the reason for each file (too small, too large,
+aspect ratio over 2:1, alpha channel, over 8 MB) and fails if there are fewer
+than 2 or more than 8. Screenshots under 1080 px get a warning: Play accepts
+them but won't feature them.
 
 **App content** (Policy → App content):
 

@@ -49,7 +49,7 @@ Release builds need signing credentials that are not in the repository. See
 | `docs/prd/` | Product requirements |
 | `docs/adr/` | Architecture decisions |
 | `docs/SOURCES.md` | Where the catalog content and images come from |
-| `scripts/` | Maintainer scripts for catalog extraction and release signing |
+| `scripts/` | Maintainer scripts for catalog extraction, release signing and Play store graphics |
 
 The stack is Kotlin, Jetpack Compose (Material 3), Room, MVVM, and manual
 dependency injection. The reasons are in the [ADRs](docs/adr/README.md).
