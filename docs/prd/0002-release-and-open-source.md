@@ -136,8 +136,14 @@ Status as of 2026-09-25. Checked = done with evidence.
   - Evidence: `CONTRIBUTING.md`.
 - [x] **OSS-04** (must): `CODEOWNERS` routes all reviews to the maintainer.
   - Evidence: `.github/CODEOWNERS` (`* @flyhard`).
-- [ ] **OSS-05** (must): Repository made public **only after** SECU-01 and
+- [x] **OSS-05** (must): Repository made public **only after** SECU-01 and
   SECU-02 pass on `main`. This is the final step of the milestone.
+  - Evidence: made public by the maintainer on 2026-09-28 (flyhard/simmarken#18).
+    Gate on `main` at `931e5f1`: [gitleaks run](https://github.com/flyhard/simmarken/actions/runs/36418797425)
+    and [CI run](https://github.com/flyhard/simmarken/actions/runs/36418797385)
+    green; local `gitleaks git --log-opts=--all` (v8.30.1, `.gitleaks.toml`,
+    full history, all refs) found no leaks; no keystore, `keystore.properties`
+    or service-account JSON tracked; issue and PR text checked for personal data.
 
 ## Delivery order
 
