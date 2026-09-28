@@ -1,8 +1,23 @@
-# Play Console setup runbook
+# Release runbook
 
-This is the one-time, manual Play Console bootstrap described in
-[ADR-0015](adr/0015-play-console-bootstrap.md). It covers PRD-0002
-**RELE-01** (remainder), **RELE-02** and **RELE-05**.
+The one-time, manual steps to get Simmärken onto Google Play, in three phases:
+
+- **A. Go public** (OSS-05): done. Only step 1 lives here.
+- **B. Play Console** (steps 2–7): the bootstrap described in
+  [ADR-0015](adr/0015-play-console-bootstrap.md). Covers PRD-0002 **RELE-01**
+  (remainder), **RELE-02** and **RELE-05**.
+- **C. Pipeline** (steps 8–10): GitHub secrets and the first automated upload.
+  Covers **CI-02**, **RELE-03** and **RELE-04**.
+
+`scripts/release-wizard.sh play` and `scripts/release-wizard.sh pipeline` walk
+you through phases B and C on your own machine. They run the scriptable parts
+(signed build, checks, fingerprints, GitHub secrets), tell you where to click
+for the rest, and write the evidence below. The status table is the wizard's
+only state: a ticked row is skipped on the next run. The wizard never commits;
+review the diff and commit this file yourself.
+
+Release signing uses 1Password ([ADR-0019](adr/0019-release-signing-via-1password.md)):
+the committed `release.env` holds `op://` references and the keystore path.
 
 Fill in the *Evidence* lines as you go and commit this file. **Never paste
 secrets here:** no passwords, private keys or service-account JSON. Certificate
@@ -19,8 +34,13 @@ fingerprints, release IDs and dates are fine.
 | 5. First internal-testing release (manual upload) | RELE-02 | [ ] | |
 | 6. Service account and `PLAY_SERVICE_ACCOUNT_JSON` | RELE-02 | [ ] | |
 | 7. Internal testers | RELE-05 | [ ] | |
+| 8. Signing secrets in GitHub | CI-02 | [ ] | |
+| 9. First automated upload | RELE-03, RELE-04 | [ ] | |
+| 10. Update installed from Play | RELE-03 | [ ] | |
 
 ---
+
+# Phase A: Go public
 
 ## 1. Host the privacy policy
 
@@ -42,6 +62,14 @@ The URL is stored in Play Console. If the policy moves, update the Console too
 (ADR-0015).
 
 - Evidence: URL = `…`, confirmed reachable on `YYYY-MM-DD`
+
+# Phase B: Play Console
+
+Run `scripts/release-wizard.sh play`, or follow steps 2–7 by hand.
+
+This works with a personal developer account for internal testing. A
+production release will later need a closed test with at least 12 testers
+opted in for 14 days in a row.
 
 ## 2. Create the app record
 
@@ -115,8 +143,10 @@ them but won't feature them.
 
 ## 4. Play App Signing with the existing upload key
 
-The upload key already exists locally (see `scripts/generate-upload-keystore.sh`).
-Its SHA-256 is in the gitignored `keystore-fingerprint.md`.
+The upload key already exists (see `scripts/generate-upload-keystore.sh`) and is
+stored in 1Password. Its SHA-256 is in the gitignored `keystore-fingerprint.md`
+on the machine that generated it; the wizard computes it from the keystore
+instead, so any machine with 1Password access works.
 
 1. Choose **Use Google-generated app signing key** (the default). Our local key
    becomes the **upload key**.
@@ -124,7 +154,8 @@ Its SHA-256 is in the gitignored `keystore-fingerprint.md`.
    ```sh
    keytool -export -rfc -keystore <upload.jks> -alias <alias> -file upload_certificate.pem
    ```
-   Don't commit `upload_certificate.pem`.
+   Don't commit `upload_certificate.pem`. The wizard writes it to a temporary
+   folder outside the checkout and deletes it afterwards.
 3. Play Console → Test and release → App integrity → **Upload key certificate**:
    check that its SHA-256 matches `keystore-fingerprint.md` exactly.
 
@@ -134,7 +165,7 @@ Its SHA-256 is in the gitignored `keystore-fingerprint.md`.
 ## 5. First internal-testing release (manual)
 
 ```sh
-op run --env-file=release.env -- ./gradlew bundleRelease   # or plain ./gradlew bundleRelease with keystore.properties
+op run --env-file=release.env -- ./gradlew bundleRelease
 scripts/verify-release-signature.sh         # must pass before upload
 ```
 
@@ -164,8 +195,9 @@ notes, for example `Första testversionen.`
    with **Release manager** only, for app `se.simmarken`.
 4. GitHub → repository Settings → Secrets and variables → Actions → new
    secret **`PLAY_SERVICE_ACCOUNT_JSON`** containing the full JSON key.
-5. Delete the local JSON file (or store it in a password manager). It must never
-   be in the repository. `.gitignore` covers `**/service-account*.json`.
+5. Store the JSON key in 1Password as a document (the wizard names it
+   *Play service account*), then delete the local file. It must never be in the
+   repository. `.gitignore` covers `**/service-account*.json`.
 
 - Evidence: secret created `YYYY-MM-DD`; service-account email `…@….iam.gserviceaccount.com`
 
@@ -181,8 +213,51 @@ needs no review.
 
 - Evidence: installed from Play on `<device>` `YYYY-MM-DD`
 
+When steps 2–7 are done, tick RELE-01, RELE-02 and RELE-05 in
+[PRD-0002](prd/0002-release-and-open-source.md), linking to this file.
+
 ---
 
-When all steps are done, tick RELE-01, RELE-02 and RELE-05 in
-[PRD-0002](prd/0002-release-and-open-source.md), linking to this file. The
-release pipeline (CI-02, RELE-03, RELE-04) is next.
+# Phase C: Pipeline
+
+Run `scripts/release-wizard.sh pipeline`, or follow steps 8–10 by hand. Step 9
+needs the release workflow `.github/workflows/release.yml` on `main`
+(flyhard/simmarken#8).
+
+## 8. Signing secrets in GitHub
+
+The release workflow signs with the environment-variable path from
+[ADR-0012](adr/0012-release-signing-configuration.md). Set four repository
+secrets (Settings → Secrets and variables → Actions), taking every value from
+1Password:
+
+| Secret | Value |
+|--------|-------|
+| `ANDROID_KEYSTORE_BASE64` | The keystore file, base64-encoded on one line |
+| `KEYSTORE_PASSWORD` | `store_password` field of the keystore item |
+| `KEY_ALIAS` | `key_alias` field |
+| `KEY_PASSWORD` | `key_password` field |
+
+`PLAY_SERVICE_ACCOUNT_JSON` was set in step 6. The wizard pipes each value from
+`op` straight into `gh secret set`, so nothing is printed or written to disk.
+
+- Evidence: secrets set `YYYY-MM-DD`
+
+## 9. First automated upload
+
+GitHub → Actions → **Release** → Run workflow on `main` (or push a `v*` tag).
+When the run is green, Play Console → Testing → **Internal testing** should
+show a new release with a `versionCode` above 1, uploaded without any Console
+clicks.
+
+- Evidence: run `…` green `YYYY-MM-DD`; `versionCode` `…` on the internal track
+
+## 10. Update installed from Play
+
+On the internal tester's device, open Play Store → Simmärken and install the
+update. Check that the app opens and existing progress is still there.
+
+- Evidence: update installed on `<device>` `YYYY-MM-DD`
+
+When steps 8–10 are done, tick CI-02, RELE-03 and RELE-04 in
+[PRD-0002](prd/0002-release-and-open-source.md), linking to this file.

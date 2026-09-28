@@ -32,3 +32,18 @@ jobs:
 
       - name: Lint and unit test
         run: ./gradlew lintDebug testDebugUnitTest --no-daemon
+
+  release-scripts:
+    name: release-scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Shellcheck release wizard
+        run: shellcheck -x scripts/release-wizard.sh scripts/lib/release-runbook.sh scripts/tests/test_release_runbook.sh
+
+      - name: Release runbook tests
+        run: scripts/tests/test_release_runbook.sh

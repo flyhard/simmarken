@@ -147,16 +147,20 @@ Status as of 2026-09-25. Checked = done with evidence.
 
 ## Delivery order
 
-Remaining work, in dependency order:
+Remaining work, in dependency order. Both steps are phases of the
+[release runbook](../PLAY-CONSOLE-SETUP.md), and `scripts/release-wizard.sh`
+walks through them.
 
-1. **Play Console setup** (RELE-01 remainder, RELE-02, RELE-05) — manual, per
+1. **Play Console setup** (RELE-01 remainder, RELE-02, RELE-05), runbook phase
+   B, `release-wizard.sh play` — manual, per
    [ADR-0015](../adr/0015-play-console-bootstrap.md): app record and store
-   listing, privacy policy, Play App Signing with the existing upload key,
-   first internal-testing release uploaded by hand, service account and
+   listing, Play App Signing with the existing upload key, first
+   internal-testing release uploaded by hand, service account and
    `PLAY_SERVICE_ACCOUNT_JSON`.
-2. **Release pipeline** (CI-02, RELE-03, RELE-04) — needs 1.
-3. **Open-source publish** (OSS-01 … OSS-04 done; OSS-05 last) — re-run the
-   full-history Gitleaks scan on `main` immediately before flipping visibility.
+2. **Release pipeline** (CI-02, RELE-03, RELE-04), runbook phase C,
+   `release-wizard.sh pipeline` — needs 1 and the release workflow.
+
+Open-source publish (OSS-01 … OSS-05, runbook phase A) is done.
 
 ## Out of scope
 
