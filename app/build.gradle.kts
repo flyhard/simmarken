@@ -51,7 +51,7 @@ fun Project.resolveReleaseSigningCredentials(): ReleaseSigningCredentials? {
         } else {
             keystorePath
         }
-        val storeFile = java.io.File(expanded)
+        val storeFile = rootProject.file(expanded)
         if (!storeFile.exists()) {
             throw GradleException(
                 "ANDROID_KEYSTORE_FILE points to $storeFile, which does not exist. " +
