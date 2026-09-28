@@ -48,7 +48,8 @@ The URL is stored in Play Console. If the policy moves, update the Console too
   from `a5be492`, green. The deployed artifact holds only
   `privacy-policy/index.html` and `assets/css/style.css`; every other file under
   `docs/` was excluded by `docs/_config.yml`. Live URL confirmed reachable on
-  `YYYY-MM-DD` (both languages shown).
+  2026-09-28: `privacy-policy/` returns 200 with both languages shown; the site
+  root, `adr/0001-use-prds-and-adrs.html` and `PLAY-CONSOLE-SETUP.html` return 404.
 
 ## 2. Create the app record
 
