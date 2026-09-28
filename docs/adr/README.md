@@ -19,13 +19,14 @@ order they were made. Product scope lives in [PRDs](../prd/README.md).
 | [0009](0009-per-app-language-preference.md) | Per-app language preference | Accepted |
 | [0010](0010-manual-dependency-injection.md) | Manual dependency injection | Accepted |
 | [0011](0011-secrets-scanning-with-gitleaks.md) | Secrets scanning with Gitleaks | Accepted |
-| [0012](0012-release-signing-configuration.md) | Release signing configuration | Accepted |
+| [0012](0012-release-signing-configuration.md) | Release signing configuration | Superseded by ADR-0019 |
 | [0013](0013-ci-on-github-actions.md) | CI on GitHub Actions | Accepted |
 | [0014](0014-play-store-publishing-via-gradle-play-publisher.md) | Play Store publishing via Gradle Play Publisher | Accepted (not yet implemented) |
 | [0015](0015-play-console-bootstrap.md) | Play Console bootstrap | Accepted (not yet implemented) |
 | [0016](0016-android-sdk-in-cloud-agent-sessions.md) | Android SDK in Claude Code cloud sessions | Accepted |
 | [0017](0017-store-graphics-from-launcher-icon.md) | Store graphics generated from the launcher icon | Proposed |
 | [0018](0018-privacy-policy-on-github-pages.md) | Privacy policy on GitHub Pages | Accepted |
+| [0019](0019-release-signing-via-1password.md) | Release signing via 1Password | Proposed |
 
 ## When to write an ADR
 
