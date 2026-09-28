@@ -32,7 +32,9 @@ Options:
 - **GitHub Pages from `main` → `/docs`** (Settings → Pages). URL:
   `https://flyhard.github.io/simmarken/privacy-policy/`. Pages on a *private*
   repo needs a paid GitHub plan. On the free plan, this works only after the
-  repository goes public (OSS-05).
+  repository goes public (OSS-05). `docs/_config.yml` and the policy's
+  `permalink` make Pages serve exactly this path and nothing else from `docs/`
+  ([ADR-0018](adr/0018-privacy-policy-on-github-pages.md)).
 - A separate small public repository (for example `flyhard/simmarken-privacy`)
   with Pages enabled, if the listing must go live before OSS-05.
 
@@ -69,7 +71,7 @@ this record.
 ### Store graphics
 
 `scripts/store-graphics.py` makes the icon and feature graphic from the app's
-adaptive launcher icon ([ADR-0017](adr/0017-store-graphics-from-launcher-icon.md)).
+adaptive launcher icon ([ADR-0018](adr/0017-store-graphics-from-launcher-icon.md)).
 It needs Python 3.9+ and `rsvg-convert` (macOS: `brew install librsvg`;
 Debian/Ubuntu: `sudo apt-get install librsvg2-bin`). The script checks for both
 before doing anything.

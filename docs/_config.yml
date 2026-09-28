@@ -1,0 +1,24 @@
+# GitHub Pages site for the docs/ folder (ADR-0018).
+#
+# Pages serves `main` → `/docs`. Only the privacy policy is published. All
+# Markdown under docs/ is excluded, so ADRs, PRDs and notes can never break the
+# Pages build (for example with Liquid-looking `{{ }}` or `{% %}`) and take the
+# policy URL down with them. `include` wins over `exclude` in Jekyll, so a new
+# page must be listed under `include` explicitly. (A bare "*" exclude would also
+# drop the theme's layouts.)
+#
+# Do not set `url`, `baseurl` or `repository`: Pages derives them from the
+# repository, so a rename needs no change here.
+
+title: Simmärken
+lang: sv
+
+exclude:
+  - "*.md"
+  - adr/
+  - agents/
+  - extraction/
+  - images/
+  - prd/
+include:
+  - privacy-policy.md

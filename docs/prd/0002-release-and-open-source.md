@@ -108,8 +108,10 @@ Status as of 2026-09-25. Checked = done with evidence.
   - Done: policy text drafted in `docs/privacy-policy.md` (Swedish + English);
     runbook `docs/PLAY-CONSOLE-SETUP.md` covers listing, IARC and data safety;
     `scripts/store-graphics.py` generates the icon and feature graphic and
-    checks screenshots (flyhard/simmmarken#6).
-  - Remaining: host the policy at a public URL, take the screenshots and
+    checks screenshots (flyhard/simmmarken#6); `docs/_config.yml` and the
+    policy's permalink make GitHub Pages (`main` → `/docs`) serve it at
+    `/privacy-policy/` ([ADR-0018](../adr/0018-privacy-policy-on-github-pages.md)).
+  - Remaining: turn on Pages and confirm the live URL, take the screenshots and
     complete the Console steps.
 
 - [ ] **RELE-06** (must): Adaptive launcher icon (foreground, solid brand-colour
