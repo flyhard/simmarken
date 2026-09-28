@@ -1,3 +1,9 @@
+---
+# The URL is stored in Play Console (ADR-0015, ADR-0018); never change it.
+title: Integritetspolicy / Privacy policy
+permalink: /privacy-policy/
+---
+
 # Integritetspolicy – Simmärken
 
 *English version below.*

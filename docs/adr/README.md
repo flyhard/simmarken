@@ -25,6 +25,7 @@ order they were made. Product scope lives in [PRDs](../prd/README.md).
 | [0015](0015-play-console-bootstrap.md) | Play Console bootstrap | Accepted (not yet implemented) |
 | [0016](0016-android-sdk-in-cloud-agent-sessions.md) | Android SDK in Claude Code cloud sessions | Accepted |
 | [0017](0017-store-graphics-from-launcher-icon.md) | Store graphics generated from the launcher icon | Proposed |
+| [0018](0018-privacy-policy-on-github-pages.md) | Privacy policy on GitHub Pages | Accepted |
 
 ## When to write an ADR
 
