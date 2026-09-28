@@ -35,8 +35,9 @@ passed a badge and whether you have bought the pin.
 ./gradlew connectedDebugAndroidTest         # Room and seed instrumented tests (needs an emulator; not run in CI)
 ```
 
-Release builds need signing credentials that are not in the repository. See
-[ADR-0012](docs/adr/0012-release-signing-configuration.md) and
+Release builds need signing credentials that are not in the repository. With
+1Password, run `op run --env-file=release.env -- ./gradlew bundleRelease`; see
+[ADR-0019](docs/adr/0019-release-signing-via-1password.md), `release.env` and
 `keystore.properties.example`.
 
 ## Project layout

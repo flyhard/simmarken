@@ -35,10 +35,34 @@ fun Project.resolveReleaseSigningCredentials(): ReleaseSigningCredentials? {
         return null
     }
 
-    val base64 = System.getenv("ANDROID_KEYSTORE_BASE64")?.trim().orEmpty()
     val storePassword = System.getenv("KEYSTORE_PASSWORD")
     val keyAlias = System.getenv("KEY_ALIAS")
     val keyPassword = System.getenv("KEY_PASSWORD")
+
+    // Local builds with 1Password (ADR-0019): the keystore file is downloaded from
+    // 1Password to a path outside the checkout, and `op run --env-file=release.env`
+    // injects the passwords for the duration of the build only.
+    val keystorePath = System.getenv("ANDROID_KEYSTORE_FILE")?.trim().orEmpty()
+    if (keystorePath.isNotEmpty() && !storePassword.isNullOrBlank() &&
+        !keyAlias.isNullOrBlank() && !keyPassword.isNullOrBlank()
+    ) {
+        val expanded = if (keystorePath == "~" || keystorePath.startsWith("~/")) {
+            System.getProperty("user.home") + keystorePath.removePrefix("~")
+        } else {
+            keystorePath
+        }
+        val storeFile = rootProject.file(expanded)
+        if (!storeFile.exists()) {
+            throw GradleException(
+                "ANDROID_KEYSTORE_FILE points to $storeFile, which does not exist. " +
+                    "Download the keystore from 1Password first (see release.env).",
+            )
+        }
+        return ReleaseSigningCredentials(storeFile, storePassword, keyAlias, keyPassword)
+    }
+
+    // CI: the keystore arrives base64-encoded in a secret and is decoded into build/.
+    val base64 = System.getenv("ANDROID_KEYSTORE_BASE64")?.trim().orEmpty()
     if (base64.isNotEmpty() && !storePassword.isNullOrBlank() &&
         !keyAlias.isNullOrBlank() && !keyPassword.isNullOrBlank()
     ) {
@@ -131,9 +155,10 @@ gradle.taskGraph.whenReady {
             throw GradleException(
                 """
                 Release signing is not configured.
-                Local: copy keystore.properties.example → keystore.properties and run scripts/generate-upload-keystore.sh
+                Local (1Password): op run --env-file=release.env -- ./gradlew bundleRelease
+                Local (file): copy keystore.properties.example → keystore.properties and run scripts/generate-upload-keystore.sh
                 CI: set ANDROID_KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD
-                See keystore.properties.example for details.
+                See ADR-0019 for details.
                 """.trimIndent(),
             )
         }

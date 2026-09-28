@@ -134,7 +134,7 @@ Its SHA-256 is in the gitignored `keystore-fingerprint.md`.
 ## 5. First internal-testing release (manual)
 
 ```sh
-./gradlew bundleRelease                     # uses keystore.properties
+op run --env-file=release.env -- ./gradlew bundleRelease   # or plain ./gradlew bundleRelease with keystore.properties
 scripts/verify-release-signature.sh         # must pass before upload
 ```
 

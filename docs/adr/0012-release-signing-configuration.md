@@ -1,6 +1,6 @@
 # ADR-0012: Release signing configuration
 
-- **Status:** Accepted
+- **Status:** Superseded by ADR-0019
 - **Date:** 2026-07-26 (recorded retroactively 2026-09-25)
 - **Related:** PRD-0002 (CI-02, RELE-01), ADR-0011
 
