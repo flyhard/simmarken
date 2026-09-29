@@ -54,7 +54,11 @@ Status as of 2026-09-25. Checked = done with evidence.
   GitHub Secrets (no secrets in source).
   - Done: Gradle reads signing credentials from environment variables and fails
     hard without them ([ADR-0012](../adr/0012-release-signing-configuration.md)).
-  - Remaining: the release workflow itself.
+  - Done: `.github/workflows/release.yml` builds and signs the AAB from the
+    four ADR-0012 secrets, failing before the build if any secret is missing
+    ([ADR-0020](../adr/0020-release-workflow-version-codes-and-credentials.md);
+    flyhard/simmarken#8).
+  - Remaining: the maintainer's first end-to-end run (release runbook phase C).
 - [x] **CI-03** (must): CI uses Gradle dependency caching; feedback loop under
   10 minutes.
 - [x] **CI-07** (should): Claude Code cloud sessions can run the CI checks
@@ -88,8 +92,16 @@ Status as of 2026-09-25. Checked = done with evidence.
   internal testing track on tag or manual dispatch.
   - Keystore and service-account credentials are decoded to ephemeral runner
     paths outside the checkout and removed after the build.
+  - Done: the release workflow runs on `workflow_dispatch` and `v*` tags and
+    uploads with Gradle Play Publisher to the internal track only; credentials
+    go to `$RUNNER_TEMP` and are deleted by an `if: always()` step (flyhard/simmarken#8).
+  - Remaining: a green dispatched run and the update installed from Play.
 - [ ] **RELE-04** (must): `versionCode` is incremented before each Play upload —
   no duplicate-version rejection.
+  - Done: Gradle Play Publisher's `AUTO` strategy uses the highest `versionCode`
+    on Play + 1, and the workflow refuses to upload unless it is above 1
+    ([ADR-0020](../adr/0020-release-workflow-version-codes-and-credentials.md)).
+  - Remaining: a `versionCode` above 1 visible on the internal track.
 - [ ] **RELE-05** (must): Minimum store presence required by Play for internal
   testing.
   - App name **Simmärken**, default store language Swedish (`sv-SE`).
@@ -201,3 +213,4 @@ Remaining work, in dependency order:
 - [ADR-0015](../adr/0015-play-console-bootstrap.md) Play Console bootstrap
 - [ADR-0016](../adr/0016-android-sdk-in-cloud-agent-sessions.md) Android SDK in Claude Code cloud sessions
 - [ADR-0017](../adr/0017-store-graphics-from-launcher-icon.md) Store graphics generated from the launcher icon
+- [ADR-0020](../adr/0020-release-workflow-version-codes-and-credentials.md) Release workflow: versionCode from Play, credentials outside the checkout
