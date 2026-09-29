@@ -18,6 +18,7 @@ coil = "3.5.0"
 robolectric = "4.14.1"
 datastore = "1.2.1"
 appcompat = "1.7.1"
+playPublisher = "4.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,3 +54,4 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
+play-publisher = { id = "com.github.triplet.play", version.ref = "playPublisher" }

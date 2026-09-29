@@ -1,3 +1,4 @@
+import com.github.triplet.gradle.androidpublisher.ResolutionStrategy
 import java.util.Base64
 import java.util.Properties
 import org.gradle.api.GradleException
@@ -9,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.play.publisher)
 }
 
 data class ReleaseSigningCredentials(
@@ -142,11 +144,30 @@ android {
     }
 }
 
+// Play uploads (ADR-0014, ADR-0020): only .github/workflows/release.yml publishes.
+// It writes the service-account JSON outside the checkout and passes its path in
+// PLAY_SERVICE_ACCOUNT_FILE. AUTO asks Play for the highest versionCode already
+// uploaded and uses the next one; `versionCode` in defaultConfig only applies to
+// local builds and the manual first upload (ADR-0015). Without the file the
+// plugin is off, so local `bundleRelease` never needs Play credentials.
+val playServiceAccountFile = System.getenv("PLAY_SERVICE_ACCOUNT_FILE")?.trim().orEmpty()
+
+play {
+    enabled.set(playServiceAccountFile.isNotEmpty())
+    if (playServiceAccountFile.isNotEmpty()) {
+        serviceAccountCredentials.set(file(playServiceAccountFile))
+    }
+    track.set("internal")
+    defaultToAppBundles.set(true)
+    resolutionStrategy.set(ResolutionStrategy.AUTO)
+}
+
 gradle.taskGraph.whenReady {
     val isReleaseBuild = allTasks.any { task ->
         val n = task.name
         n == "bundleRelease" || n == "assembleRelease" ||
-            n.endsWith("BundleRelease") || n.endsWith("AssembleRelease")
+            n.endsWith("BundleRelease") || n.endsWith("AssembleRelease") ||
+            n.endsWith("ReleaseBundle") // signReleaseBundle, publishReleaseBundle (ADR-0020)
     }
     if (isReleaseBuild) {
         val cfg = android.signingConfigs.findByName("release")
