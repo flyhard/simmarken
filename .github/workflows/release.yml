@@ -1,0 +1,148 @@
+# Signed release AAB → Play internal testing (PRD-0002 CI-02, RELE-03, RELE-04).
+# Decisions: ADR-0014 (Gradle Play Publisher), ADR-0015 (service account),
+# ADR-0019 (signing env vars), ADR-0020 (versionCode and credential files).
+#
+# Needs five repository secrets: ANDROID_KEYSTORE_BASE64, KEYSTORE_PASSWORD,
+# KEY_ALIAS, KEY_PASSWORD and PLAY_SERVICE_ACCOUNT_JSON. Uploads to the internal
+# track only; promotion to production stays manual in Play Console.
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+# One upload at a time: the versionCode is "highest on Play + 1" (ADR-0020), so
+# two parallel runs would pick the same one.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  internal:
+    name: Upload to Play internal testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Check release secrets
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          missing=()
+          for name in ANDROID_KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD PLAY_SERVICE_ACCOUNT_JSON; do
+            [[ -n "${!name//[[:space:]]/}" ]] || missing+=("$name")
+          done
+          if ((${#missing[@]})); then
+            echo "::error title=Release secrets missing::Set these repository secrets (Settings → Secrets and variables → Actions): ${missing[*]}. See docs/PLAY-CONSOLE-SETUP.md. Nothing was built or uploaded."
+            exit 1
+          fi
+          echo "All five release secrets are set."
+
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: android-actions/setup-android@v4
+
+      - name: Install Android SDK platform
+        run: sdkmanager "platforms;android-36"
+
+      - uses: gradle/actions/setup-gradle@v6
+        with:
+          # A release build only reads the cache that CI on main writes.
+          cache-read-only: true
+
+      # Credentials go to the runner's temp directory, outside the checkout, and
+      # are deleted by the last step even if the job fails (ADR-0020).
+      - name: Write credentials outside the checkout
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          umask 077
+          dir="$RUNNER_TEMP/release-credentials"
+          mkdir -p "$dir"
+          if ! printf '%s' "$ANDROID_KEYSTORE_BASE64" | tr -d '[:space:]' | base64 --decode > "$dir/upload.jks" 2>/dev/null \
+              || [[ ! -s "$dir/upload.jks" ]]; then
+            echo "::error title=Bad keystore secret::ANDROID_KEYSTORE_BASE64 is not valid base64. Re-create it with: base64 < upload.jks | tr -d '\\n'"
+            exit 1
+          fi
+          printf '%s' "$PLAY_SERVICE_ACCOUNT_JSON" > "$dir/play-service-account.json"
+          if ! jq -e '.type == "service_account"' "$dir/play-service-account.json" > /dev/null 2>&1; then
+            echo "::error title=Bad service-account secret::PLAY_SERVICE_ACCOUNT_JSON is not a Google service-account JSON key (ADR-0015)."
+            exit 1
+          fi
+          {
+            echo "ANDROID_KEYSTORE_FILE=$dir/upload.jks"
+            echo "PLAY_SERVICE_ACCOUNT_FILE=$dir/play-service-account.json"
+          } >> "$GITHUB_ENV"
+
+      # bundleRelease runs processReleaseVersionCodes, which asks Play for the
+      # highest versionCode on any track and uses the next one (ADR-0020).
+      - name: Build signed bundle
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew bundleRelease --no-daemon
+
+      - name: Check versionCode
+        id: version
+        run: |
+          manifest="$(find app/build/intermediates/bundle_manifest -path '*release*' -name AndroidManifest.xml 2>/dev/null | head -n1 || true)"
+          code="$(sed -n 's/.*android:versionCode="\([0-9]*\)".*/\1/p' "$manifest" 2>/dev/null | head -n1 || true)"
+          name="$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' "$manifest" 2>/dev/null | head -n1 || true)"
+          # versionCode 1 is the manual first upload (ADR-0015); every automated
+          # upload must be above it (RELE-04).
+          if [[ ! "$code" =~ ^[0-9]+$ ]] || ((code <= 1)); then
+            echo "::error title=versionCode not above 1::The bundle has versionCode '${code:-none}'. Upload versionCode 1 by hand first (docs/PLAY-CONSOLE-SETUP.md step 5), then re-run."
+            exit 1
+          fi
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "Bundle has versionCode $code ($name)."
+
+      - name: Upload to internal testing
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew publishReleaseBundle --no-daemon
+
+      - name: Summary
+        env:
+          VERSION_CODE: ${{ steps.version.outputs.code }}
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+        run: |
+          {
+            echo "### Uploaded to Play internal testing"
+            echo
+            echo "- versionCode: \`$VERSION_CODE\`"
+            echo "- versionName: \`$VERSION_NAME\`"
+            echo "- ref: \`$GITHUB_REF_NAME\` (\`${GITHUB_SHA::7}\`)"
+            echo
+            echo "Promote to production by hand in Play Console."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Remove credentials
+        if: always()
+        run: |
+          rm -rf "$RUNNER_TEMP/release-credentials"
+          # Not written by this workflow (ANDROID_KEYSTORE_FILE wins over the
+          # base64 path), but make sure no keystore copy is left in the checkout.
+          rm -rf app/build/signing

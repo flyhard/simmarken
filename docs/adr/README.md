@@ -27,6 +27,7 @@ order they were made. Product scope lives in [PRDs](../prd/README.md).
 | [0017](0017-store-graphics-from-launcher-icon.md) | Store graphics generated from the launcher icon | Proposed |
 | [0018](0018-privacy-policy-on-github-pages.md) | Privacy policy on GitHub Pages | Accepted |
 | [0019](0019-release-signing-via-1password.md) | Release signing via 1Password | Proposed |
+| [0020](0020-release-workflow-version-codes-and-credentials.md) | Release workflow: versionCode from Play, credentials outside the checkout | Proposed |
 
 ## When to write an ADR
 
