@@ -137,6 +137,15 @@ Status as of 2026-09-25. Checked = done with evidence.
     zone (flyhard/simmmarken#5).
   - Remaining: check the icon on a real launcher (light and themed-icon modes).
 
+- [ ] **RELE-07** (must): The app targets the API level Google Play requires
+  for new apps (API 36 / Android 16 since 2026-08-31) before the first upload
+  of `versionCode` 1.
+  - Done: `targetSdk = 36` in `app/build.gradle.kts`. The Android 16 behaviour
+    changes don't affect the app: it already calls `enableEdgeToEdge()`, has no
+    custom back handling (predictive back is now on by default), and sets no
+    orientation or resizability limits (ignored on large screens).
+  - Remaining: a smoke test on an Android 16 device or emulator.
+
 ### Open source (OSS)
 
 - [x] **OSS-01** (must): README with project description, prerequisites, and
@@ -165,7 +174,7 @@ Remaining work, in dependency order. Both steps are phases of the
 [release runbook](../PLAY-CONSOLE-SETUP.md), and `scripts/release-wizard.sh`
 walks through them.
 
-1. **Play Console setup** (RELE-01 remainder, RELE-02, RELE-05), runbook phase
+1. **Play Console setup** (RELE-01 remainder, RELE-02, RELE-05, RELE-07), runbook phase
    B, `release-wizard.sh play` — manual, per
    [ADR-0015](../adr/0015-play-console-bootstrap.md): app record and store
    listing, Play App Signing with the existing upload key, first
